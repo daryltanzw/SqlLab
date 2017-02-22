@@ -1,0 +1,2 @@
+from authenticate import AuthenticationForm
+from register import RegistrationForm
