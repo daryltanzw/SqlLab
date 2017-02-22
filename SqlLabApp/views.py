@@ -15,7 +15,6 @@ def login(request):
             user = auth.authenticate(email=request.POST['email'], password=request.POST['password'])
             if user is not None:
                 django_login(request, user)
-                # return redirect('/')
                 return HttpResponse("Success Login")
     else:
         form = AuthenticationForm()
