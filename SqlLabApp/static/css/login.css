@@ -1,0 +1,88 @@
+.form {
+    /* Size and position */
+    width: 320px;
+    margin: 20px auto 20px;
+    padding: 15px;
+    position: relative;
+
+    /* Styles */
+    background: white;
+    border-radius: 7px;
+}
+
+.form h1 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.form h1 .log-in,
+.form h1 .sign-up {
+    display: inline-block;
+    font: 15px/1 'Assistant';
+}
+
+.form h1 .log-in {
+    font: 20px/1 'Assistant';
+    color: #7287aa;
+    padding-right: 2px;
+}
+
+.form h1 .sign-up {
+    color: #647187;
+    padding-left: 2px;
+    font: 20px/1 'Assistant';
+}
+
+.form input[type=text],
+.form input[type=password] {
+    font: 15px/1 'Assistant';
+    font-weight: 400;
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ebe6e2;
+    border-radius: 3px;
+    transition: all 0.3s ease-out;
+}
+
+.form input[type=text]:hover,
+.form input[type=password]:hover {
+    border-color: #CCC;
+}
+
+.form label:hover ~ input {
+    border-color: #CCC;
+}
+
+.form input[type=text]:focus,
+.form input[type=password]:focus {
+    border-color: #BBB;
+    outline: none;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.btn-cv {
+    display: inline-block;
+    margin-top: 5px;
+    border: solid 1px #7287aa;
+    font-size: 15px;
+    color: #7287aa;
+    background: 0 0;
+    transition: all .3s ease-in-out;
+    width: 290px;
+    outline: none;
+}
+
+.btn-cv:hover,
+.btn-cv.active {
+    color: black;
+    border: solid 1px black;
+    background: transparent;
+}

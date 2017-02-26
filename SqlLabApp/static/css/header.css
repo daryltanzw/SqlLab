@@ -1,0 +1,49 @@
+.intro {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+    background-color:  #4ec0cc;
+    background: url('../img/sea.jpg') no-repeat bottom center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.intro .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.intro .intro-body .brand-heading {
+    font-size: 40px;
+}
+
+@media(min-width:768px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body .brand-heading {
+        font-size: 150px;
+    }
+
+    .intro .intro-body .intro-text {
+        font-size: 26px;
+    }
+}
+
+.btn-social {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 50px;
+    line-height: 120px;
+}
