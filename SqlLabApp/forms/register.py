@@ -3,11 +3,9 @@ from SqlLabApp.models import User
 
 
 class RegistrationForm(forms.ModelForm):
-    email = forms.EmailField(widget=forms.TextInput, label="Email")
-    password1 = forms.CharField(widget=forms.PasswordInput,
-                                label="Craete a password")
-    password2 = forms.CharField(widget=forms.PasswordInput,
-                                label="Confirm your password")
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}), label='')
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}), label='')
 
     class Meta:
         model = User

@@ -1,10 +1,11 @@
 from django.conf.urls import url
 from django.contrib import admin
-from . import views
+from SqlLabApp.views import MainView, LoginFormView, RegistrationFormView
 
 
 urlpatterns = [
-    url(r'^$', views.login, name='login'),
-    url(r'^register/$', views.register, name='register'),
     url(r'^admin/', admin.site.urls),
+    url(r'^$', MainView.as_view(), name='main'),
+    url(r'^login/$', LoginFormView.as_view(), name='login'),
+    url(r'^register/$', RegistrationFormView.as_view(), name='register'),
 ]

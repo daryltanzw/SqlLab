@@ -53,20 +53,15 @@
                         <p style="margin-bottom: 70px; font: 18px/1 'Assistant';">An Automatic SQL Lab System</p>
                     </div>
                     <div class="col-md-5">
-                        <form class="form" method="post">
-                           <!--  {% csrf_token %}
-                            {{ form.as_p }} -->
-                            <input type="text" name="email" placeholder="Email">
-                            <input type="password" name="password" placeholder="Password">
+                        <form class="form" action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            {{ login_form }}
                             <button class="btn-lg btn-cv" type="submit">Log in</button>
                         </form>
-                        <form class="form">
+                        <form class="form" action="{% url 'register' %}" method="post">
                             <h1><span class="log-in">New to SqlLab?</span><span class="sign-up">Sign up</span></h1>
-                          <!--   {% csrf_token %}
-                            {{ form.as_p }} -->
-                            <input type="text" id="signup_email" placeholder="Email">
-                             <input type="password" id="signup_password1" placeholder="Password" class="showpassword">
-                            <input type="password" id="signup_password2" placeholder="Confirm Password" class="showpassword">
+                            {% csrf_token %}
+                            {{ register_form }}
                             <button id="signup" class="btn-lg btn-cv" method="get" type="submit">Sign up for SqlLab</button>
                         </form>
                     </div>
