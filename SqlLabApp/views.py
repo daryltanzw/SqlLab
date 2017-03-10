@@ -1,9 +1,10 @@
 from django.contrib.auth import login as django_login
 from django.views.generic import TemplateView, FormView
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from SqlLabApp.forms.login import LoginForm
 from SqlLabApp.forms.register import RegistrationForm
+from SqlLabApp.forms.instructor import InstructorForm
 from SqlLabApp.backends import EmailAuthBackend
 
 class MainView(TemplateView):
@@ -31,7 +32,7 @@ class LoginFormView(FormView):
             user = auth.authenticate(email=request.POST['email'], password=request.POST['password'])
             if user is not None:
                 django_login(request, user)
-                return HttpResponse("Success Login")
+                return HttpResponseRedirect("/SqlLabApp/instructor")
 
         else:
             return self.render_to_response(
@@ -52,7 +53,7 @@ class RegistrationFormView(FormView):
         login_form = LoginForm()
         if register_form.is_valid():
             register_form.save()
-            return HttpResponse("Success Registration")
+            return HttpResponseRedirect("/SqlLabApp/instructor")
 
         else:
             return self.render_to_response(
@@ -61,3 +62,8 @@ class RegistrationFormView(FormView):
                     login_form=login_form
                 )
             )
+
+class InstructorFormView(FormView):
+    form_class = InstructorForm
+    template_name = 'SqlLabApp/instructor.html'
+    success_url = '/'

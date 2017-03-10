@@ -1,0 +1,68 @@
+@media(min-width:768px) {
+    .navbar-fixed-top {
+        padding: 5px 0;
+        -webkit-transition: padding .3s;
+        -moz-transition: padding .3s;
+        transition: padding .3s;
+    }
+
+    .navbar-fixed-top .navbar-brand {
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+    }
+
+    .navbar-fixed-top.navbar-shrink {
+        padding: 10px 0;
+        background-color: #fff;
+        color: #2c3e50;
+    }
+
+    .navbar-fixed-top.navbar-shrink li a {
+        color: #2c3e50;
+    }
+
+    .navbar-fixed-top.navbar-shrink .navbar-brand {
+        font-size: 1.5em;
+    }
+}
+
+h1 {
+    padding-top: 5px;
+    color: #2c3e50;
+    font: 30px/0 'Gloria Hallelujah';
+}
+
+.navbar {
+    text-transform: uppercase;
+    color: transparent;
+    font-weight: 700;
+    background: transparent;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
+    -moz-box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
+    box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
+}
+
+.navbar a {
+    color: #2c3e50;
+}
+
+.navbar a:focus {
+    outline: 0;
+}
+
+.navbar .navbar-nav li a:focus {
+    outline: 0;
+}
+
+.navbar-default,
+.navbar-inverse {
+    border: 0;
+}
+
+.navbar .img-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+}
