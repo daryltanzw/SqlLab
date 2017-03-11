@@ -32,23 +32,38 @@
     }
 }
 
+#create-test-button,
 .action-container {
   display: block;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 22px;
   padding-bottom: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   width: 100%;
   height: auto;
-  background: white;
   border: 1px solid rgba(74, 74, 74, 0.075);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
-  color: #204056;
-  text-align: left;
   font-size: 18px;
   font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+#create-test-button {
+    background: #1e9f75;
+    color: white;
+    text-align: center;
+}
+
+#create-test-button:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
+}
+
+.action-container {
+    background: white;
+    color: #204056;
+    text-align: left;
 }
 
 .action-container p {
@@ -61,7 +76,7 @@
 
 .action-container:hover {
     background: #204056;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
 }
 
 .action-container:hover p,

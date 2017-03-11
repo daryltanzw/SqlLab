@@ -86,3 +86,23 @@
     border: solid 1px black;
     background: transparent;
 }
+
+footer a {
+    margin-right: 20px;
+}
+
+footer a:hover,
+a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+footer a {
+    margin-right: 20px;
+}
+
+footer a:hover,
+a:focus {
+    text-decoration: none;
+    color: white;
+}
