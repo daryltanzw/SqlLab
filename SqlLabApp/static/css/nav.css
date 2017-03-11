@@ -14,7 +14,7 @@
 
     .navbar-fixed-top.navbar-shrink {
         padding: 10px 0;
-        background-color: #fff;
+        background-color: #2c3e50;
         color: #2c3e50;
     }
 
@@ -28,23 +28,22 @@
 }
 
 h1 {
-    padding-top: 5px;
-    color: #2c3e50;
+    padding-top: 10px;
+    color: white;
     font: 30px/0 'Gloria Hallelujah';
 }
 
 .navbar {
     text-transform: uppercase;
-    color: transparent;
     font-weight: 700;
-    background: transparent;
+    background: #2c3e50;
     -webkit-box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
     -moz-box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
     box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
 }
 
 .navbar a {
-    color: #2c3e50;
+    color: white;
 }
 
 .navbar a:focus {
@@ -64,5 +63,5 @@ h1 {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin: 5px;
+    margin: 10px;
 }

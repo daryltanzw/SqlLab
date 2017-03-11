@@ -1,0 +1,93 @@
+.intro {
+    display: table;
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    padding: 100px 0;
+    text-align: left;
+    background: white;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.intro .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@media(min-width:768px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body .brand-heading {
+        font-size: 150px;
+    }
+
+    .intro .intro-body .intro-text {
+        font-size: 26px;
+    }
+}
+
+.action-container {
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 22px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: auto;
+  background: white;
+  border: 1px solid rgba(74, 74, 74, 0.075);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  color: #204056;
+  text-align: left;
+  font-size: 18px;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+.action-container p {
+    float: left;
+}
+
+.action-container a {
+    color: #204056;
+}
+
+.action-container:hover {
+    background: #204056;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.action-container:hover p,
+.action-container:hover a,
+.action-container:hover li {
+    color: white;
+}
+
+.action-container:hover #icon {
+    color: white;
+}
+
+#menu > li.sub ul {
+    position: absolute;
+    left: 0;
+    float: right;
+}
+
+#menu li.sub ul li a {
+    display: inline;
+}
+
+#menu{
+    text-align:right;
+}
+
+li{
+    display:inline-block;
+}
