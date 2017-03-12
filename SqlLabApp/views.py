@@ -1,10 +1,11 @@
 from django.contrib.auth import login as django_login
 from django.views.generic import TemplateView, FormView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 
 from SqlLabApp.forms.login import LoginForm
 from SqlLabApp.forms.register import RegistrationForm
 from SqlLabApp.forms.instructor import InstructorForm
+from SqlLabApp.forms.createtest import CreateTestForm
 from SqlLabApp.backends import EmailAuthBackend
 
 class MainView(TemplateView):
@@ -63,7 +64,14 @@ class RegistrationFormView(FormView):
                 )
             )
 
+
 class InstructorFormView(FormView):
     form_class = InstructorForm
     template_name = 'SqlLabApp/instructor.html'
+    success_url = '/'
+
+
+class CreateTestFormView(FormView):
+    form_class = InstructorForm
+    template_name = 'SqlLabApp/createtest.html'
     success_url = '/'
