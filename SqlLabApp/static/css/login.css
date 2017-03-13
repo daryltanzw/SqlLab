@@ -47,6 +47,10 @@
     transition: all 0.3s ease-out;
 }
 
+.form input[type=radio] {
+
+}
+
 .form input[type=text]:hover,
 .form input[type=password]:hover {
     border-color: #CCC;
@@ -60,6 +64,10 @@
 .form input[type=password]:focus {
     border-color: #BBB;
     outline: none;
+}
+
+.form ul {
+    list-style: none
 }
 
 .clearfix:after {

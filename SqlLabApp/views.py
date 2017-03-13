@@ -33,7 +33,7 @@ class LoginFormView(FormView):
             user = auth.authenticate(email=request.POST['email'], password=request.POST['password'])
             if user is not None:
                 django_login(request, user)
-                return HttpResponseRedirect("/SqlLabApp/instructor")
+                return HttpResponseRedirect("../instructor")
 
         else:
             return self.render_to_response(
@@ -54,7 +54,7 @@ class RegistrationFormView(FormView):
         login_form = LoginForm()
         if register_form.is_valid():
             register_form.save()
-            return HttpResponseRedirect("/SqlLabApp/instructor")
+            return HttpResponseRedirect("../instructor")
 
         else:
             return self.render_to_response(

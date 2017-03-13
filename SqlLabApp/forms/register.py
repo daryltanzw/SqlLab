@@ -6,8 +6,10 @@ class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}), label='')
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}), label='')
-    # isInstructor = forms.BooleanField(label='Instructor')
-    # isStudent = forms.BooleanField(label='Student')
+    INSTRUCTOR = "INS"
+    STUDENT = "STU"
+    roles_choices = ((INSTRUCTOR, "Instructor"), (STUDENT, "Student"))
+    role = forms.ChoiceField(widget=forms.RadioSelect, choices=roles_choices, label='')
 
     class Meta:
         model = User
@@ -28,7 +30,7 @@ class RegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
-        user.set_role("Student")
+        user.set_role(self.cleaned_data['role'])
         if commit:
             user.save()
         return user
