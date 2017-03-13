@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib import admin
-from SqlLabApp.views import *
+from SqlLabApp.views.login import LoginFormView, MainView, RegistrationFormView
+from SqlLabApp.views.instructor import InstructorFormView
+from SqlLabApp.views.createtest import CreateTestFormView
 
 
 urlpatterns = [

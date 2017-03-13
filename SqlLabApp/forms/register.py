@@ -8,8 +8,8 @@ class RegistrationForm(forms.ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}), label='')
     INSTRUCTOR = "INS"
     STUDENT = "STU"
-    roles_choices = ((INSTRUCTOR, "Instructor"), (STUDENT, "Student"))
-    role = forms.ChoiceField(widget=forms.RadioSelect, choices=roles_choices, label='')
+    roles_choices = [(INSTRUCTOR, "Instructor"), (STUDENT, "Student")]
+    role = forms.ChoiceField(choices=roles_choices, widget=forms.RadioSelect(), label='')
 
     class Meta:
         model = User
