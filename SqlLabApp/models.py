@@ -22,5 +22,23 @@ class User(AbstractBaseUser):
     def get_full_name(self):
         pass
 
-# class Test(models.Model):
-#     ins_email_id =
+class Test(models.Model):
+    ins_email = models.ForeignKey(User)
+    tid = models.IntegerField(primary_key=True)
+    test_table_name = models.CharField(max_length=100, null=False) # reflects an actual table
+
+#  Created on the fly from test_table_name
+# class Question(models.Model):
+#     question_id = models.IntegerField(primary_key=True)
+#     question_name = models.CharField(max_length=100, null=False)
+#     teacher_ans_query = models.TextField(null=False)
+
+
+class QuestionData(models.Model):
+    class Meta:
+        unique_together = (('tid', 'data_tbl_name'),)
+
+    tid = models.ForeignKey(Test)
+    data_tbl_name = models.CharField(max_length = 100)
+    student_visible = models.BooleanField(default=True)
+
