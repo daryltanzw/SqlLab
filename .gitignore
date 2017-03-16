@@ -5,6 +5,7 @@
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+/SqlLab/settings.py
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -14,6 +15,6 @@
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
-
+.
 # Byte code
 *.pyc
