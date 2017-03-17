@@ -1,6 +1,3 @@
-import csv
-import os
-
 from django import forms
 
 
