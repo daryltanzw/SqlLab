@@ -38,6 +38,7 @@ class CreateTestFormView(FormView):
             # if not create_test_name_table(test_name_table_format(1, request.POST['test_name']),
             #                               q_a_file_lines):
             #     return HttpResponse("Unable to Create test_name Database")
+            # Can try raise exception so the 3 table creations with the DB is in one transaction!
 
             # create QuestionDataUsedByTest and dynamic data_tbl_name from the .sql
         else:
