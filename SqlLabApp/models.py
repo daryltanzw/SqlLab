@@ -25,6 +25,8 @@ class User(AbstractBaseUser):
 
 
 class UserRole(models.Model):
+    class Meta:
+        unique_together = (('email', 'role'),)
     email = models.ForeignKey(User)
     role = models.CharField(max_length=3)
 
@@ -35,11 +37,15 @@ class Class(models.Model):
 
 
 class ClassTeacherTeaches(models.Model):
+    class Meta:
+        unique_together = (('classid', 'teacher_email'),)
     classid = models.ForeignKey(Class)
     teacher_email = models.ForeignKey(User)
 
 
 class ClassStudentAttends(models.Model):
+    class Meta:
+        unique_together = (('classid', 'student_email'),)
     classid = models.ForeignKey(Class)
     student_email = models.ForeignKey(User)
 
