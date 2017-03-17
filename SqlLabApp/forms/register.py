@@ -1,11 +1,12 @@
 from django import forms
-from SqlLabApp.models import User
+from SqlLabApp.models import User, UserRole
 
 
 class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}), label='')
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}), label='')
+    full_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Full Name'}), label='')
     INSTRUCTOR = "INS"
     STUDENT = "STU"
     roles_choices = [(INSTRUCTOR, "Instructor"), (STUDENT, "Student")]
@@ -30,7 +31,8 @@ class RegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
-        user.set_role(self.cleaned_data['role'])
+        user_role = UserRole(email_id=self.cleaned_data['email'], role=self.cleaned_data['role'])
         if commit:
             user.save()
+            user_role.save()
         return user
