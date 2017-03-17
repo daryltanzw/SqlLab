@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+from datetime import datetime
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
@@ -6,15 +8,14 @@ from django.db import models
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=100, primary_key=True)
     password = models.CharField(max_length=100, null=False)
-    role = models.CharField(max_length=3)
-
+    full_name = models.CharField(max_length =100, null=False)
     USERNAME_FIELD = 'email'
 
-    def set_role(self, role):
-        self.role = role
+    def get_full_name(self):
+        return self.full_name
 
-    def get_role(self):
-        return self.role
+    def set_full_name(self, fname):
+        self.full_name = fname
 
     def get_short_name(self):
         pass
@@ -23,23 +24,54 @@ class User(AbstractBaseUser):
         pass
 
 
-class Test(models.Model):
-    ins_email = models.ForeignKey(User)
-    tid = models.IntegerField(primary_key=True)
-    test_table_name = models.CharField(max_length=100, null=False)  # reflects an actual table
+class UserRole(models.Model):
+    email = models.ForeignKey(User)
+    role = models.CharField(max_length=3)
 
 
-# Created on the fly from test_table_name
-# class Question(models.Model):
-#     question_id = models.IntegerField(primary_key=True)
-#     question_name = models.CharField(max_length=100, null=False)
-#     teacher_ans_query = models.TextField(null=False)
+class Class(models.Model):
+    classid = models.AutoField(primary_key=True)
+    class_name = models.CharField(max_length=100, null=False)
 
 
-class QuestionData(models.Model):
+class ClassTeacherTeaches(models.Model):
+    classid = models.ForeignKey(Class)
+    teacher_email = models.ForeignKey(User)
+
+
+class ClassStudentAttends(models.Model):
+    classid = models.ForeignKey(Class)
+    student_email = models.ForeignKey(User)
+
+
+class TestForClass(models.Model):
+    tid = models.AutoField(primary_key=True)
+    classid = models.ForeignKey(Class)
+    start_time = models.DateTimeField(default=datetime.now, blank=True)
+    end_time = models.DateTimeField(default=datetime.now, blank=True)
+    test_name = models.CharField(max_length=100, null=False)
+    max_attempt = models.IntegerField(max_length=100, null=True, default=None) #if null, assume unlimited
+    # dyanmic Sql Table is created "tid1.test_name" to store all Questions
+
+
+class StudentAttemptsTest(models.Model):
+    class Meta:
+        unique_together = (('tid', 'student_email', 'attempt_no'),)
+
+    tid = models.ForeignKey(TestForClass)
+    student_email = models.ForeignKey(User)
+    attempt_no = models.IntegerField()
+    total_marks = models.IntegerField()
+    student_attempt_tbl_name = models.CharField(max_length=100, null=False)
+    # dynamic Sql Table is created "student_email.tid1" to store students answers
+
+
+class QuestionDataUsedByTest(models.Model):
     class Meta:
         unique_together = (('tid', 'data_tbl_name'),)
 
-    tid = models.ForeignKey(Test)
-    data_tbl_name = models.CharField(max_length=100)
-    student_visible = models.BooleanField(default=True)
+    tid = models.ForeignKey(TestForClass)
+    data_tbl_name = models.CharField(max_length=100, null=False)
+    student_visibility = models.BooleanField(default=True)
+    # dyanamic Sql Table is created "tid1.Employee1" to store Data tables which will be queried against.
+
