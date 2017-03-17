@@ -6,6 +6,7 @@ from SqlLabApp.forms.login import LoginForm
 from SqlLabApp.forms.register import RegistrationForm
 from SqlLabApp.backends import EmailAuthBackend
 
+
 class MainView(TemplateView):
     template_name = 'SqlLabApp/index.html'
 

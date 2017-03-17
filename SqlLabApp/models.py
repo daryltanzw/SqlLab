@@ -27,6 +27,7 @@ class User(AbstractBaseUser):
 class UserRole(models.Model):
     class Meta:
         unique_together = (('email', 'role'),)
+
     email = models.ForeignKey(User)
     role = models.CharField(max_length=3)
 
@@ -39,6 +40,7 @@ class Class(models.Model):
 class ClassTeacherTeaches(models.Model):
     class Meta:
         unique_together = (('classid', 'teacher_email'),)
+
     classid = models.ForeignKey(Class)
     teacher_email = models.ForeignKey(User)
 
@@ -46,6 +48,7 @@ class ClassTeacherTeaches(models.Model):
 class ClassStudentAttends(models.Model):
     class Meta:
         unique_together = (('classid', 'student_email'),)
+
     classid = models.ForeignKey(Class)
     student_email = models.ForeignKey(User)
 
@@ -56,8 +59,8 @@ class TestForClass(models.Model):
     start_time = models.DateTimeField(default=datetime.now, blank=True)
     end_time = models.DateTimeField(default=datetime.now, blank=True)
     test_name = models.CharField(max_length=100, null=False)
-    max_attempt = models.IntegerField(null=True, default=None) #if null, assume unlimited
     # dyanmic Sql Table is created "tid1.test_name" to store all Questions
+    max_attempt = models.IntegerField(null=True, default=None)  # if null, assume unlimited
 
 
 class StudentAttemptsTest(models.Model):
@@ -80,4 +83,3 @@ class QuestionDataUsedByTest(models.Model):
     data_tbl_name = models.CharField(max_length=100, null=False)
     student_visibility = models.BooleanField(default=True)
     # dyanamic Sql Table is created "tid1.Employee1" to store Data tables which will be queried against.
-
