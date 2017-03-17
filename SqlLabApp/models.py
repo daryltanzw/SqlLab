@@ -8,7 +8,7 @@ from django.db import models
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=100, primary_key=True)
     password = models.CharField(max_length=100, null=False)
-    full_name = models.CharField(max_length =100, null=False)
+    full_name = models.CharField(max_length=100, default="", null=False)
     USERNAME_FIELD = 'email'
 
     def get_full_name(self):
@@ -50,7 +50,7 @@ class TestForClass(models.Model):
     start_time = models.DateTimeField(default=datetime.now, blank=True)
     end_time = models.DateTimeField(default=datetime.now, blank=True)
     test_name = models.CharField(max_length=100, null=False)
-    max_attempt = models.IntegerField(max_length=100, null=True, default=None) #if null, assume unlimited
+    max_attempt = models.IntegerField(null=True, default=None) #if null, assume unlimited
     # dyanmic Sql Table is created "tid1.test_name" to store all Questions
 
 
