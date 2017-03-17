@@ -15,7 +15,7 @@ class CreateTestFormView(FormView):
         create_test_form = self.form_class(request.POST, request.FILES)
 
         if create_test_form.is_valid():
-            # create_TestForClass_row(classid, starttime, endtime, max_attempt, test_name)
+            # create_TestForClass_row(classid, starttime, endtime, max_attempt, test_name), return tid
 
             q_a_file = request.FILES['q_a_file_upload']
             data_file = request.FILES['data_file_upload']
@@ -27,6 +27,8 @@ class CreateTestFormView(FormView):
             # validate data_file parsing..
             # try run sql code
 
+            # create_test_name_table(test_name_table_format(tid, test_name)
+            # create QuestionDataUsedByTest and dynamic data_tbl_name from the .sql
         else:
             return HttpResponse("Create Test Not Successful! Please Contact Dev")
 
