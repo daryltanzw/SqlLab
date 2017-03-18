@@ -137,12 +137,12 @@ li {
 }
 
 .form input[type=text] {
-    outline: none;
+    display: inline-table;
     margin-bottom: 15px;
+    outline: none;
     padding: 15px;
-    width: 80%;
+    width: 99%;
     height: auto;
-    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     border-radius: 10px;
     font-size: 16px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
@@ -153,12 +153,11 @@ li {
 }
 
 .create-module {
+    display: inline-table;
     margin-bottom: 15px;
     padding: 15px;
-    margin-left: 2px;
-    width: 19%;
+    width: 100%;
     height: auto;
-    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     border-radius: 10px;
     font-size: 15px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
@@ -167,4 +166,9 @@ li {
     color: white;
     text-align: center;
     cursor: pointer;
+    margin-right: 0;
+}
+
+.create-module:hover {
+    color: white;
 }

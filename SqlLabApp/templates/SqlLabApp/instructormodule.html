@@ -65,15 +65,20 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-                <form class="form" autocomplete="off" action="{% url 'instructormodule' %}" method="post">{% csrf_token %}
-                    <div class="form-horizontal">
-                        {% for field in form %}
-                            {{ field.label_tag }} {{ field }}
-                            {{ create_module_form }}
-                        {% endfor %}
-                    <button class="btn-lg create-module" type="submit">CREATE NEW MODULE</button>
+                <form class="form" autocomplete="off" action="{% url 'instructormodule' %}"
+                      method="post">{% csrf_token %}
+                    <div id="module" class="row">
+                        <div class="col-md-9">
+                            {% for field in form %}
+                                {{ field.label_tag }} {{ field }}
+                                {{ create_module_form }}
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn create-module" type="submit">CREATE NEW MODULE</button>
+                        </div>
                     </div>
-                 </form>
+                </form>
                 <div class="button-container">
                     <form class="form" id="action-container">
                         <a href="/SqlLabApp/instructortest">
