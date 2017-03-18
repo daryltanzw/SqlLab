@@ -22,7 +22,7 @@
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Custom CSS -->
-    <link  rel="stylesheet" href="{% static 'css/list.css' %}">
+    <link  rel="stylesheet" href="{% static 'css/instructormodule.css' %}">
     <link  rel="stylesheet" href="{% static 'css/nav.css' %}">
 
     <!-- Custom Fonts -->
@@ -60,13 +60,15 @@
         </div>
     </nav>
 
-
     <header class="intro">
         <div class="intro-body">
             <div class="container">
                 <div class="button-container">
+                    <div id="module-header">
+                        <h2>CS4221 - Database Application Design and Tuning</h2>
+                    </div>
                     <a href="/SqlLabApp/createtest">
-                            <div id="create-test">CREATE TEST</div>
+                            <div id="create-test">CREATE NEW TEST</div>
                     </a>
                     <form class="form" id="action-container">
                         <p>Test 1</p>

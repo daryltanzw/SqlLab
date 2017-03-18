@@ -53,7 +53,7 @@
 #upload-file2:hover,
 #upload-file3:hover {
     background-color: #204056;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
+    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
     color: white;
     text-align: center;
 }
@@ -79,13 +79,10 @@
     margin-bottom: 15px;
     width: 100%;
     height: auto;
-    border: 1px solid rgba(74, 74, 74, 0.075);
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+    /*border: 1px solid rgba(74, 74, 74, 0.075);*/
+    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     border-radius: 10px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-}
-
-#create-test {
     background: #1e9f75;
     color: white;
     text-align: center;
@@ -95,7 +92,7 @@
 
 #create-test:hover {
     cursor: pointer;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
+    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
     text-decoration: none;
 }
 

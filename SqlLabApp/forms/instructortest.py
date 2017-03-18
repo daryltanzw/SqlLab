@@ -1,7 +1,7 @@
 from django import forms
 
 
-class InstructorForm(forms.Form):
+class InstructorTestForm(forms.Form):
 
      class Meta:
         fields = [ ]

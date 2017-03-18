@@ -8,7 +8,7 @@ from SqlLabApp.backends import EmailAuthBackend
 
 
 class MainView(TemplateView):
-    template_name = 'SqlLabApp/index.html'
+    template_name = 'SqlLabApp/loginregister.html'
 
     def get(self, request, *args, **kwargs):
         login_form = LoginForm(self.request.GET or None)
@@ -21,7 +21,7 @@ class MainView(TemplateView):
 
 class LoginFormView(FormView):
     form_class = LoginForm
-    template_name = 'SqlLabApp/index.html'
+    template_name = 'SqlLabApp/loginregister.html'
     success_url = '/'
 
     def post(self, request, *args, **kwargs):
@@ -32,7 +32,7 @@ class LoginFormView(FormView):
             user = auth.authenticate(email=request.POST['email'], password=request.POST['password'])
             if user is not None:
                 django_login(request, user)
-                return HttpResponseRedirect("../instructor")
+                return HttpResponseRedirect("../instructormodule")
 
         else:
             return self.render_to_response(
@@ -45,7 +45,7 @@ class LoginFormView(FormView):
 
 class RegistrationFormView(FormView):
     form_class = RegistrationForm
-    template_name = 'SqlLabApp/index.html'
+    template_name = 'SqlLabApp/loginregister.html'
     success_url = '/'
 
     def post(self, request, *args, **kwargs):
@@ -53,7 +53,7 @@ class RegistrationFormView(FormView):
         login_form = LoginForm()
         if register_form.is_valid():
             register_form.save()
-            return HttpResponseRedirect("../instructor")
+            return HttpResponseRedirect("../instructormodule")
 
         else:
             return self.render_to_response(

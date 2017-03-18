@@ -4,9 +4,9 @@ from SqlLabApp.models import User, UserRole
 
 class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}), label='')
+    full_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Full Name'}), label='')
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), label='')
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}), label='')
-    full_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Full Name'}), label='')
     INSTRUCTOR = "INS"
     STUDENT = "STU"
     roles_choices = [(INSTRUCTOR, "Instructor"), (STUDENT, "Student")]
@@ -14,7 +14,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2']
+        fields = ['email', 'full_name', 'password1', 'password2']
 
     def clean(self):
         """

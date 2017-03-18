@@ -44,7 +44,7 @@ class CreateTestFormView(FormView):
         else:
             return HttpResponse("Create Test Not Successful! Please Contact Dev")
 
-        return HttpResponseRedirect("../instructor")
+        return HttpResponseRedirect("../instructormodule")
 
 
 def validate_q_a_file(filename, q_a_file_lines):
