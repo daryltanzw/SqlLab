@@ -65,7 +65,7 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-                <form class="form" action="{% url 'instructormodule' %}" method="post">{% csrf_token %}
+                <form class="form" autocomplete="off" action="{% url 'instructormodule' %}" method="post">{% csrf_token %}
                     <div class="form-horizontal">
                         {% for field in form %}
                             {{ field.label_tag }} {{ field }}
