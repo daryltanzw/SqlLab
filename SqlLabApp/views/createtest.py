@@ -10,7 +10,7 @@ from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 class CreateTestFormView(FormView):
     form_class = CreateTestForm
-    template_name = 'SqlLabApp/createtest_new.html'
+    template_name = 'SqlLabApp/createtest.html'
     success_url = '/'
 
     def post(self, request, *args, **kwargs):

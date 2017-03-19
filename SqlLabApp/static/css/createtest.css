@@ -33,6 +33,23 @@
     }
 }
 
+.form input[type=text],
+.form input[type=number]{
+    display: inline-table;
+    margin-bottom: 15px;
+    outline: none;
+    padding: 15px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    border: 1px solid rgba(74, 74, 74, 0.22);
+    background: white;
+    color: #204056;
+    text-align: left;
+}
+
 #upload-file1,
 #upload-file2,
 #upload-file3 {

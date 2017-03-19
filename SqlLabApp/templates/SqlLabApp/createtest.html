@@ -67,36 +67,41 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-                <input type="text" class="form-control" id="test-name" placeholder="Test Name">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form name="form" enctype="multipart/form-data" method="POST">{% csrf_token %}
-                            <input type="file" id="files" name="myfile" style="display: none"><br/>
-                            <div id="upload-file1" onclick="document.getElementById('files').click();">
-                                <div id="icon">
-                                    <i class="fa fa-upload upload-icon" id="upload-icon"></i>
-                                    <p>UPLOAD QUESTION AND ANSWER FILE</p>
-                                    <div id="selectedQuestionFiles"></div>
-                                </div>
-                            </div>
+                <form class="form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button id="create-test" class="btn" type="submit">CREATE NEW TEST</button>
+                </form>
+{#                <input type="text" class="form-control" id="test-name" placeholder="Test Name">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6">#}
+{#                        <form name="form" enctype="multipart/form-data" method="POST">{% csrf_token %}#}
+{#                            <input type="file" id="files" name="myfile" style="display: none"><br/>#}
+{#                            <div id="upload-file1" onclick="document.getElementById('files').click();">#}
+{#                                <div id="icon">#}
+{#                                    <i class="fa fa-upload upload-icon" id="upload-icon"></i>#}
+{#                                    <p>UPLOAD QUESTION AND ANSWER FILE</p>#}
+{#                                    <div id="selectedQuestionFiles"></div>#}
+{#                                </div>#}
+{#                            </div>#}
 {#                            <input type="submit" value="Upload"/>#}
 {#                            {% if uploaded_file_url %}#}
 {#                                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>#}
 {#                            {% endif %}#}
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="file" id="multi-files" name="files" multiple style="display: none"><br/>
-                        <div id="upload-file3" onclick="document.getElementById('multi-files').click();">
-                            <div id="icon">
-                                <i class="fa fa-upload upload-icon" id="upload-icon"></i>
-                                <p>UPLOAD DATA FILES</p>
-                                <div id="selectedDataFiles"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="create-test">CREATE TEST</div>
+{#                        </form>#}
+{#                    </div>#}
+{#                    <div class="col-md-6">#}
+{#                        <input type="file" id="multi-files" name="files" multiple style="display: none"><br/>#}
+{#                        <div id="upload-file3" onclick="document.getElementById('multi-files').click();">#}
+{#                            <div id="icon">#}
+{#                                <i class="fa fa-upload upload-icon" id="upload-icon"></i>#}
+{#                                <p>UPLOAD DATA FILES</p>#}
+{#                                <div id="selectedDataFiles"></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div id="create-test">CREATE TEST</div>#}
             </div>
         </div>
     </header>
