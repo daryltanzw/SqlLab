@@ -81,7 +81,7 @@
                 <div class="button-container">
                     {% if class_list %}
                         {% for module in class_list %}
-                            <a href="{%  url 'instructortest' module.classid %}">
+                            <a href="{%  url 'instructortest' module.classid %}">{% csrf_token %}
                                 <div id="action-container">
                                     <p>{{ module.class_name }}</p>
                                     <ul id="menu">
