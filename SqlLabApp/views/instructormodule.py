@@ -8,17 +8,17 @@ class CreateModuleFormView(FormView):
     template_name = 'SqlLabApp/instructormodule.html'
     success_url = '/'
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         create_module_form = CreateModuleForm
         class_list = ClassTeacherTeaches.objects.filter(teacher_email_id=request.user.email)
         class_names = []
 
         for module in class_list:
-            class_names.append(Class.objects.get(classid=module.classid_id).class_name)
+            class_names.append(Class.objects.get(classid=module.classid_id))
 
         return self.render_to_response(
             self.get_context_data(
-                class_list=sorted(class_names),
+                class_list=class_names,
                 create_module_form=create_module_form,
             )
         )

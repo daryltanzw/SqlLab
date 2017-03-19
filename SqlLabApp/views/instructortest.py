@@ -1,9 +1,8 @@
-from django.views.generic import FormView
+from django.views.generic import DetailView
 
-from SqlLabApp.forms.instructortest import InstructorTestForm
+from SqlLabApp.models import Class
 
 
-class InstructorTestFormView(FormView):
-    form_class = InstructorTestForm
+class CreateTestFormView(DetailView):
+    model = Class
     template_name = 'SqlLabApp/instructortest.html'
-    success_url = '/'
