@@ -11,8 +11,9 @@ urlpatterns = [
     url(r'^$', MainView.as_view(), name='main'),
     url(r'^login/$', LoginFormView.as_view(), name='login'),
     url(r'^register/$', RegistrationFormView.as_view(), name='register'),
+
     url(r'^instructormodule/$', CreateModuleFormView.as_view(), name='instructormodule'),
-    url(r'^instructortest/$', InstructorTestFormView.as_view(), name='instructortest'),
-    url(r'^createmodule/$', CreateModuleFormView.as_view(), name='createmodule'),
+
     url(r'^createtest/$', CreateTestFormView.as_view(), name='createtest'),
+    url(r'^instructortest/$', InstructorTestFormView.as_view(), name='instructortest'),
 ]

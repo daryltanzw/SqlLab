@@ -1,12 +1,5 @@
 from django import forms
-from django import forms
 from SqlLabApp.models import Class, ClassTeacherTeaches
-
-
-class InstructorModuleForm(forms.Form):
-
-     class Meta:
-        fields = [ ]
 
 
 class CreateModuleForm(forms.Form):
