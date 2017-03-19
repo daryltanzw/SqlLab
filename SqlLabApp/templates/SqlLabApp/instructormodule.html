@@ -82,7 +82,7 @@
                     {% for module in class_list %}
                         <form class="form" id="action-container" action="{% url 'instructormodule' %}">
                             <a href="/SqlLabApp/instructortest">
-                                <p>{{ module.classid_id }}</p>
+                                <p>{{ module.class_name }}</p>
                             </a>
                             <ul id="menu">
                                 <li class="sub"><a href="#">Edit</a> |</li>
