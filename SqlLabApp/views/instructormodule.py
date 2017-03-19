@@ -10,15 +10,15 @@ class CreateModuleFormView(FormView):
 
     def get(self, request):
         create_module_form = CreateModuleForm
-        class_list = ClassTeacherTeaches.objects.all().filter(teacher_email_id=request.user.email)
+        class_list = ClassTeacherTeaches.objects.filter(teacher_email_id=request.user.email)
         class_names = []
 
         for module in class_list:
-            class_names.append(Class.objects.get(classid=module.classid_id))
+            class_names.append(Class.objects.get(classid=module.classid_id).class_name)
 
         return self.render_to_response(
             self.get_context_data(
-                class_list=class_names,
+                class_list=sorted(class_names),
                 create_module_form=create_module_form,
             )
         )
