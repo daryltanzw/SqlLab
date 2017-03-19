@@ -79,15 +79,21 @@
                     </div>
                 </form>
                 <div class="button-container">
-                    {% for module in class_list %}
-                        <div id="action-container">
-                            <p>{{ module }}</p>
-                            <ul id="menu">
-                                <li class="sub"><a href="#">Edit</a> |</li>
-                                <li class="sub"><a href="#">Delete</a></li>
-                            </ul>
-                        </div>
-                    {% endfor %}
+                    {% if class_list %}
+                        {% for module in class_list %}
+                            <div id="action-container">
+                                <p>{{ module }}</p>
+                                <ul id="menu">
+                                    <li class="sub"><a href="#">Edit</a> |</li>
+                                    <li class="sub"><a href="#">Delete</a></li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+
+                        {% else %}
+                            <p>There are currently no modules.</p>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
