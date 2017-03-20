@@ -14,12 +14,12 @@ class TakeTestFormView(FormView):
         test_name = TestForClass.objects.get(tid=self.kwargs['test_id']).test_name
         test_name_table = test_name_table_format(self.kwargs['test_id'], test_name)
         #qid_list = test_name_table.objects.(values_list('qid', flat=True))
-        qst_data = test_name_table.objects.all()
+        # qst_data = test_name_table.objects.all()
 
 
         return self.render_to_response(
             self.get_context_data(
-                qst_data=qst_data,
+                # qst_data=qst_data,
             )
         )
     '''    
