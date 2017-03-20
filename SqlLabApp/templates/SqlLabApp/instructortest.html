@@ -22,8 +22,8 @@
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Custom CSS -->
-    <link  rel="stylesheet" href="{% static 'css/instructormodule.css' %}">
-    <link  rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/instructormodule.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -39,20 +39,21 @@
 </head>
 
 <body id="page-top" class="index">
-    {% block content %}
+{% block content %}
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                 <h1>SqLLAB</h1>
+                <h1>SqLLAB</h1>
             </div>
 
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <div class="dropdown">
-                              <img class="img-circle" src="../../static/img/profile.png" type="button" style="cursor: pointer">
+                            <img class="img-circle" src="../../../static/img/profile.png" type="button"
+                                 style="cursor: pointer">
                         </div>
                     </li>
                 </ul>
@@ -63,24 +64,25 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-{#                    <div id="module-header">#}
-{#                        <h2>{{ class.class_name }}</h2>#}
-{#                    </div>#}
-                    <a href="/SqlLabApp/createtest">
-                        <button class="btn create-module" type="submit">CREATE NEW TEST</button>
-                    </a>
-                    <div class="button-container">
+                <div id="module-header">
+                    <h2>{{ module_name }}</h2>
+                </div>
+                <a href="/SqlLabApp/createtest">
+                    <button class="btn create-module" type="submit">CREATE NEW TEST</button>
+                </a>
+                <div class="button-container">
                     {% if test_list %}
                         {% for test in test_list %}
-{#                            <a href="{%  url 'instructortest' module.testid %}">{% csrf_token %}#}
+                            <a href="{% url 'taketest' test.tid %}">{% csrf_token %}
                                 <div id="action-container">
                                     <p>{{ test.test_name }}</p>
                                     <ul id="menu">
                                         <li class="sub"><a href="#">Edit</a> |</li>
-                                        <li class="sub"><a href="#">Delete</a></li>
+                                        <li class="sub"><a href="#">Delete</a> |</li>
+                                        <li class="sub"><a href="#">Review</a></li>
                                     </ul>
                                 </div>
-{#                             </a>#}
+                            </a>
                         {% endfor %}
 
                     {% else %}
@@ -91,5 +93,5 @@
         </div>
     </header>
 
-    {% endblock %}
+{% endblock %}
 </body>

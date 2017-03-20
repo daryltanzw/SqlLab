@@ -40,28 +40,6 @@ a:hover {
     text-decoration: none;
 }
 
-#create-test {
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 15px;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    font-size: 16px;
-    border: 1px solid #204056;
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    color: #204056;
-    text-align: center;
-    padding-top: 18px;
-    padding-bottom: 18px;
-}
-
-#create-test:hover {
-    cursor: pointer;
-    text-decoration: none;
-}
-
 #action-container {
     outline: none;
     display: block;
@@ -70,16 +48,16 @@ a:hover {
     margin-bottom: 15px;
     margin-left: 2px;
     width: 100%;
-    height: auto;
+    height: 50px;
     /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     border: 1px solid rgba(74, 74, 74, 0.22);
     background: white;
     color: #204056;
     text-align: left;
-    padding-top: 18px;
+    padding-top: 15px;
     padding-bottom: 10px;
 }
 
@@ -160,7 +138,6 @@ li {
     border-radius: 10px;
     font-size: 15px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    border: 1px solid rgba(74, 74, 74, 0.22);
     background: #1e9f75;
     color: white;
     text-align: center;
@@ -169,6 +146,7 @@ li {
 }
 
 .create-module:hover {
+    background: #1e9f75;
     color: white;
 }
 

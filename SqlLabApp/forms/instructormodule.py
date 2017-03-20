@@ -3,7 +3,7 @@ from SqlLabApp.models import Class, ClassTeacherTeaches
 
 
 class CreateModuleForm(forms.Form):
-    class_name = forms.CharField(widget=forms.widgets.TextInput(attrs={'placeholder': 'Module Code'}), label='')
+    class_name = forms.CharField(widget=forms.widgets.TextInput(attrs={'placeholder': 'Enter New Module Code'}), label='')
 
     class Meta:
         model = Class

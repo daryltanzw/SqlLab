@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^login/$', LoginFormView.as_view(), name='login'),
     url(r'^register/$', RegistrationFormView.as_view(), name='register'),
     url(r'^instructormodule/$', CreateModuleFormView.as_view(), name='instructormodule'),
-    url(r'^(?P<pk>[0-9]+)/$', InstructorTestFormView.as_view(), name='instructortest'),
+    url(r'^(?P<class_id>[0-9]+)/instructortest/$', InstructorTestFormView.as_view(), name='instructortest'),
     url(r'^createtest/$', CreateTestFormView.as_view(), name='createtest'),
-    url(r'^(?P<test_id>[0-9]+)/$', TakeTestFormView.as_view(), name='taketest'),
+    url(r'^(?P<test_id>[0-9]+)/taketest/$', TakeTestFormView.as_view(), name='taketest'),
 ]
