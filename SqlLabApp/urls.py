@@ -4,6 +4,7 @@ from SqlLabApp.views.login import LoginFormView, MainView, RegistrationFormView
 from SqlLabApp.views.instructormodule import CreateModuleFormView
 from SqlLabApp.views.instructortest import InstructorTestFormView
 from SqlLabApp.views.createtest import CreateTestFormView
+from SqlLabApp.views.taketest import TakeTestFormView
 
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     url(r'^instructormodule/$', CreateModuleFormView.as_view(), name='instructormodule'),
     url(r'^(?P<pk>[0-9]+)/$', InstructorTestFormView.as_view(), name='instructortest'),
     url(r'^createtest/$', CreateTestFormView.as_view(), name='createtest'),
+    url(r'^(?P<test_id>[0-9]+)/$', TakeTestFormView.as_view(), name='taketest'),
 ]
