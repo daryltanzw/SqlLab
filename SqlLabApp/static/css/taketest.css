@@ -1,0 +1,84 @@
+.intro {
+    display: table;
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    padding: 100px 0;
+    vertical-align: middle;
+    text-align: left;
+    background: white;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.intro .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body .brand-heading {
+        font-size: 150px;
+    }
+
+    .intro .intro-body .intro-text {
+        font-size: 26px;
+    }
+}
+
+#module-header {
+    height: 80px;
+}
+
+#module-header h2 {
+    border-bottom:1px solid #CCC;
+    float:left;
+    width:100%;
+    padding-bottom:15px;
+}
+
+#id_student_answer {
+    display: inline-table;
+    margin-bottom: 15px;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    border: 1px solid rgba(74, 74, 74, 0.22);
+    background: white;
+    color: #204056;
+    text-align: left;
+}
+
+#create-test {
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: auto;
+    /*border: 1px solid rgba(74, 74, 74, 0.075);*/
+    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
+    border-radius: 10px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    background: #1e9f75;
+    color: white;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+#create-test:hover {
+    cursor: pointer;
+    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
+    text-decoration: none;
+}

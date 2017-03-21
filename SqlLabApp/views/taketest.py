@@ -19,6 +19,7 @@ class TakeTestFormView(FormView):
 
         return self.render_to_response(
             self.get_context_data(
+                test_name=test_name,
                 # qst_data=qst_data,
             )
         )
