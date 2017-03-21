@@ -12,7 +12,7 @@ class InstructorTestFormView(FormView):
     def get(self, request, *args, **kwargs):
         module_name = Class.objects.get(classid=self.kwargs['class_id']).class_name
         create_module_form = InstructorTestForm
-        test_list = TestForClass.objects.filter(classid_id=self.kwargs['class_id'])
+        test_list = TestForClass.objects.filter(classid_id=self.kwargs['class_id']).order_by('test_name')
 
         return self.render_to_response(
             self.get_context_data(
