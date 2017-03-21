@@ -114,3 +114,17 @@ a:focus {
     text-decoration: none;
     color: white;
 }
+
+#id_role ul {
+    text-align: left;
+    float: left;
+}
+
+#id_role li {
+    float: left;
+    color: #7287aa;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 60px;
+    font: 13px/1 'Assistant';
+}
