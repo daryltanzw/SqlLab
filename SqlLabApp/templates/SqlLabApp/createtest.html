@@ -13,10 +13,12 @@
     {% load staticfiles %}
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -66,39 +68,13 @@
             <div class="container">
                 <form class="form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form }}
                     <button id="create-test" class="btn" type="submit">CREATE NEW TEST</button>
                 </form>
-{#                <input type="text" class="form-control" id="test-name" placeholder="Test Name">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-6">#}
-{#                        <form name="form" enctype="multipart/form-data" method="POST">{% csrf_token %}#}
-{#                            <input type="file" id="files" name="myfile" style="display: none"><br/>#}
-{#                            <div id="upload-file1" onclick="document.getElementById('files').click();">#}
-{#                                <div id="icon">#}
-{#                                    <i class="fa fa-upload upload-icon" id="upload-icon"></i>#}
-{#                                    <p>UPLOAD QUESTION AND ANSWER FILE</p>#}
-{#                                    <div id="selectedQuestionFiles"></div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <input type="submit" value="Upload"/>#}
-{#                            {% if uploaded_file_url %}#}
-{#                                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>#}
-{#                            {% endif %}#}
-{#                        </form>#}
-{#                    </div>#}
-{#                    <div class="col-md-6">#}
-{#                        <input type="file" id="multi-files" name="files" multiple style="display: none"><br/>#}
-{#                        <div id="upload-file3" onclick="document.getElementById('multi-files').click();">#}
-{#                            <div id="icon">#}
-{#                                <i class="fa fa-upload upload-icon" id="upload-icon"></i>#}
-{#                                <p>UPLOAD DATA FILES</p>#}
-{#                                <div id="selectedDataFiles"></div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div id="create-test">CREATE TEST</div>#}
+                <script type="text/javascript">
+                    $("#id_start_time").datetimepicker();
+                    $("#id_end_time").datetimepicker();
+                </script>
             </div>
         </div>
     </header>

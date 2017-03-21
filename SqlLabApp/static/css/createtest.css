@@ -33,6 +33,10 @@
     }
 }
 
+#datetimepickerstart {
+    background: white;
+}
+
 .form input[type=text],
 .form input[type=number]{
     display: inline-table;
