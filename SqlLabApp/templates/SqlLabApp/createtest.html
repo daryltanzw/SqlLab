@@ -68,7 +68,7 @@
             <div class="container">
                 <form class="form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form }}
+                    {{ form.as_p }}
                     <button id="create-test" class="btn" type="submit">CREATE NEW TEST</button>
                 </form>
                 <script type="text/javascript">
