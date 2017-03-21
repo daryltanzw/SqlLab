@@ -1,7 +1,9 @@
-from SqlLabApp.forms.taketest import TakeTestForm
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
-from SqlLabApp.models import Class, TestForClass
+from django.db import models
+
+from SqlLabApp.forms.taketest import TakeTestForm
+from SqlLabApp.models import QuestionAnswer, TestForClass
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 class TakeTestFormView(FormView):
@@ -12,15 +14,16 @@ class TakeTestFormView(FormView):
     def get(self, request, *args, **kwargs):
         take_test_form = TakeTestForm
         test_name = TestForClass.objects.get(tid=self.kwargs['test_id']).test_name
-        test_name_table = test_name_table_format(self.kwargs['test_id'], test_name)
-        #qid_list = test_name_table.objects.(values_list('qid', flat=True))
-        # qst_data = test_name_table.objects.all()
-
+        # test_name_table = test_name_table_format(self.kwargs['test_id'], test_name) TODO: Uncomment
+        # qid_list = models.Model.objects.model._meta.db_table.objects.(values_list('qid', flat=True))
+        test_name_table = 'sqllabapp_testname'
+        qst_data = QuestionAnswer.objects.raw('SELECT * FROM ' + test_name_table)
 
         return self.render_to_response(
             self.get_context_data(
+                take_test_form=take_test_form,
                 test_name=test_name,
-                # qst_data=qst_data,
+                qst_data=qst_data,
             )
         )
     '''    

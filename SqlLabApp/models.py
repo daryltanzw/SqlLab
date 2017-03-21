@@ -83,3 +83,10 @@ class QuestionDataUsedByTest(models.Model):
     data_tbl_name = models.CharField(max_length=100, null=False)
     student_visibility = models.BooleanField(default=True)
     # dyanamic Sql Table is created "tid1.Employee1" to store Data tables which will be queried against.
+
+
+class QuestionAnswer(models.Model):
+    qid = models.IntegerField(primary_key=True)
+    question = models.CharField(max_length=100, null=False)
+    answer = models.CharField(max_length=100, null=False)
+    mark = models.IntegerField()
