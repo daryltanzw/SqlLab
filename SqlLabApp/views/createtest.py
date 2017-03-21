@@ -14,33 +14,35 @@ class CreateTestFormView(FormView):
     success_url = '/'
 
     def post(self, request, *args, **kwargs):
+        classid = self.kwargs['class_id']
         create_test_form = self.form_class(request.POST, request.FILES)
 
         if create_test_form.is_valid():
-
-            # create_TestForClass_row(classid, starttime, endtime, max_attempt, test_name), return tid
-
-            q_a_file_name = request.FILES['q_a_file_upload'].name
-            q_a_file_lines = request.FILES['q_a_file_upload'].read().splitlines()
-
+            q_a_file = request.FILES['q_a_file_upload']
             data_file = request.FILES['data_file_upload']
 
-            validate_msg_q_a_file = validate_q_a_file(q_a_file_name, q_a_file_lines)
+            if q_a_file is None or data_file is None:
+                raise ValueError("No Upload for Q&A file or Data Files")
+
+            q_a_file_lines = q_a_file.read().splitlines()
+            data_file_lines = data_file.read().splitlines()
+
+            validate_msg_q_a_file = validate_q_a_file(q_a_file.name, q_a_file_lines)
             if validate_msg_q_a_file != "Valid":
                 return HttpResponse(validate_msg_q_a_file)
 
+            # create_TestForClass_row(classid, starttime, endtime, max_attempt, test_name), return tid
 
+                # validate data_file parsing..
+                # try run sql to create data_tbl_name
 
-            # validate data_file parsing..
-            # try run sql code
+                # create_test_name_table(test_name_table_format(tid, test_name)
+                # if not create_test_name_table(test_name_table_format(1, request.POST['test_name']),
+                #                               q_a_file_lines):
+                #     return HttpResponse("Unable to Create test_name Database")
+                # Can try raise exception so the 3 table creations with the DB is in one transaction!
 
-            # create_test_name_table(test_name_table_format(tid, test_name)
-            # if not create_test_name_table(test_name_table_format(1, request.POST['test_name']),
-            #                               q_a_file_lines):
-            #     return HttpResponse("Unable to Create test_name Database")
-            # Can try raise exception so the 3 table creations with the DB is in one transaction!
-
-            # create QuestionDataUsedByTest and dynamic data_tbl_name from the .sql
+                # create QuestionDataUsedByTest and dynamic data_tbl_name from the .sql
         else:
             return HttpResponse("Create Test Not Successful! Please Contact Dev")
 
