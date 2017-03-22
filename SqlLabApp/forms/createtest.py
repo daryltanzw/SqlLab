@@ -5,8 +5,8 @@ from django import forms
 
 class CreateTestForm(forms.Form):
     test_name = forms.CharField(widget=forms.widgets.TextInput(attrs={}), label='Test Name')
-    # start_time = forms.DateField(widget=forms.widgets.DateInput(attrs={'class': 'datepicker'}), label='Start Date')
-    # end_time = forms.DateField(widget=forms.widgets.DateInput(attrs={'class': 'datepicker'}), label='End Date')
+    start_time = forms.CharField(widget=forms.widgets.TextInput(attrs={}), label='Start Date')
+    end_time = forms.CharField(widget=forms.widgets.TextInput(attrs={}), label='End Date')
     max_attempt = forms.IntegerField(widget=forms.widgets.NumberInput(
                     attrs={}),
                     label='Number of Attempts (Leave Blank for Unlimited)', initial=None, required=False)
@@ -14,8 +14,7 @@ class CreateTestForm(forms.Form):
     data_file_upload = forms.FileField(label="Upload .sql dump")
 
     class Meta:
-        # fields = ['test_name','start_time', 'end_time', 'max_attempt', 'q_a_file_upload', 'data_file_upload']
-        fields = ['test_name','max_attempt', 'q_a_file_upload', 'data_file_upload']
+        fields = ['test_name','start_time', 'end_time', 'max_attempt', 'q_a_file_upload', 'data_file_upload']
 
     # def clean(self):
     #     start_time = self.data.get('start_time')

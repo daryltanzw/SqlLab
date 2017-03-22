@@ -67,7 +67,7 @@
                 <div id="module-header">
                     <h2>{{ module_name }}</h2>
                 </div>
-                <a href="/SqlLabApp/createtest">
+                <a href="{% url 'createtest' classid %}">{% csrf_token %}
                     <button class="btn create-module" type="submit">CREATE NEW TEST</button>
                 </a>
                 <div class="button-container">

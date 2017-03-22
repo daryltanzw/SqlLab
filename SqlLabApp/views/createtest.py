@@ -20,12 +20,11 @@ class CreateTestFormView(FormView):
 
     def post(self, request, *args, **kwargs):
         create_test_form = self.form_class(request.POST, request.FILES)
-        # TODO: Class id retrieve from prev view
-        classid = 1
+        classid = self.kwargs['class_id']
 
         if create_test_form.is_valid():
-            # start_time = request.POST['start_time']
-            # end_time = request.POST['end_time']
+            start_time = request.POST['start_time']
+            end_time = request.POST['end_time']
             max_attempt = request.POST['max_attempt']
             test_name = request.POST['test_name']
             q_a_file = request.FILES['q_a_file_upload']
@@ -49,7 +48,7 @@ class CreateTestFormView(FormView):
                     validate_q_a_file(q_a_file.name, q_a_file_lines)
                     cursor = connection.cursor()
                     processed_data_file_lines = append_to_relations(tid, data_file_lines)
-                    run_sql(cursor, processed_data_file_lines)
+                    # run_sql(cursor, processed_data_file_lines)
                     create_test_name_table(cursor, test_name_table_format(tid, test_name), q_a_file_lines)
                     connection.commit()
 
@@ -62,7 +61,7 @@ class CreateTestFormView(FormView):
                 connection.close()
                 raise err
 
-            return HttpResponseRedirect("../{0}/instructortest".format(classid))
+            return HttpResponseRedirect("../instructortest".format(classid))
 
         else:
             raise ValueError(create_test_form.errors)

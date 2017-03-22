@@ -10,12 +10,14 @@ class InstructorTestFormView(FormView):
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
-        module_name = Class.objects.get(classid=self.kwargs['class_id']).class_name
+        classid = self.kwargs['class_id']
+        module_name = Class.objects.get(classid=classid).class_name
         create_module_form = InstructorTestForm
-        test_list = TestForClass.objects.filter(classid_id=self.kwargs['class_id']).order_by('test_name')
+        test_list = TestForClass.objects.filter(classid_id=classid).order_by('test_name')
 
         return self.render_to_response(
             self.get_context_data(
+                classid=classid,
                 test_list=test_list,
                 module_name=module_name,
                 create_module_form=create_module_form,
