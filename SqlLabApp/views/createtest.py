@@ -1,9 +1,14 @@
 import os
 
+import sqlparse
+from django.db import transaction
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.createtest import CreateTestForm
+from SqlLabApp.models import TestForClass, QuestionDataUsedByTest
+from SqlLabApp.utils.CreateTestDataParser import get_tbl_names, append_to_relations
+from SqlLabApp.utils.CreateTestNameTable import create_test_name_table
 from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
@@ -14,10 +19,14 @@ class CreateTestFormView(FormView):
     success_url = '/'
 
     def post(self, request, *args, **kwargs):
-        classid = self.kwargs['class_id']
         create_test_form = self.form_class(request.POST, request.FILES)
+        classid = 1
 
         if create_test_form.is_valid():
+            # start_time = request.POST['start_time']
+            # end_time = request.POST['end_time']
+            max_attempt = request.POST['max_attempt']
+            test_name = request.POST['test_name']
             q_a_file = request.FILES['q_a_file_upload']
             data_file = request.FILES['data_file_upload']
 
@@ -31,22 +40,35 @@ class CreateTestFormView(FormView):
             if validate_msg_q_a_file != "Valid":
                 return HttpResponse(validate_msg_q_a_file)
 
-            # create_TestForClass_row(classid, starttime, endtime, max_attempt, test_name), return tid
+            try:
+                connection = get_db_connection()
+                with transaction.atomic():
+                    # test_for_class_row = TestForClass(classid_id=classid, max_attempt=max_attempt, test_name=test_name,
+                    #                                   start_time=start_time, end_time=end_time)
+                    test_for_class_row = TestForClass(classid_id=classid, max_attempt=max_attempt, test_name=test_name)
+                    test_for_class_row.save()
+                    tid = test_for_class_row.tid
 
-                # validate data_file parsing..
-                # try run sql to create data_tbl_name
+                    cursor = connection.cursor()
+                    processed_data_file_lines = append_to_relations(tid, data_file_lines)
+                    run_sql(cursor, processed_data_file_lines)
+                    create_test_name_table(cursor, test_name_table_format(tid, test_name), q_a_file_lines)
+                    connection.commit()
 
-                # create_test_name_table(test_name_table_format(tid, test_name)
-                # if not create_test_name_table(test_name_table_format(1, request.POST['test_name']),
-                #                               q_a_file_lines):
-                #     return HttpResponse("Unable to Create test_name Database")
-                # Can try raise exception so the 3 table creations with the DB is in one transaction!
+                    data_tbl_name_list = get_tbl_names(data_file_lines)
+                    for name in data_tbl_name_list:
+                        question_data_used_by_test_row = QuestionDataUsedByTest(tid_id=tid, data_tbl_name=name)
+                        question_data_used_by_test_row.save()
 
-                # create QuestionDataUsedByTest and dynamic data_tbl_name from the .sql
+            except ValueError as err:
+                connection.close()
+                raise err
+                # return HttpResponse(err.args)
+
+            return HttpResponseRedirect("../instructormodule")
+
         else:
-            return HttpResponse("Create Test Not Successful! Please Contact Dev")
-
-        return HttpResponseRedirect("../instructormodule")
+            raise ValueError(create_test_form.errors)
 
 
 def validate_q_a_file(filename, q_a_file_lines):
@@ -64,27 +86,13 @@ def validate_q_a_file(filename, q_a_file_lines):
     return "Valid"
 
 
-# assumes tbl_name has been formatted using utils/QuestionTableFormatter
-def create_test_name_table(tbl_name, q_a_file_lines):
+def run_sql(cursor, processed_data_file_lines):
     try:
-        db_conn = get_db_connection()
-        cursor = db_conn.cursor()
+        query = '\n'.join(processed_data_file_lines)
+        result_list = sqlparse.parse(sqlparse.format(query, reindent=True, keyword_case='upper'))
 
-        cursor.execute("drop table if exists {0};".format(tbl_name))
-        cursor.execute(
-            "create table {0} (qid INTEGER primary key, question text, teacher_answer text);".format(tbl_name))
+        for result in result_list:
+            cursor.execute(str(result))
 
-        q_no = 0
-        for row in q_a_file_lines:
-            r = row.split("\t")
-            q_no += 1
-            cursor.execute("Insert into {0} values({1},%s, %s)"
-                           .format(tbl_name, q_no), (r[0], r[1]))
-            # sqltable, q1, question text, answer text
-            # %s %s is the database to avoid quotes as the queries inserted as text will containt quotes
-
-        db_conn.commit()
-        return True
-
-    except:
-        return False
+    except Exception as err:
+        raise ValueError(err)
