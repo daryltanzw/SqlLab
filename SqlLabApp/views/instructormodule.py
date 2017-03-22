@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 from SqlLabApp.models import Class, ClassTeacherTeaches
 
+
 class CreateModuleFormView(FormView):
     form_class = CreateModuleForm
     template_name = 'SqlLabApp/instructormodule.html'
@@ -18,7 +19,7 @@ class CreateModuleFormView(FormView):
         for module in class_list:
             class_names.append(Class.objects.get(classid=module.classid_id))
 
-        class_names.sort(key = operator.attrgetter('class_name'))
+        class_names.sort(key=operator.attrgetter('class_name'))
 
         return self.render_to_response(
             self.get_context_data(
