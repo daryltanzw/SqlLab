@@ -2,7 +2,7 @@ import os
 
 import sqlparse
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.createtest import CreateTestForm
@@ -20,6 +20,7 @@ class CreateTestFormView(FormView):
 
     def post(self, request, *args, **kwargs):
         create_test_form = self.form_class(request.POST, request.FILES)
+        # TODO: Class id retrieve from prev view
         classid = 1
 
         if create_test_form.is_valid():
@@ -36,10 +37,6 @@ class CreateTestFormView(FormView):
             q_a_file_lines = q_a_file.read().splitlines()
             data_file_lines = data_file.read().splitlines()
 
-            validate_msg_q_a_file = validate_q_a_file(q_a_file.name, q_a_file_lines)
-            if validate_msg_q_a_file != "Valid":
-                return HttpResponse(validate_msg_q_a_file)
-
             try:
                 connection = get_db_connection()
                 with transaction.atomic():
@@ -49,6 +46,7 @@ class CreateTestFormView(FormView):
                     test_for_class_row.save()
                     tid = test_for_class_row.tid
 
+                    validate_q_a_file(q_a_file.name, q_a_file_lines)
                     cursor = connection.cursor()
                     processed_data_file_lines = append_to_relations(tid, data_file_lines)
                     run_sql(cursor, processed_data_file_lines)
@@ -63,9 +61,8 @@ class CreateTestFormView(FormView):
             except ValueError as err:
                 connection.close()
                 raise err
-                # return HttpResponse(err.args)
 
-            return HttpResponseRedirect("../instructormodule")
+            return HttpResponseRedirect("../{0}/instructortest".format(classid))
 
         else:
             raise ValueError(create_test_form.errors)
@@ -76,14 +73,12 @@ def validate_q_a_file(filename, q_a_file_lines):
     valid_extensions = ['.tsv', '.txt']
 
     if file_ext.lower() not in valid_extensions:
-        return "Only tsv or txt files are allowed"
+        raise ValueError("Only tsv or txt files are allowed")
 
     for row in q_a_file_lines:
         splitted = row.split("\t")
-        if len(splitted) != 2:
-            return "Expected 2 columns with one tab separation -> {0}".format(row)
-
-    return "Valid"
+        if len(splitted) != 3:
+            raise ValueError("Expected Question <tab> Answer <tab> Marks".format(row))
 
 
 def run_sql(cursor, processed_data_file_lines):

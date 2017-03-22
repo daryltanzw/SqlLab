@@ -8,8 +8,8 @@ class CreateTestNameTable(TestCase):
     def test_valid_create_test_name_table(self):
         q_a_file_lines = [
             "Select all females, with score higher than 50\tselect * from students where gender = 'F' and grade "
-            "> 50;",
-            'q2\ta2', 'q3\ta3']
+            "> 50;\t5",
+            'q2\ta2\t4', 'q3\ta3\t3']
 
         connection = get_db_connection()
         cursor = connection.cursor()
@@ -25,8 +25,8 @@ class CreateTestNameTable(TestCase):
         raised = False
         q_a_file_lines = [
             "Select all females, with score higher than 50\tselect * from students where gender = 'F' and grade "
-            "> 50;",
-            'q2', 'q3\ta3']
+            "> 50;\t5",
+            'q2\t4', 'q3\ta3\t3']
 
         connection = get_db_connection()
         cursor = connection.cursor()
