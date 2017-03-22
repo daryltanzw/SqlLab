@@ -39,9 +39,8 @@ class CreateTestFormView(FormView):
             try:
                 connection = get_db_connection()
                 with transaction.atomic():
-                    # test_for_class_row = TestForClass(classid_id=classid, max_attempt=max_attempt, test_name=test_name,
-                    #                                   start_time=start_time, end_time=end_time)
-                    test_for_class_row = TestForClass(classid_id=classid, max_attempt=max_attempt, test_name=test_name)
+                    test_for_class_row = TestForClass(classid_id=classid, max_attempt=max_attempt, test_name=test_name,
+                                                      start_time=start_time, end_time=end_time)
                     test_for_class_row.save()
                     tid = test_for_class_row.tid
 

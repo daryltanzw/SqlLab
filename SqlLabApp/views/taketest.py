@@ -14,9 +14,7 @@ class TakeTestFormView(FormView):
     def get(self, request, *args, **kwargs):
         take_test_form = TakeTestForm
         test_name = TestForClass.objects.get(tid=self.kwargs['test_id']).test_name
-        # test_name_table = test_name_table_format(self.kwargs['test_id'], test_name) TODO: Uncomment
-        # qid_list = models.Model.objects.model._meta.db_table.objects.(values_list('qid', flat=True))
-        test_name_table = 'sqllabapp_testname'
+        test_name_table = test_name_table_format(self.kwargs['test_id'], test_name)
         qst_data = QuestionAnswer.objects.raw('SELECT * FROM ' + test_name_table)
 
         return self.render_to_response(
