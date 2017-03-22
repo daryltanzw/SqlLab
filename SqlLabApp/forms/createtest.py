@@ -10,8 +10,8 @@ class CreateTestForm(forms.Form):
     max_attempt = forms.IntegerField(widget=forms.widgets.NumberInput(
                     attrs={}),
                     label='Number of Attempts (Leave Blank for Unlimited)', initial=None, required=False)
-    q_a_file_upload = forms.FileField(label="Upload Tab Separated File ( Question <tab> Answer )")
-    data_file_upload = forms.FileField(label="Upload .sql dumps")
+    q_a_file_upload = forms.FileField(label="Upload Tab Separated File (.txt, .tsv)")
+    data_file_upload = forms.FileField(label="Upload .sql dump")
 
     class Meta:
         # fields = ['test_name','start_time', 'end_time', 'max_attempt', 'q_a_file_upload', 'data_file_upload']
