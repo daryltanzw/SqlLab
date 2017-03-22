@@ -1,9 +1,0 @@
-{% block content %}
-  <h2>Create Test</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Test</button>
-   </form>
-
-{% endblock %}
