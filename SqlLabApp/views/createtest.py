@@ -60,7 +60,7 @@ class CreateTestFormView(FormView):
                 connection.close()
                 raise err
 
-            return HttpResponseRedirect("../instructortest".format(classid))
+            return HttpResponseRedirect("../instructortest")
 
         else:
             raise ValueError(create_test_form.errors)

@@ -5,8 +5,8 @@ from django import forms
 
 class CreateTestForm(forms.Form):
     test_name = forms.CharField(widget=forms.widgets.TextInput(attrs={}), label='Test Name')
-    start_time = forms.CharField(widget=forms.widgets.TextInput(attrs={}), label='Start Date')
-    end_time = forms.CharField(widget=forms.widgets.TextInput(attrs={}), label='End Date')
+    start_time = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={}), label='Start Date')
+    end_time = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={}), label='End Date')
     max_attempt = forms.IntegerField(widget=forms.widgets.NumberInput(
                     attrs={}),
                     label='Number of Attempts (Leave Blank for Unlimited)', initial=None, required=False)
