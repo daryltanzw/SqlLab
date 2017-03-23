@@ -47,7 +47,7 @@ a:hover {
     border-radius: 10px;
 }
 
-#action-container {
+#module-container {
     display: block;
     padding-left: 15px;
     padding-right: 15px;
@@ -57,24 +57,58 @@ a:hover {
     /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     font-size: 15px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    /*border-bottom: 1px solid rgba(74, 74, 74, 0.22);*/
     background: white;
     color: #204056;
     text-align: left;
     padding-top: 15px;
 }
 
-#action-container p {
+#module-container p {
     float: left;
     font-size: 16px;
     font-weight: bold;
 }
 
-#action-container a {
+#module-container a {
      color: #204056;
     font-size: 15px;
 }
 
-#action-container:hover #icon {
+#module-container:hover #icon {
+    color: white;
+}
+
+#test-container {
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
+    font-size: 15px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    border-bottom: 1px solid rgba(74, 74, 74, 0.22);
+    background: white;
+    color: #204056;
+    text-align: left;
+    padding-top: 15px;
+}
+
+#test-container p {
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#test-container a {
+     color: #204056;
+    font-size: 15px;
+}
+
+#test-container:hover #icon {
     color: white;
 }
 

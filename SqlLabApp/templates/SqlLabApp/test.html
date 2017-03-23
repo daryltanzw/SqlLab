@@ -22,7 +22,7 @@
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/instructormodule.css' %}">
+    <link rel="stylesheet" href="{% static 'css/module.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
 
     <!-- Custom Fonts -->
@@ -67,36 +67,49 @@
                 <div id="module-header">
                     <h2>{{ module_name }}</h2>
                 </div>
-                <a href="{% url 'createtest' classid %}">{% csrf_token %}
-                    <button class="btn create-module" type="submit">CREATE NEW TEST</button>
-                </a>
+                {% ifequal user_role 'INS' %}
+                    <a href="{% url 'createtest' classid %}">{% csrf_token %}
+                        <button class="btn create-module" type="submit">CREATE NEW TEST</button>
+                    </a>
+                {% endifequal %}
                 <div class="button-container">
                     {% if test_list %}
                         {% for test in test_list %}
                             <div class="panel-group">
                             <div class="panel panel-default" id="panel-container">
-                                <div class="panel-heading" id="action-container">
+                                <div class="panel-heading" id="test-container">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="#collapse{{ test.tid }}">
                                             <p>{{ test.test_name }}</p>
                                             <ul id="menu">
-                                                <li class="sub"><a href="{% url 'taketest' test.tid %}">Take Test</a> |</li>
-                                                <li class="sub"><a href="#">Review Test</a> |</li>
-                                                <li class="sub"><a href="#">Edit Test</a> |</li>
-                                                <li class="sub"><a href="#">Delete Test</a></li>
+                                                <li class="sub"><a href="{% url 'taketest' test.tid %}">Take Test</a> |
+                                                </li>
+                                                <li class="sub"><a href="#">Review Test</a></li>
+                                                {% ifequal user_role 'INS' %}
+                                                    <li class="sub"><a href="#">| Edit Test</a> |</li>
+                                                {% endifequal %}
+                                                {% ifequal user_role 'INS' %}
+                                                    <li class="sub"><a href="#">Delete Test</a></li>
+                                                {% endifequal %}
                                             </ul>
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">
+{#                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">#}
                                     <div class="panel-body">
-                                        <p style="text-indent: 1em;"><strong>Start Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
-                                        <p style="text-indent: 1em;"><strong>End Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
-                                        <p style="text-indent: 1em;"><strong>Number of Attempts Allowed:</strong>&ensp;&ensp;{{ test.max_attempt }}
-                                        <p style="text-indent: 1em;"><strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
-                                        </p>
+                                        <p style="text-indent: 1em;"><strong>Start
+                                            Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
+                                        <p style="text-indent: 1em;"><strong>End
+                                            Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
+                                        <p style="text-indent: 1em;"><strong>Number of Attempts
+                                            Allowed:</strong>&ensp;&ensp;{{ test.max_attempt }}
+                                            {% ifequal user_role 'INS' %}
+                                                <p style="text-indent: 1em;">
+                                                <strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
+                                            {% endifequal %}
+                                            </p>
                                     </div>
-                                </div>
+{#                                </div>#}
                             </div>
                         {% endfor %}
 
@@ -105,8 +118,8 @@
                     {% endif %}
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
     </header>
 
 {% endblock %}

@@ -44,7 +44,7 @@ class CreateModuleFormView(FormView):
                 connection.close()
                 raise err
 
-            return HttpResponseRedirect("../instructormodule")
+            return HttpResponseRedirect("../module")
 
         else:
             raise ValueError(create_module_form.errors)

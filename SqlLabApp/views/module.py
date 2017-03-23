@@ -1,13 +1,13 @@
 import operator
 
-from SqlLabApp.forms.instructormodule import InstructorModuleForm
+from SqlLabApp.forms.module import InstructorModuleForm
 from django.views.generic import FormView
-from SqlLabApp.models import Class, ClassTeacherTeaches
+from SqlLabApp.models import UserRole, Class, ClassTeacherTeaches
 
 
 class InstructorModuleFormView(FormView):
     form_class = InstructorModuleForm
-    template_name = 'SqlLabApp/instructormodule.html'
+    template_name = 'SqlLabApp/module.html'
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
@@ -19,9 +19,11 @@ class InstructorModuleFormView(FormView):
             class_names.append(Class.objects.get(classid=module.classid_id))
 
         class_names.sort(key=operator.attrgetter('class_name'))
+        user_role = UserRole.objects.get(email_id=request.user.email).role
 
         return self.render_to_response(
             self.get_context_data(
+                user_role=user_role,
                 class_list=class_names,
                 create_module_form=create_module_form,
             )

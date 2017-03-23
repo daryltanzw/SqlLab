@@ -32,7 +32,7 @@ class LoginFormView(FormView):
             user = auth.authenticate(email=request.POST['email'], password=request.POST['password'])
             if user is not None:
                 django_login(request, user)
-                return HttpResponseRedirect("../instructormodule")
+                return HttpResponseRedirect("../module")
 
         else:
             return self.render_to_response(
@@ -53,7 +53,7 @@ class RegistrationFormView(FormView):
         login_form = LoginForm()
         if register_form.is_valid():
             register_form.save()
-            return HttpResponseRedirect("../instructormodule")
+            return HttpResponseRedirect("../module")
 
         else:
             return self.render_to_response(
