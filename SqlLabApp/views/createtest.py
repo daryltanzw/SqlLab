@@ -47,7 +47,7 @@ class CreateTestFormView(FormView):
                     validate_q_a_file(q_a_file.name, q_a_file_lines)
                     cursor = connection.cursor()
                     processed_data_file_lines = append_to_relations(tid, data_file_lines)
-                    # run_sql(cursor, processed_data_file_lines)
+                    run_sql(cursor, processed_data_file_lines)
                     create_test_name_table(cursor, test_name_table_format(tid, test_name), q_a_file_lines)
                     connection.commit()
 
