@@ -27,6 +27,10 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
 h1 {
     padding-top: 10px;
     color: white;
