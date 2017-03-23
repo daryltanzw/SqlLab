@@ -80,7 +80,7 @@
                                         <a data-toggle="collapse" href="#collapse{{ test.tid }}">
                                             <p>{{ test.test_name }}</p>
                                             <ul id="menu">
-                                                <li class="sub"><a href="#">Take Test</a> |</li>
+                                                <li class="sub"><a href="{% url 'taketest' test.tid %}">Take Test</a> |</li>
                                                 <li class="sub"><a href="#">Review Test</a> |</li>
                                                 <li class="sub"><a href="#">Edit Test</a> |</li>
                                                 <li class="sub"><a href="#">Delete Test</a></li>
