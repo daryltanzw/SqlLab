@@ -78,23 +78,39 @@
                         </div>
                     </div>
                 </form>
+
                 <div class="button-container">
                     {% if class_list %}
                         {% for module in class_list %}
-                            <a href="{%  url 'instructortest' module.classid %}">{% csrf_token %}
-                                <div id="action-container">
-                                    <p>{{ module.class_name }}</p>
-                                    <ul id="menu">
-                                        <li class="sub"><a href="#">Edit</a> |</li>
-                                        <li class="sub"><a href="#">Delete</a></li>
-                                    </ul>
+                            <div class="panel-group">
+                            <div class="panel panel-default" id="panel-container">
+                                <div class="panel-heading" id="action-container">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse{{ module.classid }}">
+                                            <p>{{ module.class_name }}</p>
+                                            <ul id="menu">
+                                                <li class="sub"><a href="#">View Students</a> |</li>
+                                                <li class="sub"><a href="{% url 'instructortest' module.classid %}">View Tests</a> |</li>
+                                                <li class="sub"><a href="#">Edit Module</a> |</li>
+                                                <li class="sub"><a href="#">Delete Module</a></li>
+                                            </ul>
+                                        </a>
+                                    </h4>
                                 </div>
-                             </a>
+                                <div id="collapse{{ module.classid }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p style="text-indent: 1em;"><strong>Semester:</strong>&ensp;&ensp;2016/2017, Semester 1</p>
+                                        <p style="text-indent: 1em;"><strong>Facilitators:</strong>&ensp;&ensp;ASSOC PROF Stephan Bressan, Thomas Kister</p>
+                                        <p style="text-indent: 1em;"><strong>Number of Students:</strong>&ensp;&ensp;60</p>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
 
                     {% else %}
                         <p>There is currently no module.</p>
                     {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -73,24 +73,40 @@
                 <div class="button-container">
                     {% if test_list %}
                         {% for test in test_list %}
-                            <a href="{% url 'taketest' test.tid %}">{% csrf_token %}
-                                <div id="action-container">
-                                    <p>{{ test.test_name }}</p>
-                                    <ul id="menu">
-                                        <li class="sub"><a href="#">Edit</a> |</li>
-                                        <li class="sub"><a href="#">Delete</a> |</li>
-                                        <li class="sub"><a href="#">Review</a></li>
-                                    </ul>
+                            <div class="panel-group">
+                            <div class="panel panel-default" id="panel-container">
+                                <div class="panel-heading" id="action-container">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse{{ test.tid }}">
+                                            <p>{{ test.test_name }}</p>
+                                            <ul id="menu">
+                                                <li class="sub"><a href="#">Take Test</a> |</li>
+                                                <li class="sub"><a href="#">Review Test</a> |</li>
+                                                <li class="sub"><a href="#">Edit Test</a> |</li>
+                                                <li class="sub"><a href="#">Delete Test</a></li>
+                                            </ul>
+                                        </a>
+                                    </h4>
                                 </div>
-                            </a>
+                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p style="text-indent: 1em;"><strong>Start Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
+                                        <p style="text-indent: 1em;"><strong>End Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
+                                        <p style="text-indent: 1em;"><strong>Number of Attempts Allowed:</strong>&ensp;&ensp;{{ test.max_attempt }}
+                                        <p style="text-indent: 1em;"><strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
 
                     {% else %}
                         <p>There is currently no test.</p>
                     {% endif %}
+                    </div>
+                </div>
                 </div>
             </div>
-        </div>
     </header>
 
 {% endblock %}

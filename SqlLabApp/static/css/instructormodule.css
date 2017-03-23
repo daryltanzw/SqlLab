@@ -40,25 +40,27 @@ a:hover {
     text-decoration: none;
 }
 
+#panel-container {
+    margin-bottom: 15px;
+    margin-left: 2px;
+    border: 1px solid rgba(74, 74, 74, 0.22);
+    border-radius: 10px;
+}
+
 #action-container {
-    outline: none;
     display: block;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 15px;
-    margin-left: 2px;
     width: 100%;
-    height: 50px;
-    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
+    height: auto;
     border-radius: 10px;
+    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     font-size: 15px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    border: 1px solid rgba(74, 74, 74, 0.22);
     background: white;
     color: #204056;
     text-align: left;
     padding-top: 15px;
-    padding-bottom: 10px;
 }
 
 #action-container p {
@@ -66,18 +68,19 @@ a:hover {
 }
 
 #action-container a {
-    color: #204056;
+     color: #204056;
 }
 
 #action-container:hover {
-    background: #204056;
+    /*background: #204056;*/
+    /*border-radius: 0;*/
     /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
 }
 
 #action-container:hover p,
 #action-container:hover a,
 #action-container:hover li {
-    color: white;
+    /*color: white;*/
 }
 
 #action-container:hover #icon {
@@ -107,10 +110,10 @@ li {
 }
 
 #module-header h2 {
-    border-bottom:1px solid #CCC;
-    float:left;
-    width:100%;
-    padding-bottom:15px;
+    border-bottom: 1px solid #CCC;
+    float: left;
+    width: 100%;
+    padding-bottom: 15px;
 }
 
 .form input[type=text] {
