@@ -79,7 +79,7 @@
                             <div class="panel panel-default" id="panel-container">
                                 <div class="panel-heading" id="test-container">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#collapse{{ test.tid }}">
+{#                                        <a data-toggle="collapse" href="#collapse{{ test.tid }}">#}
                                             <p>{{ test.test_name }}</p>
                                             <ul id="menu">
                                                 <li class="sub"><a href="{% url 'taketest' test.tid %}">Take Test</a> |
@@ -92,7 +92,7 @@
                                                     <li class="sub"><a href="#">Delete Test</a></li>
                                                 {% endifequal %}
                                             </ul>
-                                        </a>
+{#                                        </a>#}
                                     </h4>
                                 </div>
 {#                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">#}
