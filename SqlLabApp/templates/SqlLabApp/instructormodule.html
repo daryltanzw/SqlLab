@@ -65,19 +65,9 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-                <form class="form" autocomplete="off" action="{% url 'instructormodule' %}"
-                      method="post">{% csrf_token %}
-                    <div id="module" class="row">
-                        <div class="col-md-9">
-                            {% for field in form %}
-                                {{ field.label_tag }} {{ field }}
-                            {% endfor %}
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn create-module" type="submit">CREATE NEW MODULE</button>
-                        </div>
-                    </div>
-                </form>
+                <a href="{% url 'createmodule' %}">{% csrf_token %}
+                    <button class="btn create-module" type="submit">CREATE NEW MODULE</button>
+                </a>
 
                 <div class="button-container">
                     {% if class_list %}
@@ -99,8 +89,8 @@
                                 </div>
                                 <div id="collapse{{ module.classid }}" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        <p style="text-indent: 1em;"><strong>Semester:</strong>&ensp;&ensp;2016/2017, Semester 1</p>
-                                        <p style="text-indent: 1em;"><strong>Facilitators:</strong>&ensp;&ensp;ASSOC PROF Stephan Bressan, Thomas Kister</p>
+                                        <p style="text-indent: 1em;"><strong>Semester:</strong>&ensp;&ensp;{{ module.semester }}</p>
+                                        <p style="text-indent: 1em;"><strong>Facilitators:</strong>&ensp;&ensp;{{ module.facilitators }}</p>
                                         <p style="text-indent: 1em;"><strong>Number of Students:</strong>&ensp;&ensp;60</p>
                                     </div>
                                 </div>

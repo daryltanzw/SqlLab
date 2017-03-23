@@ -65,22 +65,13 @@ a:hover {
 
 #action-container p {
     float: left;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 #action-container a {
      color: #204056;
-}
-
-#action-container:hover {
-    /*background: #204056;*/
-    /*border-radius: 0;*/
-    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
-}
-
-#action-container:hover p,
-#action-container:hover a,
-#action-container:hover li {
-    /*color: white;*/
+    font-size: 15px;
 }
 
 #action-container:hover #icon {

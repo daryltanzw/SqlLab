@@ -1,18 +1,17 @@
 import operator
 
-from SqlLabApp.forms.instructormodule import CreateModuleForm
-from django.http import HttpResponseRedirect
+from SqlLabApp.forms.instructormodule import InstructorModuleForm
 from django.views.generic import FormView
 from SqlLabApp.models import Class, ClassTeacherTeaches
 
 
-class CreateModuleFormView(FormView):
-    form_class = CreateModuleForm
+class InstructorModuleFormView(FormView):
+    form_class = InstructorModuleForm
     template_name = 'SqlLabApp/instructormodule.html'
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
-        create_module_form = CreateModuleForm
+        create_module_form = InstructorModuleForm
         class_list = ClassTeacherTeaches.objects.filter(teacher_email_id=request.user.email)
         class_names = []
 
@@ -27,16 +26,3 @@ class CreateModuleFormView(FormView):
                 create_module_form=create_module_form,
             )
         )
-
-    def post(self, request, *args, **kwargs):
-        create_module_form = self.form_class(request.POST)
-        if create_module_form.is_valid():
-            create_module_form.save(request.user)
-            return HttpResponseRedirect("../instructormodule")
-
-        else:
-            return self.render_to_response(
-                self.get_context_data(
-                    create_module_form=create_module_form,
-                )
-            )
