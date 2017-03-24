@@ -7,6 +7,7 @@ from SqlLabApp.forms.taketest import TakeTestForm
 from SqlLabApp.models import QuestionAnswer, TestForClass, QuestionDataUsedByTest
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
+
 class TakeTestFormView(FormView):
     form_class = TakeTestForm
     template_name = 'SqlLabApp/taketest.html'
@@ -23,14 +24,14 @@ class TakeTestFormView(FormView):
         table_names = QuestionDataUsedByTest.objects.filter(tid_id=tid, student_visibility='t')
         tables = []
 
-
         for table in table_names:
             with connection.cursor() as cursor:
                 # Get table name
                 table_name = 'tid' + tid + '_' + table.data_tbl_name
 
                 # Retrieve column names
-                cursor.execute('SELECT column_name FROM information_schema.columns WHERE table_name=\'' + table_name + '\'')
+                cursor.execute(
+                    'SELECT column_name FROM information_schema.columns WHERE table_name=\'' + table_name + '\'')
                 curr_table_columns = [tuple(i[0] for i in it.chain(cursor.fetchall()))]
 
                 # Retrieve current table data
@@ -38,7 +39,7 @@ class TakeTestFormView(FormView):
                 curr_table_rows = cursor.fetchall()
 
                 # Remove tid from table name
-                table_name = table_name.split("_",1)[1]
+                table_name = table_name.split("_", 1)[1]
                 name = [table_name]
                 tables.append(curr_table_columns + curr_table_rows + name)
 
@@ -50,18 +51,16 @@ class TakeTestFormView(FormView):
                 qst_data=qst_data,
             )
         )
-    '''
 
-    def post(self, request, *args, **kwargs):
-        take_test_form = self.form_class(request.POST)
-        if take_test_form.is_valid():
-            take_test_form.save(request.user)
-            return HttpResponseRedirect("../instructormodule")
-
-        else:
-            return self.render_to_response(
-                self.get_context_data(
-                    take_test_form=take_test_form,
-                )
-            )
-    '''
+    # def post(self, request, *args, **kwargs):
+    #     take_test_form = self.form_class(request.POST)
+    #     if take_test_form.is_valid():
+    #         take_test_form.save(request.user)
+    #         return HttpResponseRedirect("../instructormodule")
+    #
+    #     else:
+    #         return self.render_to_response(
+    #             self.get_context_data(
+    #                 take_test_form=take_test_form,
+    #             )
+    #         )

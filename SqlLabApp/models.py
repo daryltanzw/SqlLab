@@ -72,9 +72,7 @@ class StudentAttemptsTest(models.Model):
     tid = models.ForeignKey(TestForClass)
     student_email = models.ForeignKey(User)
     attempt_no = models.IntegerField()
-    total_marks = models.IntegerField()
-    student_attempt_tbl_name = models.CharField(max_length=100, null=False)
-    # dynamic Sql Table is created "student_email.tid1" to store students answers
+    # dynamic Sql Table = format(tid, student_email, attempt_no)
 
 
 class QuestionDataUsedByTest(models.Model):
