@@ -104,7 +104,7 @@ h3 {
     background: #204056;
     color: white;
     text-align: center;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
+    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
 }
 
 #container {
