@@ -53,7 +53,7 @@ class RegistrationFormView(FormView):
         login_form = LoginForm()
         if register_form.is_valid():
             register_form.save()
-            return HttpResponseRedirect("../module")
+            return HttpResponseRedirect("../login")
 
         else:
             return self.render_to_response(
