@@ -94,36 +94,45 @@ h3 {
 #expand-tables {
     position: fixed;
     border-radius: 0;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    border: 0;
     width: 100%;
-    padding: 15px;
+    padding: 0;
+    margin: 0;
     font-size: 18px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     background: #204056;
     color: white;
     text-align: center;
-    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
+}
+
+#expand-tables p {
+    padding: 15px;
 }
 
 #container {
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
+    margin: 0;
+    background: white;
+    color: #204056;
+    padding: 15px;
 }
 
 #tables {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
-    padding-right: 17px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 15px;
     text-align: left;
 }
 
 th {
     text-align: center;
     font-size: 13px;
+    background-color: #1e9f75;
     color: white;
 
 }
@@ -131,4 +140,5 @@ th {
 tr {
     text-align: center;
     font-size: 13px;
+    color: #204056;
 }

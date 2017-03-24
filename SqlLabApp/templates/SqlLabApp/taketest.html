@@ -41,13 +41,14 @@
 <body id="page-top" class="index">
 {% block content %}
 
-    <div data-toggle="collapse" data-target="#tables" id="expand-tables">
+    <button data-toggle="collapse" data-target="#container" id="expand-tables">
         <p>
             SHOW TABLES
             <i class="fa fa-angle-double-down animated" style="margin-top: 10px; font-size: 20px"></i>
         </p>
-        <div id="container">
-            <div id="tables" class="collapse pre-scrollable">
+
+    <div id="container" class="collapse pre-scrollable">
+            <div id="tables">
                 {% for table in tables %}
                     <table class="table table-bordered">
                         {% for row in table %}
@@ -79,7 +80,8 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
+    </button>
+
 
     <header class="intro">
         <div class="intro-body">
