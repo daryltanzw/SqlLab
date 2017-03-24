@@ -41,40 +41,56 @@
 <body id="page-top" class="index">
 {% block content %}
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <h1>SqLLAB</h1>
-            </div>
-
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <div class="dropdown">
-                            <img class="img-circle" src="../../../static/img/profile.png" type="button"
-                                 style="cursor: pointer">
-                        </div>
-                    </li>
-                </ul>
+    <button data-toggle="collapse" data-target="#tables" id="expand-tables" class="btn" type="submit">
+        <p>
+            SHOW TABLES
+            <i class="fa fa-angle-double-down animated" style="margin-top: 10px; font-size: 20px"></i>
+        </p>
+        <div id="container">
+            <div id="tables" class="collapse pre-scrollable">
+                {% for table in tables %}
+                    <div id="module-header">
+                        <h3>Table Name</h3>
+                    </div>
+                    <table class="table table-bordered">
+                        {% for row in table %}
+                            {% if forloop.first %}
+                                <thead>
+                                <tr>
+                                    {% for column_name in row %}
+                                        <th>{{ column_name }}</th>
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                            {% else %}
+                                <tbody>
+                                <tr>
+                                    {% for row_element in row %}
+                                        <td>{{ row_element }}</td>
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                {% endfor %}
             </div>
         </div>
-    </nav>
+    </button>
 
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-{#                <div id="module-header">#}
-{#                    <h2>{{ test_name }}</h2>#}
-{#                </div>#}
-                <br>
+                <div id="module-header">
+                    <h2>{{ test_name }}</h2>
+                </div>
                 {% for question in qst_data %}
-{#                    <a href="{% url 'instructortest' question.qid %}">{% csrf_token %}#}
-                        <div id="action-container">
-                            <h4>{{ question.qid }}) {{ question.question }}</h4><br>
-                           {{ take_test_form.as_p }}
-                        </div>
-{#                    </a>#}
+                    {#                    <a href="{% url 'instructortest' question.qid %}">{% csrf_token %}#}
+                    <div id="action-container">
+                        <h4>{{ question.qid }}) {{ question.question }}</h4><br>
+                        {{ take_test_form.as_p }}
+                    </div>
+                    {#                    </a>#}
                 {% endfor %}
                 <button id="create-test" class="btn" type="submit">SUBMIT</button>
             </div>
