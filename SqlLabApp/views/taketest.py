@@ -20,15 +20,14 @@ class TakeTestFormView(FormView):
         qst_data = QuestionAnswer.objects.raw('SELECT * FROM ' + test_name_table)
 
         # Retrieve all tables used by current test
-        table_names = QuestionDataUsedByTest.objects.filter(tid_id=tid)
+        table_names = QuestionDataUsedByTest.objects.filter(tid_id=tid, student_visibility='t')
         tables = []
-        names = []
+
 
         for table in table_names:
             with connection.cursor() as cursor:
                 # Get table name
                 table_name = 'tid' + tid + '_' + table.data_tbl_name
-                names.append(table_name)
 
                 # Retrieve column names
                 cursor.execute('SELECT column_name FROM information_schema.columns WHERE table_name=\'' + table_name + '\'')
@@ -37,12 +36,15 @@ class TakeTestFormView(FormView):
                 # Retrieve current table data
                 cursor.execute('SELECT * FROM ' + table_name)
                 curr_table_rows = cursor.fetchall()
-                tables.append(curr_table_columns + curr_table_rows)
+
+                # Remove tid from table name
+                table_name = table_name.split("_",1)[1]
+                name = [table_name]
+                tables.append(curr_table_columns + curr_table_rows + name)
 
         return self.render_to_response(
             self.get_context_data(
                 tables=tables,
-                names=names,
                 take_test_form=take_test_form,
                 test_name=test_name,
                 qst_data=qst_data,

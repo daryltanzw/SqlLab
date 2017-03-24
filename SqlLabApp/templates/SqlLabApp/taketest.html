@@ -49,11 +49,13 @@
         <div id="container">
             <div id="tables" class="collapse pre-scrollable">
                 {% for table in tables %}
-                    <div id="module-header">
-                        <h3>Table Name</h3>
-                    </div>
                     <table class="table table-bordered">
                         {% for row in table %}
+                            <div id="module-header">
+                                {% if forloop.last %}
+                                    <h3> {{ row }}</h3>
+                                {% endif %}
+                            </div>
                             {% if forloop.first %}
                                 <thead>
                                 <tr>
@@ -62,6 +64,7 @@
                                     {% endfor %}
                                 </tr>
                                 </thead>
+                            {% elif forloop.last %}
                             {% else %}
                                 <tbody>
                                 <tr>
