@@ -8,6 +8,8 @@ from SqlLabApp.views.createtest import CreateTestFormView
 from SqlLabApp.views.taketest import TakeTestFormView
 from SqlLabApp.views.editmodule import EditModuleFormView
 from SqlLabApp.views.deletemodule import DeleteModuleView
+from SqlLabApp.views.edittest import EditTestFormView
+from SqlLabApp.views.deletetest import DeleteTestView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -21,4 +23,7 @@ urlpatterns = [
     url(r'^(?P<test_id>[0-9]+)/taketest/$', TakeTestFormView.as_view(), name='taketest'),
     url(r'^(?P<class_id>[0-9]+)/editmodule/$', EditModuleFormView.as_view(), name='editmodule'),
     url(r'^(?P<class_id>[0-9]+)/deletemodule/$', DeleteModuleView.as_view(), name='deletemodule'),
+    url(r'^(?P<test_id>[0-9]+)/edittest/$', EditTestFormView.as_view(), name='edittest'),
+    url(r'^(?P<test_id>[0-9]+)/deletetest/$', DeleteTestView.as_view(), name='deletetest'),
+
 ]
