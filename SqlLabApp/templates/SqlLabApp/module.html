@@ -87,8 +87,8 @@
                                                 <li class="sub"><a href="{% url 'test' module.classid %}">View
                                                     Tests</a></li>
                                                 {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a href="#">| Edit Module</a> |</li>
-                                                    <li class="sub"><a href="#">Delete Module</a></li>
+                                                    <li class="sub"><a href="{% url 'editmodule' module.classid %}">| Edit Module</a> |</li>
+                                                    <li class="sub"><a href="{% url 'deletemodule' module.classid %}">Delete Module</a></li>
                                                 {% endifequal %}
                                             </ul>
                                         </a>

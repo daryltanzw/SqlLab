@@ -1,5 +1,4 @@
 # checks if teacher's query output = student's query output
-
 from django.db import connection
 
 
