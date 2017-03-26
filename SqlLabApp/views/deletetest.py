@@ -12,7 +12,8 @@ class DeleteTestView(View):
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
-        tid = self.kwargs['test_id']
+        test_id = self.kwargs['test_id']
+        tid = int(test_id[0])
 
         try:
             connection = get_db_connection()
