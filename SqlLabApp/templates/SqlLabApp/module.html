@@ -78,6 +78,7 @@
                             <div class="panel panel-default" id="panel-container">
                                 <div class="panel-heading" id="module-container">
                                     <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse{{ module.classid }}">
                                             <p>{{ module.class_name }}</p>
                                             <ul id="menu">
                                                 {% ifequal user_role 'INS' %}
@@ -90,6 +91,7 @@
                                                     <li class="sub"><a href="{% url 'deletemodule' module.classid %}">Delete Module</a></li>
                                                 {% endifequal %}
                                             </ul>
+                                        </a>
                                     </h4>
                                 </div>
                                 <div id="collapse{{ module.classid }}" class="panel-collapse collapse">
