@@ -13,6 +13,7 @@ from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 from django.shortcuts import render
+from SqlLabApp.utils.CryptoSign import decryptData
 
 class EditTestFormView(FormView):
     form_class = EditTestForm
@@ -21,14 +22,18 @@ class EditTestFormView(FormView):
 
     def get(self, request, *args, **kwargs):
         test_id = self.kwargs['test_id']
-        tid = int(test_id[0])
+        tid = int(decryptData(test_id))
+
         test = TestForClass.objects.get(tid=tid)
         form = EditTestForm(instance=test)
+
+        test.tid = test_id
         return render(request, self.template_name, {'form': form, 'test': test})
 
     def post(self, request, *args, **kwargs):
         edit_test_form = self.form_class(request.POST)
-        tid = self.kwargs['test_id']
+        test_id = self.kwargs['test_id']
+        tid = int(decryptData(test_id))
 
         if edit_test_form.is_valid():
             if edit_test_form.has_changed():

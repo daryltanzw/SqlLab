@@ -6,6 +6,7 @@ from django.db import connection
 from SqlLabApp.forms.taketest import TakeTestForm
 from SqlLabApp.models import QuestionAnswer, TestForClass, QuestionDataUsedByTest
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
+from SqlLabApp.utils.CryptoSign import decryptData
 
 
 class TakeTestFormView(FormView):
@@ -15,7 +16,8 @@ class TakeTestFormView(FormView):
 
     def get(self, request, *args, **kwargs):
         test_id = self.kwargs['test_id']
-        tid = int(test_id[0])
+        tid = int(decryptData(test_id))
+
         take_test_form = TakeTestForm
         test_name = TestForClass.objects.get(tid=tid).test_name
         test_name_table = test_name_table_format(tid, test_name)
