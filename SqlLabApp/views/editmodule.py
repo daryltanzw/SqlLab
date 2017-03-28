@@ -15,14 +15,19 @@ class EditModuleFormView(FormView):
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
-        class_id = self.kwargs['class_id']
+        cid = self.kwargs['class_id']
+        print "========================================"
+        print cid
+        class_id = int(cid[0])
+        print class_id
         module = Class.objects.get(classid=class_id)
         form = EditModuleForm(instance=module)
         return render(request, self.template_name, {'form': form, 'module': module})
 
     def post(self, request, *args, **kwargs):
             edit_module_form = self.form_class(request.POST)
-            class_id = self.kwargs['class_id']
+            cid = self.kwargs['class_id']
+            class_id = int(cid[0])
 
             if edit_module_form.is_valid():
                 if edit_module_form.has_changed():

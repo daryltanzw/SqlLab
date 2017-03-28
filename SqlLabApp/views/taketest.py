@@ -14,7 +14,8 @@ class TakeTestFormView(FormView):
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
-        tid = self.kwargs['test_id']
+        test_id = self.kwargs['test_id']
+        tid = int(test_id[0])
         take_test_form = TakeTestForm
         test_name = TestForClass.objects.get(tid=tid).test_name
         test_name_table = test_name_table_format(tid, test_name)
@@ -27,7 +28,7 @@ class TakeTestFormView(FormView):
         for table in table_names:
             with connection.cursor() as cursor:
                 # Get table name
-                table_name = 'tid' + tid + '_' + table.data_tbl_name
+                table_name = 'tid' + str(tid) + '_' + table.data_tbl_name
 
                 # Retrieve column names
                 cursor.execute(

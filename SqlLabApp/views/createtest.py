@@ -20,7 +20,8 @@ class CreateTestFormView(FormView):
 
     def post(self, request, *args, **kwargs):
         create_test_form = self.form_class(request.POST, request.FILES)
-        classid = self.kwargs['class_id']
+        cid = self.kwargs['class_id']
+        classid = int(cid[0])
 
         if create_test_form.is_valid():
             start_time = request.POST['start_time']

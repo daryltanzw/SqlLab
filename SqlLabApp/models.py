@@ -35,8 +35,8 @@ class UserRole(models.Model):
 class Class(models.Model):
     classid = models.AutoField(primary_key=True)
     class_name = models.CharField(max_length=100, null=False)
-    semester = models.CharField(max_length=100, null=False)
-    facilitators = models.CharField(max_length=100, null=False)
+    semester = models.CharField(max_length=100, null=True)
+    facilitators = models.CharField(max_length=100, null=True)
 
 
 class ClassTeacherTeaches(models.Model):

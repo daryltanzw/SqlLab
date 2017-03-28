@@ -20,7 +20,8 @@ class EditTestFormView(FormView):
     success_url = '/'
 
     def get(self, request, *args, **kwargs):
-        tid = self.kwargs['test_id']
+        test_id = self.kwargs['test_id']
+        tid = int(test_id[0])
         test = TestForClass.objects.get(tid=tid)
         form = EditTestForm(instance=test)
         return render(request, self.template_name, {'form': form, 'test': test})
