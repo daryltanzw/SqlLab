@@ -18,10 +18,10 @@ def create_student_attempt_table(cursor, tbl_name, tid, student_answer_list):
 
             # Retrieve question from test table
             cursor.execute('select question, teacher_answer, marks from ' + test_table + ' where qid = ' + str(q_no))
-            tuple_list = cursor.fetchall()
-            question = [i[0] for i in it.chain(tuple_list)][0]
-            instructor_answer = [i[1] for i in it.chain(tuple_list)][0]
-            total_marks = [i[2] for i in it.chain(tuple_list)][0]
+            tuple_list = cursor.fetchone()
+            question = tuple_list[0]
+            instructor_answer = tuple_list[1]
+            total_marks = tuple_list[2]
 
             # Mark student's query against instructor's query
             # TODO: Replace query's table names with actual table names stored
