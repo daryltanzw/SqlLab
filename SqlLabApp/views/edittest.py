@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 from SqlLabApp.models import TestForClass
 from SqlLabApp.forms.edittest import EditTestForm
-from SqlLabApp.models import TestForClass, QuestionDataUsedByTest
+from SqlLabApp.models import User, TestForClass, QuestionDataUsedByTest
 from SqlLabApp.utils.CreateTestDataParser import get_tbl_names, append_to_relations
 from SqlLabApp.utils.CreateTestNameTable import create_test_name_table
 from SqlLabApp.utils.DBUtils import get_db_connection
@@ -27,8 +27,10 @@ class EditTestFormView(FormView):
         test = TestForClass.objects.get(tid=tid)
         form = EditTestForm(instance=test)
 
+        full_name = User.objects.get(email=request.user.email).full_name
+
         test.tid = test_id
-        return render(request, self.template_name, {'form': form, 'test': test})
+        return render(request, self.template_name, {'form': form, 'test': test, 'full_name': full_name})
 
     def post(self, request, *args, **kwargs):
         edit_test_form = self.form_class(request.POST)

@@ -47,13 +47,20 @@
             <div class="navbar-header">
                 <h1>SqLLAB</h1>
             </div>
-
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <div class="dropdown">
-                            <img class="img-circle" src="../../../static/img/profile.png" type="button"
-                                 style="cursor: pointer">
+                            <a href="{% url 'module' %}">My Modules</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
+                            <div class="dropdown-content">
+                                <a href="#">Edit Profile</a>
+                                <a href="{% url 'main' %}">Logout</a>
+                            </div>
                         </div>
                     </li>
                 </ul>

@@ -3,9 +3,10 @@ import os
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
+from django.shortcuts import render
 
 from SqlLabApp.forms.createmodule import CreateModuleForm
-from SqlLabApp.models import Class, ClassTeacherTeaches
+from SqlLabApp.models import User, Class, ClassTeacherTeaches
 from SqlLabApp.utils.DBUtils import get_db_connection
 
 
@@ -13,6 +14,15 @@ class CreateModuleFormView(FormView):
     form_class = CreateModuleForm
     template_name = 'SqlLabApp/createmodule.html'
     success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        full_name = User.objects.get(email=request.user.email).full_name
+
+        return self.render_to_response(
+            self.get_context_data(
+                full_name=full_name
+            )
+        )
 
     def post(self, request, *args, **kwargs):
         create_module_form = self.form_class(request.POST, request.FILES)

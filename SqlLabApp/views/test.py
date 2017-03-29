@@ -1,7 +1,7 @@
 from django.views.generic import FormView
 from SqlLabApp.forms.test import InstructorTestForm
 
-from SqlLabApp.models import UserRole, Class, TestForClass
+from SqlLabApp.models import User, UserRole, Class, TestForClass
 from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
 
@@ -23,10 +23,11 @@ class InstructorTestFormView(FormView):
             tobj.tid = encryptData(tobj.tid)
 
         user_role = UserRole.objects.get(email_id=request.user.email).role
-
+        full_name = User.objects.get(email=request.user.email).full_name
 
         return self.render_to_response(
             self.get_context_data(
+                full_name=full_name,
                 user_role=user_role,
                 classid=cid,
                 test_list=test_list,

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.editmodule import EditModuleForm
-from SqlLabApp.models import Class
+from SqlLabApp.models import User, Class
 from SqlLabApp.utils.DBUtils import get_db_connection
 
 from django.shortcuts import render
@@ -21,7 +21,10 @@ class EditModuleFormView(FormView):
 
         module = Class.objects.get(classid=class_id)
         form = EditModuleForm(instance=module)
-        return render(request, self.template_name, {'form': form, 'module': module})
+
+        full_name = User.objects.get(email=request.user.email).full_name
+
+        return render(request, self.template_name, {'form': form, 'module': module, 'full_name': full_name})
 
     def post(self, request, *args, **kwargs):
             edit_module_form = self.form_class(request.POST)

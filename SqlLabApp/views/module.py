@@ -2,7 +2,7 @@ import operator
 
 from SqlLabApp.forms.module import InstructorModuleForm
 from django.views.generic import FormView
-from SqlLabApp.models import UserRole, Class, ClassTeacherTeaches
+from SqlLabApp.models import User, UserRole, Class, ClassTeacherTeaches
 from SqlLabApp.utils.CryptoSign import encryptData
 
 
@@ -24,9 +24,11 @@ class InstructorModuleFormView(FormView):
 
         class_names.sort(key=operator.attrgetter('class_name'))
         user_role = UserRole.objects.get(email_id=request.user.email).role
+        full_name = User.objects.get(email=request.user.email).full_name
 
         return self.render_to_response(
             self.get_context_data(
+                full_name=full_name,
                 user_role=user_role,
                 class_list=class_names,
                 create_module_form=create_module_form,
