@@ -1,9 +1,8 @@
-from django.core.signing import Signer
 
-signer = Signer()
+def encryptData(n):
+    n = int(n)
+    return ((0x0000FFFF & n) << 16) + ((0xFFFF0000 & n) >> 16)
 
-def encryptData(data):
-    return signer.sign(str(data))
-
-def decryptData(cipher):
-    return signer.unsign(cipher)
+def decryptData(n):
+    n = int(n)
+    return ((0x0000FFFF & n)<<16) + ((0xFFFF0000 & n)>>16)

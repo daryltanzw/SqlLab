@@ -6,6 +6,7 @@ from SqlLabApp.models import TestForClass
 from SqlLabApp.utils.DBUtils import get_db_connection
 
 from django.shortcuts import render
+from SqlLabApp.utils.CryptoSign import decryptData
 
 
 class DeleteTestView(View):
@@ -13,7 +14,7 @@ class DeleteTestView(View):
 
     def get(self, request, *args, **kwargs):
         test_id = self.kwargs['test_id']
-        tid = int(test_id[0])
+        tid = int(decryptData(test_id))
 
         try:
             connection = get_db_connection()

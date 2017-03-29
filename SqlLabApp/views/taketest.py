@@ -2,10 +2,15 @@ import itertools as it
 
 from django.views.generic import FormView
 from django.db import connection
+from django.db import transaction
+from django.http import HttpResponseRedirect
 
 from SqlLabApp.forms.taketest import TakeTestForm
-from SqlLabApp.models import QuestionAnswer, TestForClass, QuestionDataUsedByTest
-from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
+from SqlLabApp.models import QuestionAnswer, TestForClass, StudentAttemptsTest, QuestionDataUsedByTest
+from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
+from SqlLabApp.utils.CreateStudentAttemptTable import create_student_attempt_table
+from SqlLabApp.utils.DBUtils import get_db_connection
+from SqlLabApp.utils.CryptoSign import decryptData
 
 
 class TakeTestFormView(FormView):
@@ -15,7 +20,8 @@ class TakeTestFormView(FormView):
 
     def get(self, request, *args, **kwargs):
         test_id = self.kwargs['test_id']
-        tid = int(test_id[0])
+        tid = int(decryptData(test_id))
+
         take_test_form = TakeTestForm
         test_name = TestForClass.objects.get(tid=tid).test_name
         test_name_table = test_name_table_format(tid, test_name)
@@ -53,15 +59,32 @@ class TakeTestFormView(FormView):
             )
         )
 
-    # def post(self, request, *args, **kwargs):
-    #     take_test_form = self.form_class(request.POST)
-    #     if take_test_form.is_valid():
-    #         take_test_form.save(request.user)
-    #         return HttpResponseRedirect("../instructormodule")
-    #
-    #     else:
-    #         return self.render_to_response(
-    #             self.get_context_data(
-    #                 take_test_form=take_test_form,
-    #             )
-    #         )
+    def post(self, request, *args, **kwargs):
+        submit_answer_form = self.form_class(request.POST)
+        test_id = self.kwargs['test_id']
+        tid = int(decryptData(test_id))
+
+        if submit_answer_form.is_valid():
+            student_answer_list = request.POST.getlist('student_answer')
+            student_email = request.user.email
+            attempt_no = StudentAttemptsTest.objects.filter(tid_id=tid, student_email_id=student_email).count() + 1
+
+            try:
+                connection = get_db_connection()
+                with transaction.atomic():
+                    student_attempt_test_row = StudentAttemptsTest(attempt_no=attempt_no, student_email_id=student_email,
+                                                                   tid_id=tid)
+                    student_attempt_test_row.save()
+                    cursor = connection.cursor()
+                    create_student_attempt_table(cursor, student_attempt_table_format(tid, student_email, attempt_no), tid,
+                                                 student_answer_list)
+                    connection.commit()
+
+            except ValueError as err:
+                connection.close()
+                raise err
+
+            return HttpResponseRedirect("../test")
+
+        else:
+            raise ValueError(submit_answer_form.errors)

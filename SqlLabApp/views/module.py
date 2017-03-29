@@ -20,8 +20,7 @@ class InstructorModuleFormView(FormView):
             class_names.append(Class.objects.get(classid=module.classid_id))
 
         for cobj in class_names:
-            data = encryptData(cobj.classid).split(":")
-            cobj.classid = "".join(data)
+            cobj.classid = encryptData(cobj.classid)
 
         class_names.sort(key=operator.attrgetter('class_name'))
         user_role = UserRole.objects.get(email_id=request.user.email).role

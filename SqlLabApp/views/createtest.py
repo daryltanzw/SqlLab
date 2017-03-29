@@ -11,6 +11,7 @@ from SqlLabApp.utils.CreateTestDataParser import get_tbl_names, append_to_relati
 from SqlLabApp.utils.CreateTestNameTable import create_test_name_table
 from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
+from SqlLabApp.utils.CryptoSign import decryptData
 
 
 class CreateTestFormView(FormView):
@@ -21,7 +22,7 @@ class CreateTestFormView(FormView):
     def post(self, request, *args, **kwargs):
         create_test_form = self.form_class(request.POST, request.FILES)
         cid = self.kwargs['class_id']
-        classid = int(cid[0])
+        classid = int(decryptData(cid))
 
         if create_test_form.is_valid():
             start_time = request.POST['start_time']

@@ -89,15 +89,15 @@
                 <div id="module-header">
                     <h2>{{ test_name }}</h2>
                 </div>
-                {% for question in qst_data %}
-                    {#                    <a href="{% url 'instructortest' question.qid %}">{% csrf_token %}#}
-                    <div id="action-container">
-                        <h4>{{ question.qid }}) {{ question.question }}</h4><br>
-                        {{ take_test_form.as_p }}
-                    </div>
-                    {#                    </a>#}
-                {% endfor %}
-                <button id="create-test" class="btn" type="submit">SUBMIT</button>
+                <form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    {% for question in qst_data %}
+                        <div id="action-container">
+                            <h4>{{ question.qid }}) {{ question.question }}</h4><br>
+                            {{ take_test_form.as_p }}
+                        </div>
+                    {% endfor %}
+                    <button id="create-test" class="btn" type="submit">SUBMIT</button>
+                </form>
             </div>
         </div>
     </header>
