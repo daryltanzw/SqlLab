@@ -24,6 +24,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/module.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -94,8 +95,32 @@
                                                 <li class="sub"><a href="{% url 'test' module.classid %}">View
                                                     Tests</a></li>
                                                 {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a href="{% url 'editmodule' module.classid %}">| Edit Module</a> |</li>
-                                                    <li class="sub"><a href="{% url 'deletemodule' module.classid %}">Delete Module</a></li>
+                                                    <li class="sub"><a href="{% url 'editmodule' module.classid %}">|
+                                                        Edit Module</a> |
+                                                    </li>
+                                                    <li class="sub"><a data-toggle="modal" data-target="#modal{{ module.classid }}">Delete
+                                                        Module</a>
+                                                        <div class="modal fade" id="modal{{ module.classid }}" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">{{ module.class_name }}</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" id="modal-body" style="height: 50px;">
+                                                                        <p>Are you sure you want to delete the module?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal">Close
+                                                                        </button>
+                                                                        <a href="{% url 'deletemodule' module.classid %}">
+                                                                            <button type="button" class="btn btn-success">Delete</button>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                 {% endifequal %}
                                             </ul>
                                         </a>
