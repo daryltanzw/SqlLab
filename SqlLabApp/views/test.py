@@ -24,8 +24,8 @@ class InstructorTestFormView(FormView):
         test_list = TestForClass.objects.filter(classid_id=classid).order_by('test_name')
 
         for tobj in test_list:
-            tobj.tid = encryptData(tobj.tid)
             tobj.max_attempt = str(StudentAttemptsTest.objects.filter(tid_id=tobj.tid, student_email_id=request.user.email).count()) + ' / ' + str(tobj.max_attempt)
+            tobj.tid = encryptData(tobj.tid)
 
         user_role = UserRole.objects.get(email_id=request.user.email).role
         full_name = User.objects.get(email=request.user.email).full_name
