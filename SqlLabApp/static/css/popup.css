@@ -1,11 +1,12 @@
 .modal-header h4 {
-    float: left;
+    text-align: left;
 }
 
 #modal-body p {
-    float: left;
+    text-align: left;
     font-weight: normal;
     font-size: 15px;
+    line-height: 20px;
 }
 
 .btn-success {

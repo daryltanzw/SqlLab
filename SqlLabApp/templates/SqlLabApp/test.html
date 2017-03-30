@@ -90,8 +90,30 @@
                                         <a data-toggle="collapse" href="#collapse{{ test.tid }}">
                                             <p>{{ test.test_name }}</p>
                                             <ul id="menu">
-                                                <li class="sub"><a href="{% url 'taketest' test.tid %}">Take Test</a> |
-                                                </li>
+                                                <li class="sub"><a data-toggle="modal" data-target="#modal{{ module.classid }}">Take Test</a>
+                                                    <div class="modal fade" id="modal{{ module.classid }}" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">{{ test.test_name }}</h4>
+                                                                </div>
+                                                                <div class="modal-body" id="modal-body" style="height: 70px;">
+                                                                    <p>Are you sure you want to take the test? Once you click "Confirm", it will be counted as 1 attempt.</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close
+                                                                    </button>
+{#                                                                      <form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}#}
+                                                                          <a href="{% url 'taketest' test.tid %}">
+                                                                            <button class="btn btn-success" type="submit">Confirm</button>
+                                                                          </a>
+{#                                                                      </form>#}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li> |
                                                 <li class="sub"><a href="#">Review Test</a></li>
                                                 {% ifequal user_role 'INS' %}
                                                     <li class="sub"><a href="{% url 'edittest' test.tid %}">| Edit Test</a> |</li>
@@ -125,19 +147,16 @@
                                     </h4>
                                 </div>
 {#                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">#}
-                                    <div class="panel-body">
-                                        <p style="text-indent: 1em;"><strong>Start
-                                            Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
-                                        <p style="text-indent: 1em;"><strong>End
-                                            Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
-                                        <p style="text-indent: 1em;"><strong>Number of Attempts
-                                            Allowed:</strong>&ensp;&ensp;{{ test.max_attempt }}
-                                            {% ifequal user_role 'INS' %}
-                                                <p style="text-indent: 1em;">
-                                                <strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
-                                            {% endifequal %}
-                                            </p>
-                                    </div>
+                                <div class="panel-body">
+                                    <p style="text-indent: 1em;"><strong>Start Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
+                                    <p style="text-indent: 1em;"><strong>End Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
+                                    <p style="text-indent: 1em;"><strong>Number of Attempts:</strong>&ensp;&ensp;{{ test.max_attempt }}
+                                        {% ifequal user_role 'INS' %}
+                                            <p style="text-indent: 1em;">
+                                            <strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
+                                        {% endifequal %}
+                                        </p>
+                                </div>
 {#                                </div>#}
                             </div>
                         {% endfor %}

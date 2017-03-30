@@ -1,7 +1,11 @@
 from django.views.generic import FormView
+from django.db import connection
+from django.db import transaction
 from SqlLabApp.forms.test import InstructorTestForm
+from django.http import HttpResponseRedirect
 
-from SqlLabApp.models import User, UserRole, Class, TestForClass
+from SqlLabApp.models import User, UserRole, Class, TestForClass, StudentAttemptsTest
+from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
 
@@ -21,6 +25,7 @@ class InstructorTestFormView(FormView):
 
         for tobj in test_list:
             tobj.tid = encryptData(tobj.tid)
+            tobj.max_attempt = str(StudentAttemptsTest.objects.filter(tid_id=tobj.tid, student_email_id=request.user.email).count()) + ' / ' + str(tobj.max_attempt)
 
         user_role = UserRole.objects.get(email_id=request.user.email).role
         full_name = User.objects.get(email=request.user.email).full_name
