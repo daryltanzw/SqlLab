@@ -21,14 +21,16 @@ class InstructorTestFormView(FormView):
 
         module_name = Class.objects.get(classid=classid).class_name
         create_module_form = InstructorTestForm
-        test_list = TestForClass.objects.filter(classid_id=classid).order_by('test_name')
+        tests = TestForClass.objects.filter(classid_id=classid).order_by('test_name')
+        attempts = []
 
-        for tobj in test_list:
-            tobj.max_attempt = str(StudentAttemptsTest.objects.filter(tid_id=tobj.tid, student_email_id=request.user.email).count()) + ' / ' + str(tobj.max_attempt)
+        for tobj in tests:
+            attempts.append(StudentAttemptsTest.objects.filter(tid_id=tobj.tid, student_email_id=request.user.email).count())
             tobj.tid = encryptData(tobj.tid)
 
         user_role = UserRole.objects.get(email_id=request.user.email).role
         full_name = User.objects.get(email=request.user.email).full_name
+        test_list = zip(tests, attempts)
 
         return self.render_to_response(
             self.get_context_data(
