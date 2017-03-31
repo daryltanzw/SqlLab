@@ -52,7 +52,8 @@ class ClassStudentAttends(models.Model):
         unique_together = (('classid', 'student_email'),)
 
     classid = models.ForeignKey(Class)
-    student_email = models.ForeignKey(User)
+    student_email = models.EmailField(max_length=100) # cannot be foreign key as the students
+                                                      # might not have signed up when teacher uploads
 
 
 class TestForClass(models.Model):

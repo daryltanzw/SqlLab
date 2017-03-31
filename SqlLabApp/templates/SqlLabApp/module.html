@@ -92,7 +92,7 @@
                                             <p>{{ module.class_name }}</p>
                                             <ul id="menu">
                                                 {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a href="#">View Students</a> |</li>
+                                                    <li class="sub"><a href="{% url 'teachermanagemodule' module.classid %}">View Students</a> |</li>
                                                 {% endifequal %}
                                                 <li class="sub"><a href="{% url 'test' module.classid %}">View
                                                     Tests</a></li>
