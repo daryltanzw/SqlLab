@@ -3,7 +3,6 @@ import os
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
-from django.shortcuts import render
 
 from SqlLabApp.forms.createmodule import CreateModuleForm
 from SqlLabApp.models import User, Class, ClassTeacherTeaches
@@ -39,19 +38,14 @@ class CreateModuleFormView(FormView):
             # student_list_file_lines = student_list_file.read().splitlines()
 
             try:
-                connection = get_db_connection()
                 with transaction.atomic():
-                    # validate_student_list_file(student_list_file.name, student_list_file_lines)
                     class_ = Class(class_name=class_name, semester=semester, facilitators=facilitators)
                     class_.save()
 
                     class_teacher_teaches = ClassTeacherTeaches(teacher_email_id=request.user.email, classid=class_)
                     class_teacher_teaches.save()
 
-                    connection.commit()
-
             except ValueError as err:
-                connection.close()
                 raise err
 
             return HttpResponseRedirect("../module")
