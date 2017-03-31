@@ -92,18 +92,23 @@
                                         <a data-toggle="collapse" href="#collapse{{ test.tid }}">
                                             <p>{{ test.test_name }}</p>
                                             <ul id="menu">
-                                                <li class="sub"><a data-toggle="modal" data-target="#taketest{{ test.tid }}">Take Test</a>
+                                                <li class="sub"><a data-toggle="modal"
+                                                                   data-target="#taketest{{ test.tid }}">Take Test</a>
                                                     <div class="modal fade" id="taketest{{ test.tid }}" role="dialog">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title">{{ test.test_name }}</h4>
                                                                 </div>
-                                                                <div class="modal-body" id="modal-body" style="height: 70px;">
+                                                                <div class="modal-body" id="modal-body"
+                                                                     style="height: 70px;">
                                                                     {% ifequal attempt test.max_attempt %}
-                                                                        <p>You have exceeded the maximum number of attempts.</p>
+                                                                        <p>You have exceeded the maximum number of
+                                                                            attempts.</p>
                                                                     {% else %}
-                                                                        <p>Are you sure you want to take the test? Once you click "Confirm", it will be counted as 1 attempt.</p>
+                                                                        <p>Are you sure you want to take the test? Once
+                                                                            you click "Confirm", it will be counted as 1
+                                                                            attempt.</p>
                                                                     {% endifequal %}
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -112,27 +117,63 @@
                                                                     </button>
                                                                     {% ifnotequal attempt test.max_attempt %}
                                                                         <a href="{% url 'taketest' test.tid %}">
-                                                                            <button class="btn btn-success" type="submit">Confirm</button>
+                                                                            <button class="btn btn-success"
+                                                                                    type="submit">Confirm
+                                                                            </button>
                                                                         </a>
                                                                     {% endifnotequal %}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </li> |
-                                                <li class="sub"><a href="#">Review Test</a></li>
-                                                {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a href="{% url 'edittest' test.tid %}">| Edit Test</a> |</li>
-                                                {% endifequal %}
-                                                {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a data-toggle="modal" data-target="#delete{{ test.tid }}">Delete Test</a>
-                                                        <div class="modal fade" id="delete{{ test.tid }}" >
+                                                </li>
+                                                |
+                                                {% ifequal attempt 0 %}
+                                                    <li class="sub"><a data-toggle="modal"
+                                                                       data-target="#reviewtest{{ test.tid }}">Review
+                                                        Test</a>
+
+                                                        <div class="modal fade" id="reviewtest{{ test.tid }}"
+                                                             role="dialog">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">{{ test.test_name }}</h4>
                                                                     </div>
-                                                                    <div class="modal-body" id="modal-body" style="height: 50px;">
+                                                                    <div class="modal-body" id="modal-body"
+                                                                         style="height: 70px;">
+                                                                        <p>There is no attempt yet.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal">Close
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="sub"><a href="{% url 'testattempt' test.tid %}">Review
+                                                        Test</a></li>
+                                                {% endifequal %}
+                                                {% ifequal user_role 'INS' %}
+                                                    <li class="sub"><a href="{% url 'edittest' test.tid %}">| Edit
+                                                        Test</a> |
+                                                    </li>
+                                                {% endifequal %}
+                                                {% ifequal user_role 'INS' %}
+                                                    <li class="sub"><a data-toggle="modal"
+                                                                       data-target="#delete{{ test.tid }}">Delete
+                                                        Test</a>
+                                                        <div class="modal fade" id="delete{{ test.tid }}">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">{{ test.test_name }}</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" id="modal-body"
+                                                                         style="height: 50px;">
                                                                         <p>Are you sure you want to delete the test?</p>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -140,7 +181,9 @@
                                                                                 data-dismiss="modal">Close
                                                                         </button>
                                                                         <a href="{% url 'deletetest' test.tid %}">
-                                                                            <button type="button" class="btn btn-success">Delete</button>
+                                                                            <button type="button"
+                                                                                    class="btn btn-success">Delete
+                                                                            </button>
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -152,18 +195,21 @@
                                         </a>
                                     </h4>
                                 </div>
-{#                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">#}
+                                {#                                <div id="collapse{{ test.tid }}" class="panel-collapse collapse">#}
                                 <div class="panel-body">
-                                    <p style="text-indent: 1em;"><strong>Start Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
-                                    <p style="text-indent: 1em;"><strong>End Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
-                                    <p style="text-indent: 1em;"><strong>Number of Attempts:</strong>&ensp;&ensp;{{ attempt }} / {{ test.max_attempt }}
+                                    <p style="text-indent: 1em;"><strong>Start
+                                        Date:</strong>&ensp;&ensp;{{ test.start_time }}</p>
+                                    <p style="text-indent: 1em;"><strong>End
+                                        Date:</strong>&ensp;&ensp;{{ test.end_time }}</p>
+                                    <p style="text-indent: 1em;"><strong>Number of
+                                        Attempts:</strong>&ensp;&ensp;{{ attempt }} / {{ test.max_attempt }}
                                         {% ifequal user_role 'INS' %}
                                             <p style="text-indent: 1em;">
                                             <strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
                                         {% endifequal %}
                                         </p>
                                 </div>
-{#                                </div>#}
+                                {#                                </div>#}
                             </div>
                         {% endfor %}
 

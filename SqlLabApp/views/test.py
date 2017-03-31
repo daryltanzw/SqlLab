@@ -10,7 +10,6 @@ from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
 
 class InstructorTestFormView(FormView):
-    model = Class
     form_class = InstructorTestForm
     template_name = 'SqlLabApp/test.html'
     success_url = '/'

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SqlLab">
+    <meta name="author" content="SqlLab">
+
+    <title>SqlLab</title>
+
+    {% load staticfiles %}
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/module.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='//fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Assistant' rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Gloria Hallelujah' rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body id="page-top" class="index">
+{% block content %}
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="{% url 'module' %}">
+                    <h1>SqLLAB</h1>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <div class="dropdown">
+                            <a href="{% url 'module' %}">My Modules</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
+                            <div class="dropdown-content">
+                                <a href="#">Edit Profile</a>
+                                <a href="{% url 'main' %}">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div id="module-header">
+                    <h2>{{ test_name }}</h2>
+                </div>
+
+                <div class="button-container">
+                    {% for attempt in test_attempt_list %}
+                        <div class="panel-group">
+                            <div class="panel panel-default" id="panel-container">
+                                <div class="panel-heading" id="test-container">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse{{ attempt.id }}">
+                                            <p>Attempt {{ attempt.attempt_no }}</p>
+                                            <ul id="menu">
+                                                <li></li>
+                                            </ul>
+                                        </a>
+                                    </h4>
+                                </div>
+{#                                <div id="collapse{{ attempt.id }}" class="panel-collapse collapse">#}
+                                <div class="panel-body">
+                                    <p style="text-indent: 1em;">
+                                        <strong>Date Taken:</strong>&ensp;&ensp;19-Jan-2017 04:44PM</p>
+                                    <p style="text-indent: 1em;">
+                                        <strong>Duration:</strong>&ensp;&ensp;12 mins 1 sec</p>
+{#                                 </div>#}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+</body>
