@@ -6,7 +6,7 @@ class CreateTestForm(forms.Form):
     start_time = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={}), label='Start Date')
     end_time = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={}), label='End Date')
     max_attempt = forms.IntegerField(widget=forms.widgets.NumberInput(
-                    attrs={}),
+                    attrs={'min': '0'}),
                     label='Number of Attempts (Leave Blank for Unlimited)', initial=None, required=False)
     q_a_file_upload = forms.FileField(label="Upload Tab Separated File (.txt, .tsv)")
     data_file_upload = forms.FileField(label="Upload .sql dump")

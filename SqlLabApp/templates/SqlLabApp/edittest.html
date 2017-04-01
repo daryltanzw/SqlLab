@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A reward-based trip microblogging platform">
+    <meta name="description" content="SqlLab">
     <meta name="author" content="SqlLab">
 
     <title>SqlLab</title>
@@ -47,15 +47,24 @@
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h1>SqLLAB</h1>
+                <a href="{% url 'module' %}">
+                    <h1>SqLLAB</h1>
+                </a>
             </div>
-
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <div class="dropdown">
-                            <img class="img-circle" src="../../../static/img/profile.png" type="button"
-                                 style="cursor: pointer">
+                            <a href="{% url 'module' %}">My Modules</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
+                            <div class="dropdown-content">
+                                <a href="#">Edit Profile</a>
+                                <a href="{% url 'main' %}">Logout</a>
+                            </div>
                         </div>
                     </li>
                 </ul>

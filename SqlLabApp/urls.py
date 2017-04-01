@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from SqlLabApp.views.login import LoginFormView, MainView, RegistrationFormView
 from SqlLabApp.views.module import InstructorModuleFormView
+from SqlLabApp.views.teacher_manage_module import TeacherManageModuleFormView
 from SqlLabApp.views.test import InstructorTestFormView
 from SqlLabApp.views.createmodule import CreateModuleFormView
 from SqlLabApp.views.createtest import CreateTestFormView
@@ -10,6 +11,9 @@ from SqlLabApp.views.editmodule import EditModuleFormView
 from SqlLabApp.views.deletemodule import DeleteModuleView
 from SqlLabApp.views.edittest import EditTestFormView
 from SqlLabApp.views.deletetest import DeleteTestView
+from SqlLabApp.views.testattempt import TestAttemptFormView
+
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,5 +29,7 @@ urlpatterns = [
     url(r'^(?P<class_id>[\w\-]+)/deletemodule/$', DeleteModuleView.as_view(), name='deletemodule'),
     url(r'^(?P<test_id>[\w\-]+)/edittest/$', EditTestFormView.as_view(), name='edittest'),
     url(r'^(?P<test_id>[\w\-]+)/deletetest/$', DeleteTestView.as_view(), name='deletetest'),
+    url(r'^(?P<test_id>[\w\-]+)/testattempt/$', TestAttemptFormView.as_view(), name='testattempt'),
+    url(r'^(?P<class_id>[\w\-]+)/teachermanagemodule/$', TeacherManageModuleFormView.as_view(), name='teachermanagemodule'),
 
 ]

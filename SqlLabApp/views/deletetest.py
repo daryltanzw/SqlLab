@@ -5,7 +5,7 @@ from django.views import View
 from SqlLabApp.models import TestForClass
 from SqlLabApp.utils.DBUtils import get_db_connection
 
-from django.shortcuts import render
+from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
 
 
@@ -15,6 +15,7 @@ class DeleteTestView(View):
     def get(self, request, *args, **kwargs):
         test_id = self.kwargs['test_id']
         tid = int(decryptData(test_id))
+        class_id = encryptData(TestForClass.objects.get(tid=tid).classid_id)
 
         try:
             connection = get_db_connection()
@@ -27,4 +28,4 @@ class DeleteTestView(View):
             connection.close()
             raise err
 
-        return HttpResponseRedirect("../test")
+        return HttpResponseRedirect("../../" + str(class_id) + "/test")

@@ -32,9 +32,10 @@ html {
 }
 
 h1 {
-    padding-top: 10px;
+    padding-top: 5px;
     color: white;
     font: 30px/0 'Gloria Hallelujah';
+    margin-bottom: 10px;
 }
 
 .navbar {
@@ -45,12 +46,24 @@ h1 {
     box-shadow: 0 8px 6px -6px rgba(153, 153, 153, 0.38);
 }
 
-.navbar a {
+.dropdown {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    cursor: pointer;
+}
+
+.dropdown a {
+    padding: 15px;
     color: white;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    text-decoration: none;
 }
 
 .navbar a:focus {
     outline: 0;
+    text-decoration: none;
 }
 
 .navbar .navbar-nav li a:focus {
@@ -67,4 +80,51 @@ h1 {
     height: 40px;
     border-radius: 50%;
     margin: 10px;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    margin-left: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 8px;
+    margin-right: 15px;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    min-width: 150px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+
+.dropdown-content a:hover {
+    background-color: #ffffff
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
 }

@@ -10,6 +10,7 @@ from SqlLabApp.models import QuestionAnswer, TestForClass, StudentAttemptsTest, 
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
 from SqlLabApp.utils.CreateStudentAttemptTable import create_student_attempt_table
 from SqlLabApp.utils.DBUtils import get_db_connection
+from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
 
 
@@ -63,6 +64,7 @@ class TakeTestFormView(FormView):
         submit_answer_form = self.form_class(request.POST)
         test_id = self.kwargs['test_id']
         tid = int(decryptData(test_id))
+        class_id = encryptData(TestForClass.objects.get(tid=tid).classid_id)
 
         if submit_answer_form.is_valid():
             student_answer_list = request.POST.getlist('student_answer')
@@ -84,7 +86,7 @@ class TakeTestFormView(FormView):
                 connection.close()
                 raise err
 
-            return HttpResponseRedirect("../test")
+            return HttpResponseRedirect("../../" + str(class_id) + "/test")
 
         else:
             raise ValueError(submit_answer_form.errors)

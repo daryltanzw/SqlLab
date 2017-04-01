@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.createtest import CreateTestForm
-from SqlLabApp.models import TestForClass, QuestionDataUsedByTest
+from SqlLabApp.models import User, TestForClass, QuestionDataUsedByTest
 from SqlLabApp.utils.CreateTestDataParser import get_tbl_names, append_to_relations
 from SqlLabApp.utils.CreateTestNameTable import create_test_name_table
 from SqlLabApp.utils.DBUtils import get_db_connection
@@ -18,6 +18,15 @@ class CreateTestFormView(FormView):
     form_class = CreateTestForm
     template_name = 'SqlLabApp/createtest.html'
     success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        full_name = User.objects.get(email=request.user.email).full_name
+
+        return self.render_to_response(
+            self.get_context_data(
+                full_name=full_name
+            )
+        )
 
     def post(self, request, *args, **kwargs):
         create_test_form = self.form_class(request.POST, request.FILES)

@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.createmodule import CreateModuleForm
-from SqlLabApp.models import Class, ClassTeacherTeaches
+from SqlLabApp.models import User, Class, ClassTeacherTeaches
 from SqlLabApp.utils.DBUtils import get_db_connection
 
 
@@ -13,6 +13,15 @@ class CreateModuleFormView(FormView):
     form_class = CreateModuleForm
     template_name = 'SqlLabApp/createmodule.html'
     success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        full_name = User.objects.get(email=request.user.email).full_name
+
+        return self.render_to_response(
+            self.get_context_data(
+                full_name=full_name
+            )
+        )
 
     def post(self, request, *args, **kwargs):
         create_module_form = self.form_class(request.POST, request.FILES)
@@ -29,19 +38,14 @@ class CreateModuleFormView(FormView):
             # student_list_file_lines = student_list_file.read().splitlines()
 
             try:
-                connection = get_db_connection()
                 with transaction.atomic():
-                    # validate_student_list_file(student_list_file.name, student_list_file_lines)
                     class_ = Class(class_name=class_name, semester=semester, facilitators=facilitators)
                     class_.save()
 
                     class_teacher_teaches = ClassTeacherTeaches(teacher_email_id=request.user.email, classid=class_)
                     class_teacher_teaches.save()
 
-                    connection.commit()
-
             except ValueError as err:
-                connection.close()
                 raise err
 
             return HttpResponseRedirect("../module")

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A reward-based trip microblogging platform">
+    <meta name="description" content="SqlLab">
     <meta name="author" content="SqlLab">
 
     <title>SqlLab</title>
@@ -24,6 +24,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/module.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -45,15 +46,24 @@
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h1>SqLLAB</h1>
+                <a href="{% url 'module' %}">
+                    <h1>SqLLAB</h1>
+                </a>
             </div>
-
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <div class="dropdown">
-                            <img class="img-circle" src="../../static/img/profile.png" type="button"
-                                 style="cursor: pointer">
+                            <a href="{% url 'module' %}">My Modules</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
+                            <div class="dropdown-content">
+                                <a href="#">Edit Profile</a>
+                                <a href="{% url 'main' %}">Logout</a>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -82,13 +92,37 @@
                                             <p>{{ module.class_name }}</p>
                                             <ul id="menu">
                                                 {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a href="#">View Students</a> |</li>
+                                                    <li class="sub"><a href="{% url 'teachermanagemodule' module.classid %}">View Students</a> |</li>
                                                 {% endifequal %}
                                                 <li class="sub"><a href="{% url 'test' module.classid %}">View
                                                     Tests</a></li>
                                                 {% ifequal user_role 'INS' %}
-                                                    <li class="sub"><a href="{% url 'editmodule' module.classid %}">| Edit Module</a> |</li>
-                                                    <li class="sub"><a href="{% url 'deletemodule' module.classid %}">Delete Module</a></li>
+                                                    <li class="sub"><a href="{% url 'editmodule' module.classid %}">|
+                                                        Edit Module</a> |
+                                                    </li>
+                                                    <li class="sub"><a data-toggle="modal" data-target="#modal{{ module.classid }}">Delete
+                                                        Module</a>
+                                                        <div class="modal fade" id="modal{{ module.classid }}" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">{{ module.class_name }}</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" id="modal-body" style="height: 50px;">
+                                                                        <p>Are you sure you want to delete the module?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal">Close
+                                                                        </button>
+                                                                        <a href="{% url 'deletemodule' module.classid %}">
+                                                                            <button type="button" class="btn btn-success">Delete</button>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                 {% endifequal %}
                                             </ul>
                                         </a>

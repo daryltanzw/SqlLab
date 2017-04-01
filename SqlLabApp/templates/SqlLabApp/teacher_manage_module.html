@@ -25,7 +25,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
-    <link rel="stylesheet" href="{% static 'css/createtest.css' %}">
+    <link rel="stylesheet" href="{% static 'css/uploadstudents.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -75,14 +75,24 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-                <form class="form" action = {%  url 'editmodule' module.classid %} method="post" enctype="multipart/form-data">
+                <div class="button-container">
+                    {% if processed_student_list %}
+                        {% for s in processed_student_list %}
+                            <li>{{ s }}</li>>
+                        {% endfor %}
+                    {% else %}
+                        <p>There is currently no students assigned to class.</p>
+                    {% endif %}
+                </div>
+                <form class="form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button id="create-test" class="btn" type="submit">SAVE CHANGES</button>
+                    <button id="upload-student" class="btn" type="submit">Upload Students List</button>
                 </form>
             </div>
         </div>
     </header>
+
 
 {% endblock %}
 </body>

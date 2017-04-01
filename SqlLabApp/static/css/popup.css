@@ -1,0 +1,40 @@
+.modal-header h4 {
+    text-align: left;
+}
+
+#modal-body p {
+    text-align: left;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.btn-success {
+    font-size: 15px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    background: #1e9f75;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 0;
+}
+
+.btn-success:hover {
+    background: #1e9f75;
+    color: white;
+}
+
+.btn-default {
+    font-size: 15px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    background: white;
+    color: #204056;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 0;
+}
+
+.btn-default:hover {
+    background: white;
+    color: #204056;
+}

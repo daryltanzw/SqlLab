@@ -1,18 +1,12 @@
-import os
-
-import sqlparse
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
-from SqlLabApp.models import TestForClass
 from SqlLabApp.forms.edittest import EditTestForm
-from SqlLabApp.models import TestForClass, QuestionDataUsedByTest
-from SqlLabApp.utils.CreateTestDataParser import get_tbl_names, append_to_relations
-from SqlLabApp.utils.CreateTestNameTable import create_test_name_table
+from SqlLabApp.models import User, TestForClass
 from SqlLabApp.utils.DBUtils import get_db_connection
-from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 from django.shortcuts import render
+from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
 
 class EditTestFormView(FormView):
@@ -27,13 +21,16 @@ class EditTestFormView(FormView):
         test = TestForClass.objects.get(tid=tid)
         form = EditTestForm(instance=test)
 
+        full_name = User.objects.get(email=request.user.email).full_name
+
         test.tid = test_id
-        return render(request, self.template_name, {'form': form, 'test': test})
+        return render(request, self.template_name, {'form': form, 'test': test, 'full_name': full_name})
 
     def post(self, request, *args, **kwargs):
         edit_test_form = self.form_class(request.POST)
         test_id = self.kwargs['test_id']
         tid = int(decryptData(test_id))
+        class_id = encryptData(TestForClass.objects.get(tid=tid).classid_id)
 
         if edit_test_form.is_valid():
             if edit_test_form.has_changed():
@@ -56,9 +53,9 @@ class EditTestFormView(FormView):
                     connection.close()
                     raise err
 
-                return HttpResponseRedirect("../test")
+                return HttpResponseRedirect("../../" + str(class_id) + "/test")
 
             else:
-                return HttpResponseRedirect("../test")
+                return HttpResponseRedirect("../../" + str(class_id) + "/test")
         else:
             raise ValueError(edit_test_form.errors)
