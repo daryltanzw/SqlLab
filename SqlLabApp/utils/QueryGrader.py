@@ -38,7 +38,7 @@ def format_query(tid, query_str):
 
     for key in table_dict.keys():
         if key in query_str:
-            formatted_query = re.sub(r'\b{0}\b'.format(key), table_dict.get(key), formatted_query)
+            formatted_query = str(re.sub(r'\b{0}\b'.format(key), table_dict.get(key), formatted_query)).strip()
 
     return formatted_query
 

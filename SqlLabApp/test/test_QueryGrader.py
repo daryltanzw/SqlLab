@@ -11,6 +11,8 @@ class QueryGrader_Test(TestCase):
             cursor.execute("""DROP TABLE if exists item CASCADE""")
             cursor.execute("""DROP TABLE if exists warehouse CASCADE""")
             cursor.execute("""DROP TABLE if exists stock CASCADE""")
+            cursor.execute("""DROP TABLE if exists item1 CASCADE""")
+            cursor.execute("""DROP TABLE if exists warehouse1 CASCADE""")
             cursor.execute(open("./file/QueryGraderDatabase.sql", "r").read())
             connection.commit()
             connection.close()
@@ -22,6 +24,8 @@ class QueryGrader_Test(TestCase):
         cursor.execute("""DROP TABLE if exists item CASCADE""")
         cursor.execute("""DROP TABLE if exists warehouse CASCADE""")
         cursor.execute("""DROP TABLE if exists stock CASCADE""")
+        cursor.execute("""DROP TABLE if exists item1 CASCADE""")
+        cursor.execute("""DROP TABLE if exists warehouse1 CASCADE""")
         connection.commit()
         connection.close()
 
