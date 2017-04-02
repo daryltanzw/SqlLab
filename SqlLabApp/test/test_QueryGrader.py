@@ -3,6 +3,7 @@ import SqlLabApp.utils.QueryGrader as grader
 from SqlLabApp.utils.DBUtils import get_db_connection
 
 
+# WARNING: Will actually create and try to delete tables. Ensure deletion
 class QueryGrader_Test(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -38,7 +39,8 @@ class QueryGrader_Test(TestCase):
 
         tid = 4
         input = "select i.i_name from item i, stock s where i.i_id = s.i_id and s.s_qty > 400;"
-        expected = "select i.i_name from tid{0}_item i, tid{0}_stock s where i.i_id = s.i_id and s.s_qty > 400;".format(tid)
+        expected = "select i.i_name from tid{0}_item i, tid{0}_stock s where i.i_id = s.i_id and s.s_qty > 400;".format(
+            tid)
         formatted_query = grader.format_query(tid, input)
         self.assertEqual(expected, formatted_query)
 
