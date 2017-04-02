@@ -81,44 +81,45 @@
             </div>
             <div class="container">
                 <div class="student">
-                {% if processed_student %}
-                    <div class="row">
+                    {% if processed_student %}
+
+                        <div class="row">
                         <div class="col-md-6">
-{#                        The following students have signed up:#}
-                    {% for student_email, student_name, student_signedup in processed_student %}
-                        {% ifequal student_signedup 't' %}
-                            <div class="student_container_signedup">
-                                <ul id="menu">
-                                    <li class="sub">{{ student_name }}</li>
-                                    <li class="invite" style="float: right"><a href="mailto:{{ student_email }}" target="_top">{{ student_email }}</a></li>
-                                </ul>
-                            </div>
-                        {% endifequal %}
-                    {% endfor %}
+                            {#                        The following students have signed up:#}
+                            {% for student_email, student_name, student_signedup in processed_student %}
+                                {% ifequal student_signedup 't' %}
+                                    <div class="student_container_signedup">
+                                        <ul id="menu">
+                                            <li class="sub">{{ student_name }}</li>
+                                            <li class="invite" style="float: right"><a href="mailto:{{ student_email }}" target="_top">{{ student_email }}</a></li>
+                                        </ul>
+                                    </div>
+                                {% endifequal %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            {#                     The following students have not signed up:#}
+                            {% for student_email, student_name, student_signedup in processed_student %}
+                                {% ifequal student_signedup 'f' %}
+                                    <div class="student_container">
+                                        <ul id="menu">
+                                            <li class="sub">UNKNOWN</li>
+                                            <li class="invite" style="float: right"><a href="mailto:{{ student_email }}" target="_top">{{ student_email }}</a></li>
+                                        </ul>
+                                    </div>
+                                {% endifequal %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     </div>
-                     <div class="col-md-6">
-{#                     The following students have not signed up:#}
-                    {% for student_email, student_name, student_signedup in processed_student %}
-                        {% ifequal student_signedup 'f' %}
-                            <div class="student_container">
-                                <ul id="menu">
-                                      <li class="sub">UNKNOWN</li>
-                                    <li class="invite" style="float: right"><a href="mailto:{{ student_email }}" target="_top">{{ student_email }}</a></li>
-                                </ul>
-                            </div>
-                        {% endifequal %}
-                    {% endfor %}
-                    </div>
-                {% else %}
-                    <p>There is currently no student.</p>
-                {% endif %}
                 </div>
+                <div class="container">
+                    <form class="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button id="upload-student" class="btn" type="submit">UPLOAD STUDENT LIST</button>
+                    </form>
                 </div>
-                <form class="form" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button id="upload-student" class="btn" type="submit">UPLOAD STUDENT LIST</button>
-                </form>
             </div>
         </div>
     </header>

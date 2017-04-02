@@ -190,5 +190,6 @@ ul.errorlist {
     /*border: 1px solid rgba(74, 74, 74, 0.22);*/
     margin-bottom: 20px;
     padding-bottom: 10px;
+    /*border-bottom: 1px solid #CCC;*/
     border-bottom: 1px solid #CCC;
 }
