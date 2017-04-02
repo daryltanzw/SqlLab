@@ -7,6 +7,14 @@ from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 
+# def execute_formatted_query(fq):
+#     try:
+#         conn = get_db_connection()
+#         with conn.cursor() as cursor:
+#             cursor.execute(fq)
+#             r = cursor.fetchall()
+
+
 def grade_formatted_query(student_query, teacher_query, mark):
     default_mark = 0
 
@@ -31,7 +39,7 @@ def grade_formatted_query(student_query, teacher_query, mark):
         return mark
 
 
-def format_query(tid, query_str):
+def format_select_query(tid, query_str):
     formatted_query = query_str
     table_name_list = get_tbl_names_from_select_query(query_str)
     table_dict = table_name_to_formatted(tid, table_name_list)

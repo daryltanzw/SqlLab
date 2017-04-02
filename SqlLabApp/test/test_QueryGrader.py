@@ -34,14 +34,14 @@ class QueryGrader_Test(TestCase):
         tid = 5
         input = "select * from warehouse where w_country='Singapore';"
         expected = "select * from tid{0}_warehouse where w_country='Singapore';".format(tid)
-        formatted_query = grader.format_query(tid, input)
+        formatted_query = grader.format_select_query(tid, input)
         self.assertEqual(expected, formatted_query)
 
         tid = 4
         input = "select i.i_name from item i, stock s where i.i_id = s.i_id and s.s_qty > 400;"
         expected = "select i.i_name from tid{0}_item i, tid{0}_stock s where i.i_id = s.i_id and s.s_qty > 400;".format(
             tid)
-        formatted_query = grader.format_query(tid, input)
+        formatted_query = grader.format_select_query(tid, input)
         self.assertEqual(expected, formatted_query)
 
     def test_grade_formatted_query(self):
