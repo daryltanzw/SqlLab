@@ -1,5 +1,6 @@
 import re
 
+import psycopg2
 import sqlparse
 from sqlparse.sql import Identifier, IdentifierList
 from SqlLabApp.utils.DBUtils import get_db_connection
@@ -7,19 +8,36 @@ from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 
-# def execute_formatted_query(fq):
-#     result = sqlparse.parse(sqlparse.format(fq, reindent=True, keyword_case='upper'))[0]
-#     isSelect = result.token_first().value == 'SELECT'
-#
-#     if isSelect:
-#         try:
-#             conn = get_db_connection()
-#             with conn.cursor() as cursor:
-#                 cursor.execute(fq)
-#                 r = cursor.fetchall()
-#
-#     else:
-#         return "Only Select Queries are allowed"
+# USAGE:
+# 1) Queries must all be formatted using format_select_query
+# 2) A query is 1 Select Query. There can be no create queries etc
+
+def execute_formatted_query(fq):
+    result = sqlparse.parse(sqlparse.format(fq, reindent=True, keyword_case='upper'))[0]
+
+    if is_select_query(result):
+        try:
+            conn = get_db_connection()
+            toRet = ""
+            with conn.cursor() as cursor:
+                cursor.execute(fq)
+                r = cursor.fetchmany(10)
+                for tuple in r:
+                    toRet += str(tuple) + '\n'
+
+                return toRet
+
+        except psycopg2.Error as e:
+            return e.pgerror
+
+        except ValueError as e:
+            return e.args
+
+        finally:
+            conn.close()
+
+    else:
+        return "Only Select Queries are allowed"
 
 
 def grade_formatted_query(student_query, teacher_query, mark):
@@ -60,6 +78,7 @@ def format_select_query(tid, query_str):
 
 def is_select_query(sqlparsed_result):
     return sqlparsed_result.token_first().value == 'SELECT'
+
 
 def get_tbl_names_from_select_query(query_str):
     result = sqlparse.parse(sqlparse.format(query_str, reindent=True, keyword_case='upper'))[0]
