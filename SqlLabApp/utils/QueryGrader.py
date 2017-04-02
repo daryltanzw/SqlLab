@@ -8,11 +8,18 @@ from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 
 # def execute_formatted_query(fq):
-#     try:
-#         conn = get_db_connection()
-#         with conn.cursor() as cursor:
-#             cursor.execute(fq)
-#             r = cursor.fetchall()
+#     result = sqlparse.parse(sqlparse.format(fq, reindent=True, keyword_case='upper'))[0]
+#     isSelect = result.token_first().value == 'SELECT'
+#
+#     if isSelect:
+#         try:
+#             conn = get_db_connection()
+#             with conn.cursor() as cursor:
+#                 cursor.execute(fq)
+#                 r = cursor.fetchall()
+#
+#     else:
+#         return "Only Select Queries are allowed"
 
 
 def grade_formatted_query(student_query, teacher_query, mark):
@@ -51,12 +58,15 @@ def format_select_query(tid, query_str):
     return formatted_query
 
 
+def is_select_query(sqlparsed_result):
+    return sqlparsed_result.token_first().value == 'SELECT'
+
 def get_tbl_names_from_select_query(query_str):
     result = sqlparse.parse(sqlparse.format(query_str, reindent=True, keyword_case='upper'))[0]
 
     table_name_list = []
     toReturn = []
-    if result.token_first().value == 'SELECT':
+    if is_select_query(result):
         for token in result.tokens:
             if isinstance(token, IdentifierList) or isinstance(token, Identifier):
                 table_name_list = token.value.splitlines()
