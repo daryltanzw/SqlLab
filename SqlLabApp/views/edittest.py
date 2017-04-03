@@ -2,12 +2,13 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 from SqlLabApp.forms.edittest import EditTestForm
-from SqlLabApp.models import User, TestForClass
+from SqlLabApp.models import User, TestForClass, QuestionDataUsedByTest
 from SqlLabApp.utils.DBUtils import get_db_connection
 
 from django.shortcuts import render
 from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
+
 
 class EditTestFormView(FormView):
     form_class = EditTestForm
@@ -19,43 +20,60 @@ class EditTestFormView(FormView):
         tid = int(decryptData(test_id))
 
         test = TestForClass.objects.get(tid=tid)
-        form = EditTestForm(instance=test)
-
         full_name = User.objects.get(email=request.user.email).full_name
 
+        data_tables = QuestionDataUsedByTest.objects.filter(tid_id=tid)
+        data_table_names = []
+
+        for table in data_tables:
+            data_table_names.append(table.data_tbl_name)
+
+        form = EditTestForm(instance=test, dynamic_field_names=data_table_names)
         test.tid = test_id
-        return render(request, self.template_name, {'form': form, 'test': test, 'full_name': full_name})
+
+        return render(request, self.template_name, {'form': form,
+                                                    'test': test,
+                                                    'full_name': full_name,
+                                                    'data_tables': data_tables})
 
     def post(self, request, *args, **kwargs):
-        edit_test_form = self.form_class(request.POST)
         test_id = self.kwargs['test_id']
         tid = int(decryptData(test_id))
         class_id = encryptData(TestForClass.objects.get(tid=tid).classid_id)
 
-        if edit_test_form.is_valid():
-            if edit_test_form.has_changed():
-                start_time = request.POST['start_time']
-                end_time = request.POST['end_time']
-                max_attempt = request.POST['max_attempt']
-                try:
-                    connection = get_db_connection()
+        start_time = request.POST['start_time']
+        end_time = request.POST['end_time']
+        max_attempt = request.POST['max_attempt']
+        data_tables = QuestionDataUsedByTest.objects.filter(tid_id=tid)
+
+        try:
+            connection = get_db_connection()
+            with transaction.atomic():
+                test = TestForClass.objects.get(tid=tid)
+                queryset_test = TestForClass.objects.filter(tid=tid)
+                fields = ['start_time', 'end_time', 'max_attempt']
+                updatedValues = [start_time, end_time, max_attempt]
+
+                for field, updatedValue in zip(fields, updatedValues):
+                    if getattr(test, field) != updatedValue:
+                        queryset_test.update(**{field: updatedValue})
+
+                for table in data_tables:
+                    result = request.POST.getlist(table.data_tbl_name)
+
                     with transaction.atomic():
-                        test = TestForClass.objects.get(tid=tid)
-                        queryset_test = TestForClass.objects.filter(tid=tid)
-                        fields = ['start_time', 'end_time', 'max_attempt']
-                        updatedValues = [start_time, end_time, max_attempt]
-                        for field, updatedValue in zip(fields, updatedValues):
-                            if getattr(test, field) != updatedValue:
-                                queryset_test.update(**{field: updatedValue})
-                        connection.commit()
+                        is_visible = False
+                        result = ''.join(result)
+                        if result == 'on':
+                            is_visible = True
 
-                except ValueError as err:
-                    connection.close()
-                    raise err
+                        QuestionDataUsedByTest.objects.filter(tid_id=tid, data_tbl_name=table.data_tbl_name).update(
+                            student_visibility=is_visible)
 
-                return HttpResponseRedirect("../../" + str(class_id) + "/test")
+                connection.commit()
 
-            else:
-                return HttpResponseRedirect("../../" + str(class_id) + "/test")
-        else:
-            raise ValueError(edit_test_form.errors)
+        except ValueError as err:
+            connection.close()
+            raise err
+
+        return HttpResponseRedirect("../../" + str(class_id) + "/test")

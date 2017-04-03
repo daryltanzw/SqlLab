@@ -20,17 +20,16 @@ def create_student_attempt_table(cursor, tbl_name, tid, student_answer_list):
             # Retrieve question from test table
             cursor.execute('select question, teacher_answer, marks from ' + test_table + ' where qid = ' + str(q_no))
             tuple_list = cursor.fetchone()
-            question = tuple_list[0]
-            instructor_answer = tuple_list[1]
+            question = str(tuple_list[0])
+            instructor_answer = str(tuple_list[1])
             total_marks = tuple_list[2]
 
             # Mark student's query against instructor's query
-            # TODO: Replace query's table names with actual table names stored
             student_query = grader.format_select_query(tid, student_answer)
             teacher_query = grader.format_select_query(tid, instructor_answer)
             marks_obtained = grader.grade_formatted_query(student_query, teacher_query, total_marks)
 
-            cursor.execute("Insert into {0} values(%s, %s, %s, %s)".format(tbl_name) % (
+            cursor.execute("Insert into {0} values(%s, %s, %s, %s)".format(tbl_name), (
             q_no, question, student_answer, marks_obtained))
 
     except Exception as err:

@@ -1,0 +1,2 @@
+Select all warehouse with country in Singapore	select * from warehouse where w_country='Singapore';	3
+Get item name with more than 400 in stock	select i.i_name from item i, stock s where i.i_id=s.i_id and s.s_qty > 400;	5
