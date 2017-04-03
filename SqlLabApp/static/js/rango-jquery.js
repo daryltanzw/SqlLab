@@ -14,7 +14,7 @@ $(document).ready( function() {
                        },
             error : function() {
                     console.log("ajax fail")
-                    alert("sighs")
+                    alert("Ajax Fail")
                }
         });
         });});

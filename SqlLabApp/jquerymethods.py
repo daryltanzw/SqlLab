@@ -11,8 +11,6 @@ def execute_query(request, *args, **kwargs):
         query = request.GET.get('query')
         test_id = kwargs['test_id']
         tid = int(decryptData(test_id))
-        print("++++++++++++++++++++++++")
-        print(tid)
         fq = grader.format_select_query(tid, query)
         result = grader.execute_formatted_query(fq)
         data = {"result": result}
