@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import TemplateView
 from SqlLabApp.views.login import LoginFormView, MainView, RegistrationFormView
 from SqlLabApp.views.module import InstructorModuleFormView
 from SqlLabApp.views.teacher_manage_module import TeacherManageModuleFormView
@@ -12,9 +13,7 @@ from SqlLabApp.views.deletemodule import DeleteModuleView
 from SqlLabApp.views.edittest import EditTestFormView
 from SqlLabApp.views.deletetest import DeleteTestView
 from SqlLabApp.views.testattempt import TestAttemptFormView
-
-
-
+from SqlLabApp.views.helpguide import HelpView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', MainView.as_view(), name='main'),
@@ -31,5 +30,5 @@ urlpatterns = [
     url(r'^(?P<test_id>[\w\-]+)/deletetest/$', DeleteTestView.as_view(), name='deletetest'),
     url(r'^(?P<test_id>[\w\-]+)/testattempt/$', TestAttemptFormView.as_view(), name='testattempt'),
     url(r'^(?P<class_id>[\w\-]+)/teachermanagemodule/$', TeacherManageModuleFormView.as_view(), name='teachermanagemodule'),
-
+    url(r'^help/$', HelpView.as_view(), name='help'),
 ]

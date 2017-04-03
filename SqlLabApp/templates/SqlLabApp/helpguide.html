@@ -13,19 +13,18 @@
     {% load staticfiles %}
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/module.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
-    <link rel="stylesheet" href="{% static 'css/createtest.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -38,6 +37,33 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <style>@media (min-width: 500px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+      background-color: #f1f1f1;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+      color:black;
+  }
+  .sidebar-nav .navbar li a:hover {
+    padding-top: 12px;
+    padding-bottom: 12px;
+      color:white;
+      background-color:#555;
+  }
+}</style>
 </head>
 
 <body id="page-top" class="index">
@@ -60,7 +86,7 @@
                     </li>
                     <li>
                         <div class="dropdown">
-                            <a>Hi, {{ full_name }}&ensp;&ensp;▾</a>
+                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
                             <div class="dropdown-content">
                                 <a href="#">Edit Profile</a>
                                 <a href="{% url 'main' %}">Logout</a>
@@ -77,17 +103,44 @@
         </div>
     </nav>
 
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <form class="form" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button id="create-test" class="btn" type="submit">CREATE NEW MODULE</button>
-                </form>
-            </div>
-        </div>
-    </header>
 
+<header class="intro" style="width:0px; margin-top:65px">
+<div class="container">
+<div class="row">
+  <div class="col-sm-3">
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="visible-xs navbar-brand">Sidebar menu</span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>Instructor</li>
+            <li><a href="#">Create module</a></li>
+            <li><a href="#">Create test</a></li>
+              <li>Student</li>
+            <li><a href="#">Take test</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9">
+      <br>
+      <div style="text-decoration: underline">
+          Instructor (has all the functionalities of students as well)
+      </div>
+      <p>CREATE A MODULE</p>
+      <p>1.</p>
+  </div>
+</div>
+</div>
+    </header>
 {% endblock %}
 </body>
