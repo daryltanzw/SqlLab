@@ -8,7 +8,6 @@ from SqlLabApp.views.createmodule import CreateModuleFormView
 from SqlLabApp.views.createtest import CreateTestFormView
 from SqlLabApp.views.taketest import TakeTestFormView
 from SqlLabApp.views.editmodule import EditModuleFormView
-from SqlLabApp.views.editvisibility import EditVisibilityFormView
 from SqlLabApp.views.deletemodule import DeleteModuleView
 from SqlLabApp.views.edittest import EditTestFormView
 from SqlLabApp.views.deletetest import DeleteTestView
@@ -29,7 +28,6 @@ urlpatterns = [
     url(r'^(?P<class_id>[\w\-]+)/editmodule/$', EditModuleFormView.as_view(), name='editmodule'),
     url(r'^(?P<class_id>[\w\-]+)/deletemodule/$', DeleteModuleView.as_view(), name='deletemodule'),
     url(r'^(?P<test_id>[\w\-]+)/edittest/$', EditTestFormView.as_view(), name='edittest'),
-    url(r'^(?P<test_id>[\w\-]+)/editvisibility/$', EditVisibilityFormView.as_view(), name='editvisibility'),
     url(r'^(?P<test_id>[\w\-]+)/deletetest/$', DeleteTestView.as_view(), name='deletetest'),
     url(r'^(?P<test_id>[\w\-]+)/testattempt/$', TestAttemptFormView.as_view(), name='testattempt'),
     url(r'^(?P<class_id>[\w\-]+)/teachermanagemodule/$', TeacherManageModuleFormView.as_view(), name='teachermanagemodule'),
