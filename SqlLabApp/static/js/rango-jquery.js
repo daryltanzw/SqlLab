@@ -4,7 +4,6 @@ $(document).ready( function() {
         event.preventDefault();
 
         var query = $("#query_area").val();
-//        var testid = $(this).attr("data-tid");
         $.ajax({
             url: window.location.href + 'execute_query/',
             type: "GET",

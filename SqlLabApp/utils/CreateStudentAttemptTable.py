@@ -25,7 +25,6 @@ def create_student_attempt_table(cursor, tbl_name, tid, student_answer_list):
             total_marks = tuple_list[2]
 
             # Mark student's query against instructor's query
-            # TODO: Replace query's table names with actual table names stored
             student_query = grader.format_select_query(tid, student_answer)
             teacher_query = grader.format_select_query(tid, instructor_answer)
             marks_obtained = grader.grade_formatted_query(student_query, teacher_query, total_marks)
