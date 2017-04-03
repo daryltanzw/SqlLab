@@ -14,6 +14,8 @@ from SqlLabApp.views.edittest import EditTestFormView
 from SqlLabApp.views.deletetest import DeleteTestView
 from SqlLabApp.views.testattempt import TestAttemptFormView
 from SqlLabApp.views.helpguide import HelpView
+from SqlLabApp.jquerymethods import execute_query
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', MainView.as_view(), name='main'),
@@ -31,4 +33,5 @@ urlpatterns = [
     url(r'^(?P<test_id>[\w\-]+)/testattempt/$', TestAttemptFormView.as_view(), name='testattempt'),
     url(r'^(?P<class_id>[\w\-]+)/teachermanagemodule/$', TeacherManageModuleFormView.as_view(), name='teachermanagemodule'),
     url(r'^help/$', HelpView.as_view(), name='help'),
+    url(r'^(?P<test_id>[\w\-]+)/taketest/execute_query/', execute_query, name='executequery'),
 ]
