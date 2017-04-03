@@ -1,14 +1,15 @@
-import itertools as it
-
 from SqlLabApp.models import TestForClass
-from SqlLabApp.utils.CorrectnessChecker import compare
+
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
+import SqlLabApp.utils.QueryGrader as grader
+
 
 def create_student_attempt_table(cursor, tbl_name, tid, student_answer_list):
     try:
         cursor.execute("drop table if exists {0};".format(tbl_name))
         cursor.execute(
-            "create table {0} (qid INTEGER primary key, question text, student_answer text, marks INTEGER);".format(tbl_name))
+            "create table {0} (qid INTEGER primary key, question text, student_answer text, marks INTEGER);".format(
+                tbl_name))
 
         q_no = 0
         for student_answer in student_answer_list:
@@ -25,14 +26,12 @@ def create_student_attempt_table(cursor, tbl_name, tid, student_answer_list):
 
             # Mark student's query against instructor's query
             # TODO: Replace query's table names with actual table names stored
-            correctness = compare(instructor_answer.replace(";", ""), student_answer.replace(";", ""))
-            student_marks = 0
+            student_query = grader.format_select_query(tid, student_answer)
+            teacher_query = grader.format_select_query(tid, instructor_answer)
+            marks_obtained = grader.grade_formatted_query(student_query, teacher_query, total_marks)
 
-            # Correct = full marks, wrong = 0
-            if correctness == 0:
-                student_marks = total_marks
-
-            cursor.execute("Insert into {0} values(%s, %s, %s, %s)".format(tbl_name), (q_no, question, student_answer, student_marks))
+            cursor.execute("Insert into {0} values(%s, %s, %s, %s)".format(tbl_name) % (
+            q_no, question, student_answer, marks_obtained))
 
     except Exception as err:
         raise ValueError(err)

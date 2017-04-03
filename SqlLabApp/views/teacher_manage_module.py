@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.teacher_manage_module import TeacherManageModule
-from SqlLabApp.models import User, ClassStudentAttends
+from SqlLabApp.models import User, Class, ClassStudentAttends
 from SqlLabApp.utils.CryptoSign import decryptData, encryptData
 
 
@@ -15,22 +15,33 @@ class TeacherManageModuleFormView(FormView):
         full_name = User.objects.get(email=request.user.email).full_name
         cid = self.kwargs['class_id']
         classid = int(decryptData(cid))
+        module_name = Class.objects.get(classid=classid).class_name
+
         student_list = ClassStudentAttends.objects.filter(classid_id=classid).values('student_email')
-        processed_student_list = []
+        student_email = []
+        student_name = []
+        student_signedup = []
 
         for studentobj in student_list:
-            stu = str(studentobj['student_email'])
-            stu_exist = User.objects.filter(email=stu).count() == 1
+            email = str(studentobj['student_email'])
+            stu_exist = User.objects.filter(email=email).count() == 1
+
             if stu_exist:
-                s = str(stu + "\t" + User.objects.get(email=stu).full_name)
-                processed_student_list.append(s)
+                student_email.append(email)
+                student_name.append(User.objects.get(email=email).full_name.upper)
+                student_signedup.append('t')
             else:
-                processed_student_list.append(stu)
+                student_email.append(email)
+                student_name.append('')
+                student_signedup.append('f')
+
+        processed_student = zip(student_email, student_name, student_signedup)
 
         return self.render_to_response(
             self.get_context_data(
                 full_name=full_name,
-                processed_student_list=processed_student_list
+                module_name=module_name,
+                processed_student=processed_student
             )
         )
 

@@ -11,9 +11,10 @@ def append_to_relations(tid, query_line_list):
     for line in query_line_list:
         for key in table_dict.keys():
             if key in line:
-                line = re.sub(r'\b{0}\b'.format(key), table_dict.get(key), line)
+                line = str(re.sub(r'\b{0}\b'.format(key), table_dict.get(key), line)).strip()
 
-        ret.append(str(line))
+        if len(line) > 0:
+            ret.append(line)
 
     return ret
 

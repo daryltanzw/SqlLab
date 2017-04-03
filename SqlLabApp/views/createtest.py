@@ -68,8 +68,10 @@ class CreateTestFormView(FormView):
                         question_data_used_by_test_row.save()
 
             except ValueError as err:
-                connection.close()
                 raise err
+
+            finally:
+                connection.close()
 
             return HttpResponseRedirect("../test")
 

@@ -83,8 +83,9 @@ class TakeTestFormView(FormView):
                     connection.commit()
 
             except ValueError as err:
-                connection.close()
                 raise err
+            finally:
+                connection.close()
 
             return HttpResponseRedirect("../../" + str(class_id) + "/test")
 

@@ -41,3 +41,4 @@ class InstructorTestFormView(FormView):
                 create_module_form=create_module_form,
             )
         )
+
