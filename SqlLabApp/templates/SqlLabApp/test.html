@@ -161,6 +161,9 @@
                                                     <li class="sub"><a href="{% url 'edittest' test.tid %}">| Edit
                                                         Test</a> |
                                                     </li>
+                                                    <li class="sub"><a href="{% url 'editvisibility' test.tid %}">| Edit
+                                                        Visibility</a> |
+                                                    </li>
                                                 {% endifequal %}
                                                 {% ifequal user_role 'INS' %}
                                                     <li class="sub"><a data-toggle="modal"
