@@ -1,3 +1,6 @@
+import datetime
+import time
+
 from django.views.generic import FormView
 from django.db import connection
 from django.db import transaction
@@ -22,14 +25,24 @@ class InstructorTestFormView(FormView):
         create_module_form = InstructorTestForm
         tests = TestForClass.objects.filter(classid_id=classid).order_by('test_name')
         attempts = []
+        can_take_test = []
 
         for tobj in tests:
-            attempts.append(StudentAttemptsTest.objects.filter(tid_id=tobj.tid, student_email_id=request.user.email).count())
+            curr_attempt = StudentAttemptsTest.objects.filter(tid_id=tobj.tid, student_email_id=request.user.email).count()
+            attempts.append(curr_attempt)
+            current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+            end_time = datetime.datetime.strftime(tobj.end_time, '%Y-%m-%d %H:%M:%S')
+
+            if attempts < tobj.max_attempt and current_time <= end_time:
+                can_take_test.append(True)
+            else:
+                can_take_test.append(False)
+
             tobj.tid = encryptData(tobj.tid)
 
         user_role = UserRole.objects.get(email_id=request.user.email).role
         full_name = User.objects.get(email=request.user.email).full_name
-        test_list = zip(tests, attempts)
+        test_list = zip(tests, can_take_test, attempts)
 
         return self.render_to_response(
             self.get_context_data(
