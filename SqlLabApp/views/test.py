@@ -33,7 +33,7 @@ class InstructorTestFormView(FormView):
             current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
             end_time = datetime.datetime.strftime(tobj.end_time, '%Y-%m-%d %H:%M:%S')
 
-            if attempts < tobj.max_attempt and current_time <= end_time:
+            if curr_attempt < tobj.max_attempt and current_time <= end_time:
                 can_take_test.append(True)
             else:
                 can_take_test.append(False)
