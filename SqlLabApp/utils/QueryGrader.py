@@ -3,8 +3,9 @@ import re
 import psycopg2
 import sqlparse
 from sqlparse.sql import Identifier, IdentifierList
-from SqlLabApp.utils.DBUtils import get_db_connection
 
+from SqlLabApp.models import QuestionDataUsedByTest
+from SqlLabApp.utils.DBUtils import get_db_connection
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 
 
@@ -12,7 +13,28 @@ from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format
 # 1) Queries must all be formatted using format_select_query
 # 2) A query is 1 Select Query. There can be no create queries etc
 
+def is_query_against_visible(fq):
+    try:
+        pattern = re.compile('tid[1-9]+_')
+        match = re.search(pattern, fq)
+        if match:
+            s = str(match.group(0))
+            tid = re.search(r'\d+', s).group()
+            invisible_tbl_list = QuestionDataUsedByTest.objects.filter(tid_id=tid, student_visibility=False).values('data_tbl_name')
+            for t in invisible_tbl_list:
+                table_name = t['data_tbl_name']
+                if test_name_table_format(tid, table_name) in fq:
+                    return False
+
+        return True
+    except:
+        return True
+
+
 def execute_formatted_query(fq):
+    if not is_query_against_visible(fq):
+        return "Table is not Queryable"
+
     result = sqlparse.parse(sqlparse.format(fq, reindent=True, keyword_case='upper'))[0]
 
     if is_select_query(result):
@@ -28,10 +50,16 @@ def execute_formatted_query(fq):
                 return toRet
 
         except psycopg2.Error as e:
-            return e.pgerror
+            error = e.pgerror
+            pattern = re.compile('tid[1-9]+_')
+            match = re.search(pattern, error)
+            if match:
+                s = str(match.group(0))
+                return error.replace(s, "")
+            return error
 
         except ValueError as e:
-            return e.args
+            return e.args.replace("tid", "")
 
         finally:
             conn.close()
