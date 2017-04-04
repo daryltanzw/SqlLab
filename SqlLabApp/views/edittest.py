@@ -40,7 +40,6 @@ class EditTestFormView(FormView):
                                                     'data_tables': data_tables})
 
     def post(self, request, *args, **kwargs):
-        edit_test_form = self.form_class(request)
         test_id = self.kwargs['test_id']
         tid = int(decryptData(test_id))
         class_id = encryptData(TestForClass.objects.get(tid=tid).classid_id)
@@ -52,7 +51,7 @@ class EditTestFormView(FormView):
 
         current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
-        if start_time > current_time and end_time > current_time and start_time < end_time:
+        if end_time > current_time and start_time < end_time:
             try:
                 connection = get_db_connection()
                 with transaction.atomic():

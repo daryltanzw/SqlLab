@@ -21,9 +21,6 @@ class CreateTestForm(forms.Form):
         end_time = self.data.get('end_time')
         current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
-        if start_time <= current_time:
-            raise forms.ValidationError("Start date cannot be in the past.")
-
         if end_time <= current_time:
             raise forms.ValidationError("End date cannot be in the past.")
 
