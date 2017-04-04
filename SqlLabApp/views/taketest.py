@@ -43,7 +43,7 @@ class TakeTestFormView(FormView):
                 curr_table_columns = [tuple(i[0] for i in it.chain(cursor.fetchall()))]
 
                 # Retrieve current table data
-                cursor.execute('SELECT * FROM ' + table_name)
+                cursor.execute('SELECT * FROM ' + table_name + ' LIMIT 5')
                 curr_table_rows = cursor.fetchall()
 
                 # Remove tid from table name
