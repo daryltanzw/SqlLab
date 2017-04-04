@@ -12,4 +12,4 @@ class EditTestForm(ModelForm, forms.Form):
         super(EditTestForm, self).__init__(*args, **kwargs)
 
         for field_name in dynamic_field_names:
-            self.fields[field_name] = forms.BooleanField(label=field_name, required=False)
+            self.fields[field_name] = forms.BooleanField(label=field_name.title(), required=False, label_suffix='')

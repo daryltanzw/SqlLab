@@ -73,6 +73,7 @@ class StudentAttemptsTest(models.Model):
     tid = models.ForeignKey(TestForClass)
     student_email = models.ForeignKey(User)
     attempt_no = models.IntegerField()
+    date_submitted = models.DateTimeField(default=datetime.now, blank=True, null=False)
     # dynamic Sql Table = format(tid, student_email, attempt_no)
 
 

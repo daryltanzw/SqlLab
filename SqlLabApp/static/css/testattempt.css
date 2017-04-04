@@ -2,7 +2,7 @@
     display: table;
     width: 100%;
     height: auto;
-    margin-top: 95px;
+    margin-top: 85px;
     padding: 100px 0;
     vertical-align: middle;
     text-align: left;
@@ -31,10 +31,6 @@
     .intro .intro-body .intro-text {
         font-size: 26px;
     }
-}
-
-#datetimepickerstart {
-    background: white;
 }
 
 .form input[type=text],
@@ -92,7 +88,7 @@
     transform: translate(-50%, -50%);
 }
 
-#create-test {
+#upload-student {
     display: block;
     padding-left: 20px;
     padding-right: 20px;
@@ -100,8 +96,6 @@
     margin-bottom: 15px;
     width: 100%;
     height: auto;
-    /*border: 1px solid rgba(74, 74, 74, 0.075);*/
-    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
     border-radius: 10px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     background: #1e9f75;
@@ -111,19 +105,13 @@
     padding-bottom: 18px;
 }
 
-#create-test:hover {
+#upload-student:hover {
     cursor: pointer;
-    /*box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);*/
     text-decoration: none;
 }
 
-#selectedQuestionFiles,
-#selectedAnswerFiles,
-#selectedDataFiles {
-    color: red;
-}
 
-#test-name {
+#student-name {
     display: block;
     padding-left: 20px;
     padding-right: 20px;
@@ -132,12 +120,78 @@
     font-size: 15px;
 }
 
-ul.errorlist {
-    display:none;
+#menu > li.sub ul {
+    left: 0;
+    float: left;
 }
 
-input[type="checkbox"] {
+#menu {
+    text-align: left;
+    left: 0;
+}
+
+li {
+    display: inline-block;
+}
+
+ul.errorlist {
+    display: none;
+}
+
+.button-container p {
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+#module-header h2 {
+    border-bottom: 1px solid #CCC;
     float: left;
-    margin-right: 10px;
-    margin-top: 4px;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.attempt_container {
+    display: block;
+    padding-right: 20px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    margin-left: 2px;
+    border: 1px solid rgba(74, 74, 74, 0.22);
+}
+
+.profile {
+    width: 50px;
+    height: 50px;
+}
+
+p {
+    height: 30px;
+    line-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+    color: #204056;
+}
+
+#marks {
+    font-weight: normal;
+    font-size: 15px;
+    color: #f00009;
+}
+
+#date {
+    font-weight: normal;
+    font-size: 15px;
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+    text-decoration: none;
 }
