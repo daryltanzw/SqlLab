@@ -2,7 +2,7 @@ import re
 
 import psycopg2
 import sqlparse
-from sqlparse.sql import Identifier, IdentifierList
+from sqlparse.tokens import Punctuation, Name
 
 from SqlLabApp.models import QuestionDataUsedByTest
 from SqlLabApp.utils.DBUtils import get_db_connection
@@ -110,19 +110,45 @@ def is_select_query(sqlparsed_result):
 
 def get_tbl_names_from_select_query(query_str):
     result = sqlparse.parse(sqlparse.format(query_str, reindent=True, keyword_case='upper'))[0]
+    token_ls = process_and_flatten_token_list(result.tokens)
+    table_name_list = get_table_names(token_ls)
+    return table_name_list
 
-    table_name_list = []
-    toReturn = []
-    if is_select_query(result):
-        for token in result.tokens:
-            if isinstance(token, IdentifierList) or isinstance(token, Identifier):
-                table_name_list = token.value.splitlines()
 
-    for name in table_name_list:
-        s = str(name).strip().split(None, 1)[0]
-        toReturn.append(s)
+def get_table_names(token_ls):
+    tbl_names = []
+    from_seen = False
+    for i in range(0, len(token_ls)):
+        token = token_ls[i]
+        if token.is_keyword:
+            if token.value == 'FROM':
+                from_seen = True
+                tbl_names.append(str(token_ls[i + 1].value))
+            else:
+                from_seen = False
 
-    return toReturn
+        if from_seen and token.value == ",":
+            tbl_names.append(str(token_ls[i + 1].value))
+    return tbl_names
+
+
+def process_and_flatten_token_list(tokens):
+    res_unprocessed = []
+    for token in tokens:
+        if token.is_group:
+            generator = token.flatten()
+            for value in generator:
+                res_unprocessed.append(value)
+        else:
+
+            res_unprocessed.append(token)
+
+    res = []
+    for token in res_unprocessed:
+        if token.is_keyword or token.ttype == Punctuation or token.ttype == Name:
+            res.append(token)
+
+    return res
 
 
 def table_name_to_formatted(tid, table_name_list):
