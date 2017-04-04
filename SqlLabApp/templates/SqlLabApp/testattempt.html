@@ -84,11 +84,15 @@
             </div>
             <div class="container">
                 <div class="student">
-                    {% for attempt, marks in test_attempt_list %}
+                    {% for attempt, marks, is_full_marks in test_attempt_list %}
                             <div class="attempt_container">
                                 <ul id="menu">
                                     <li class="sub"><a href="#"><p>Attempt {{ attempt.attempt_no }}</p></a></li>
-                                    <li class="sub" style="float: right"><p id="marks">Marks Obtained: {{ marks }}</p></li>
+                                    {% if is_full_marks %}
+                                        <li class="sub" style="float: right"><p id="marks-correct">Marks Obtained: {{ marks }}</p></li>
+                                    {% else %}
+                                        <li class="sub" style="float: right"><p id="marks-incorrect">Marks Obtained: {{ marks }}</p></li>
+                                    {% endif %}
                                     <li class="sub" style="float: right"><p id="date">Submitted: {{ attempt.date_submitted }}&ensp;|&ensp;</p></li>
                                 </ul>
                             </div>

@@ -157,8 +157,13 @@
                                                         </div>
                                                     </li>
                                                 {% else %}
-                                                    <li class="sub"><a href="{% url 'testattempt' test.tid %}">Review
-                                                        Test</a></li>
+                                                    {% ifequal user_role 'INS' %}
+                                                        <li class="sub"><a href="{% url 'studentlist' test.tid %}">Review
+                                                            Test</a></li>
+                                                    {% else %}
+                                                        <li class="sub"><a href="{% url 'testattempt' test.tid %}">Review
+                                                            Test</a></li>
+                                                    {% endifequal %}
                                                 {% endifequal %}
                                                 {% ifequal user_role 'INS' %}
                                                     <li class="sub"><a href="{% url 'edittest' test.tid %}">| Edit

@@ -178,7 +178,13 @@ p {
     color: #204056;
 }
 
-#marks {
+#marks-correct {
+    font-weight: normal;
+    font-size: 15px;
+    color: #1e9f75;
+}
+
+#marks-incorrect {
     font-weight: normal;
     font-size: 15px;
     color: #f00009;

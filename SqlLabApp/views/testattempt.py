@@ -1,5 +1,3 @@
-import itertools as it
-
 from django.views.generic import FormView
 from SqlLabApp.forms.testattempt import TestAttemptForm
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
@@ -23,6 +21,7 @@ class TestAttemptFormView(FormView):
         user_role = UserRole.objects.get(email_id=request.user.email).role
         full_name = User.objects.get(email=request.user.email).full_name
         marks = []
+        is_full_marks = []
 
         for tobj in test_attempt_list:
             with connection.cursor() as cursor:
@@ -40,9 +39,14 @@ class TestAttemptFormView(FormView):
 
                 marks.append(str(student_marks) + ' / ' + str(total_marks))
 
+                if student_marks == total_marks:
+                    is_full_marks.append(True)
+                else:
+                    is_full_marks.append(False)
+
             tobj.tid_id = encryptData(tobj.tid_id)
 
-        test_attempt_list = zip(test_attempt_list, marks)
+        test_attempt_list = zip(test_attempt_list, marks, is_full_marks)
 
         return self.render_to_response(
             self.get_context_data(
