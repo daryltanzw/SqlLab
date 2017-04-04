@@ -69,3 +69,8 @@ class QueryGrader_Test(TestCase):
         res = grader.execute_formatted_query(query)
         self.assertEqual(expected, res)
 
+    def test_get_tbl_names_from_select_query(self):
+        q = "select i.i_name from item i, stock s where i.i_id=s.i_id and s.s_qty > 400;"
+        expected = ['item', 'stock']
+        res = grader.get_tbl_names_from_select_query(q)
+        self.assertEqual(expected, res)
