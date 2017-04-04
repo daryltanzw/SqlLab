@@ -59,10 +59,11 @@ class StudentListFormView(FormView):
                         curr_name = str(instructor_test_name + '-' + student_test_name)
                         table_name.append(curr_name)
 
+                    tobj.tid_id = encryptData(tobj.tid_id)
+
                 test_attempt_list = zip(test_attempt_list, marks, table_name, is_full_marks)
                 student_attempt_list.append(test_attempt_list)
 
-            tobj.tid_id = encryptData(tobj.tid_id)
 
         student_list = zip(student_list, student_name, student_attempt_list)
 
