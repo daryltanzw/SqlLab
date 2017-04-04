@@ -1,17 +1,8 @@
-import itertools as it
-
 from django.db import connection
-from django.db import transaction
-from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from SqlLabApp.forms.reviewtest import ReviewTestForm
-from SqlLabApp.models import User, QuestionAnswer, TestForClass, StudentAttemptsTest, QuestionDataUsedByTest
-from SqlLabApp.utils.CreateStudentAttemptTable import create_student_attempt_table
-from SqlLabApp.utils.CryptoSign import decryptData
-from SqlLabApp.utils.CryptoSign import encryptData
-from SqlLabApp.utils.DBUtils import get_db_connection
-from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
+from SqlLabApp.models import User, TestForClass
 
 
 class ReviewTestFormView(FormView):
@@ -36,26 +27,27 @@ class ReviewTestFormView(FormView):
         take_test_form = ReviewTestForm
         test_name = TestForClass.objects.get(tid=tid).test_name
 
-        with connection.cursor() as cursor:
-            cursor.execute('SELECT * FROM ' + instructor_test_table)
-            instructor_test_table = cursor.fetchall()
-            cursor.execute('SELECT * FROM ' + student_test_table)
-            student_test_table = cursor.fetchall()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT * FROM ' + instructor_test_table)
+                instructor_test_table = cursor.fetchall()
+                cursor.execute('SELECT * FROM ' + student_test_table)
+                student_test_table = cursor.fetchall()
+
+        except ValueError as err:
+            raise err
+
+        finally:
+            connection.close()
 
         questions = []
         answers = []
         marks = []
-        qn_id = 0
 
-        for instructor, student in instructor_test_table, student_test_table:
-            qn_id += 1
-            questions.append(str(qn_id) + ". " + str(instructor[1]))
-            print "=========="
-            print instructor[1]
-            answers.append(student[0])
-            print student[0]
-            marks.append(str(student[3]) + ' / ' + str(instructor[3]))
-            print str(student[3]) + ' / ' + str(instructor[3])
+        for i in range(0,len(instructor_test_table)):
+            questions.append(str(i + 1) + '. ' + instructor_test_table[i][1])
+            answers.append(student_test_table[i][2])
+            marks.append(str(student_test_table[i][3]) + ' / ' + str(instructor_test_table[i][3]))
 
         test_data = zip(questions, answers, marks)
 
