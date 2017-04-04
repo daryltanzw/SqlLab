@@ -32,6 +32,7 @@ class StudentListFormView(FormView):
                 full_name = User.objects.get(email=student.student_email).full_name
                 marks = []
                 is_full_marks = []
+                table_name = []
 
                 for tobj in test_attempt_list:
                     with connection.cursor() as cursor:
@@ -54,7 +55,11 @@ class StudentListFormView(FormView):
                         else:
                             is_full_marks.append(False)
 
-                test_attempt_list = zip(test_attempt_list, marks, is_full_marks)
+                        # curr_name = encryptData(str(instructor_test_name + '-' + student_test_name))
+                        curr_name = str(instructor_test_name + '-' + student_test_name)
+                        table_name.append(curr_name)
+
+                test_attempt_list = zip(test_attempt_list, marks, table_name, is_full_marks)
                 student_attempt_list.append(test_attempt_list)
 
             tobj.tid_id = encryptData(tobj.tid_id)

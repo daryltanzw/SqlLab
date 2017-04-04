@@ -104,10 +104,11 @@
                                 <div id="collapse{{ student.id }}" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         {% if test_attempt_list %}
-                                            {% for attempt, marks, is_full_marks in test_attempt_list %}
+                                            {% for attempt, marks, table_name, is_full_marks in test_attempt_list %}
                                                 <div class="attempt_container">
                                                     <ul id="menu">
-                                                        <li class="sub" style="float: left"><a href="#"><p>Attempt {{ attempt.attempt_no }}</p>
+                                                        <li class="sub" style="float: left"><a href="{% url 'reviewtest' table_name %}">
+                                                            <p>Attempt {{ attempt.attempt_no }}</p>
                                                         </a></li>
                                                         {% if is_full_marks %}
                                                             <li class="sub" style="float: right"><p id="marks-correct">Marks
@@ -137,6 +138,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </header>
 
 {% endblock %}
