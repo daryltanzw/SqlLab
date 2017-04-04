@@ -21,7 +21,7 @@ def execute_formatted_query(fq):
             toRet = ""
             with conn.cursor() as cursor:
                 cursor.execute(fq)
-                r = cursor.fetchmany(10)
+                r = cursor.fetchmany(5)
                 for tuple in r:
                     toRet += str(tuple) + '\n'
 
