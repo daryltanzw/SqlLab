@@ -20,6 +20,7 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="{% static 'js/rango-jquery.js' %}"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
@@ -91,6 +92,8 @@
                     <h2>{{ test_name }}</h2>
                 </div>
                 <form class="form" method="post">{% csrf_token %}
+                     <input type="text" id= "query_area" name="Enter Query"><br>
+                     <button id="execute-select-query-btn">Execute Query</button>
                     {% for question in qst_data %}
                         <div id="action-container">
                             <h4>{{ question.qid }}) {{ question.question }}</h4><br>

@@ -52,7 +52,7 @@ h3 {
     margin-bottom: 30px;
 }
 
-#id_student_answer {
+#id_student_answer, #query_area {
     display: inline-table;
     margin-bottom: 15px;
     outline: none;

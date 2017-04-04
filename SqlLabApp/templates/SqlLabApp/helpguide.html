@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SqlLab">
+    <meta name="author" content="SqlLab">
+
+    <title>SqlLab</title>
+
+    {% load staticfiles %}
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/module.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='//fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Assistant' rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Gloria Hallelujah' rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <style>@media (min-width: 500px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+      background-color: #f1f1f1;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+      color:black;
+  }
+  .sidebar-nav .navbar li a:hover {
+    padding-top: 12px;
+    padding-bottom: 12px;
+      color:white;
+      background-color:#555;
+  }
+}</style>
+</head>
+
+<body id="page-top" class="index">
+{% block content %}
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="{% url 'module' %}">
+                    <h1>SqLLAB</h1>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <div class="dropdown">
+                            <a href="{% url 'module' %}">My Modules</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
+                            <div class="dropdown-content">
+                                <a href="#">Edit Profile</a>
+                                <a href="{% url 'main' %}">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="{% url 'help' %}">Help</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+<header class="intro" style="width:0px; margin-top:65px">
+<div class="container">
+<div class="row">
+  <div class="col-sm-3">
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="visible-xs navbar-brand">Sidebar menu</span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>Instructor</li>
+            <li><a href="#">Create module</a></li>
+            <li><a href="#">Upload student list</a></li>
+            <li><a href="#">Create test</a></li>
+              <li>Student</li>
+            <li><a href="#">Take test</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9">
+      <br>
+      <div style="text-decoration: underline">
+          Instructor (has all the functionalities of students as well)
+      </div>
+      <p>CREATE A MODULE</p>
+      <p>1.Upon logging into the system for the first time, the page as shown in figure 1 below, will be displayed. This page
+          lists all the modules under an instructor.</p>
+      <p>2. To create a module, click the "Create new module" button as shown in figure 1.</p>
+      <p><figure><img src="/static/img/Sqllab_1.png" alt="create new module" style="width:100%; border:3px solid black">
+          <figcaption style="text-align:center">Figure 1- Empty modules list</figcaption></figure></p>
+      <p>3. Fill in the details of the module in the form as shown in figure 2.</p>
+       <p><figure><img src="/static/img/Sqllab_2.png" alt="create module form" style="width:100%; border:3px solid black">
+          <figcaption style="text-align:center">Figure 2- Create module form</figcaption></figure></p>
+      <p>4. Upon successful creation of a module, the module will be displayed in the modules list page as shown in figure 3.</p>
+      <p><figure><img src="/static/img/Sqllab_9.png" alt="successfully created module" style="width:100%; border:3px solid black">
+          <figcaption style="text-align:center">Figure 3- Module successfully created</figcaption></figure></p>
+  </div>
+</div>
+</div>
+    </header>
+{% endblock %}
+</body>

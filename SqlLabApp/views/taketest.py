@@ -1,17 +1,17 @@
 import itertools as it
 
-from django.views.generic import FormView
 from django.db import connection
 from django.db import transaction
 from django.http import HttpResponseRedirect
+from django.views.generic import FormView
 
 from SqlLabApp.forms.taketest import TakeTestForm
 from SqlLabApp.models import QuestionAnswer, TestForClass, StudentAttemptsTest, QuestionDataUsedByTest
-from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
 from SqlLabApp.utils.CreateStudentAttemptTable import create_student_attempt_table
-from SqlLabApp.utils.DBUtils import get_db_connection
-from SqlLabApp.utils.CryptoSign import encryptData
 from SqlLabApp.utils.CryptoSign import decryptData
+from SqlLabApp.utils.CryptoSign import encryptData
+from SqlLabApp.utils.DBUtils import get_db_connection
+from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
 
 
 class TakeTestFormView(FormView):
@@ -57,6 +57,7 @@ class TakeTestFormView(FormView):
                 take_test_form=take_test_form,
                 test_name=test_name,
                 qst_data=qst_data,
+                test_id=test_id,
             )
         )
 
@@ -74,9 +75,8 @@ class TakeTestFormView(FormView):
             try:
                 connection = get_db_connection()
                 with transaction.atomic():
-                    student_attempt_test_row = StudentAttemptsTest(attempt_no=attempt_no, student_email_id=student_email,
+                    row, created = StudentAttemptsTest.objects.get_or_create(attempt_no=attempt_no, student_email_id=student_email,
                                                                    tid_id=tid)
-                    student_attempt_test_row.save()
                     cursor = connection.cursor()
                     create_student_attempt_table(cursor, student_attempt_table_format(tid, student_email, attempt_no), tid,
                                                  student_answer_list)
