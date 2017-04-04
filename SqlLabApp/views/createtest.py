@@ -30,6 +30,7 @@ class CreateTestFormView(FormView):
 
     def post(self, request, *args, **kwargs):
         create_test_form = self.form_class(request.POST, request.FILES)
+        create_test_form.clean()
         cid = self.kwargs['class_id']
         classid = int(decryptData(cid))
 

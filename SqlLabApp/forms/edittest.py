@@ -1,3 +1,5 @@
+import datetime
+import time
 from django import forms
 from django.forms import ModelForm
 from SqlLabApp.models import TestForClass

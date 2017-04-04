@@ -1,3 +1,5 @@
+import datetime
+import time
 from django import forms
 
 
@@ -14,14 +16,18 @@ class CreateTestForm(forms.Form):
     class Meta:
         fields = ['test_name','start_time', 'end_time', 'max_attempt', 'q_a_file_upload', 'data_file_upload']
 
-    # def clean(self):
-    #     start_time = self.data.get('start_time')
-    #     end_time = self.data.get('end_time')
-    #
-    #     if start_time < datetime.date.today() | end_time < datetime.date.today():
-    #         raise forms.ValidationError("The date cannot be in the past!")
-    #
-    #     if start_time >= end_time :
-    #         raise forms.ValidationError("Start Date should be before End Date!")
-    #
-    #     return start_time
+    def clean(self):
+        start_time = self.data.get('start_time')
+        end_time = self.data.get('end_time')
+        current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+
+        if start_time <= current_time:
+            raise forms.ValidationError("Start date cannot be in the past.")
+
+        if end_time <= current_time:
+            raise forms.ValidationError("End date cannot be in the past.")
+
+        if start_time >= end_time:
+            raise forms.ValidationError("Start date should be before end date.")
+
+        return start_time
