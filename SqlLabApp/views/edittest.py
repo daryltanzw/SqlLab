@@ -26,7 +26,7 @@ class EditTestFormView(FormView):
         data_table_names = []
 
         for table in data_tables:
-            data_table_names.append(table.data_tbl_name)
+            data_table_names.append({'name': table.data_tbl_name, 'visibility': table.student_visibility})
 
         form = EditTestForm(instance=test, dynamic_field_names=data_table_names)
         test.tid = test_id
