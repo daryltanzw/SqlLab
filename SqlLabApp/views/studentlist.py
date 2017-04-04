@@ -3,7 +3,7 @@ from SqlLabApp.forms.testattempt import TestAttemptForm
 from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, student_attempt_table_format
 from django.db import connection
 
-from SqlLabApp.models import User, UserRole, TestForClass, ClassStudentAttends, StudentAttemptsTest
+from SqlLabApp.models import User, UserRole, TestForClass, ClassTeacherTeaches, ClassStudentAttends, StudentAttemptsTest
 from SqlLabApp.utils.CryptoSign import encryptData, decryptData
 
 class StudentListFormView(FormView):
@@ -17,19 +17,28 @@ class StudentListFormView(FormView):
         test_name = TestForClass.objects.get(tid=testid).test_name
         classid = TestForClass.objects.get(tid=testid).classid_id
         curr_full_name = User.objects.get(email=request.user.email).full_name
-        student_list = ClassStudentAttends.objects.filter(classid_id=classid)
-        student_name = []
-        student_attempt_list = []
+        teacher_list = ClassTeacherTeaches.objects.filter(classid_id=classid).values('teacher_email_id')
+        student_list = ClassStudentAttends.objects.filter(classid_id=classid).values('student_email')
+        user_name = []
+        attempt_list = []
+        email_list = []
+
+        for teacher in teacher_list:
+            email_list.append(teacher['teacher_email_id'])
 
         for student in student_list:
-            stu_exist = User.objects.filter(email=student.student_email).count() == 1
+            email_list.append(student['student_email'])
 
-            if stu_exist:
-                student_name.append(User.objects.get(email=student.student_email).full_name.upper)
+        user_id = list(range(0,len(email_list)))
 
-                test_attempt_list = list(reversed(StudentAttemptsTest.objects.filter(tid_id=testid, student_email_id=student.student_email)))
+        for email in email_list:
+            user_exist = User.objects.filter(email=email).count() == 1
+
+            if user_exist:
+                user_name.append(User.objects.get(email=email).full_name.upper)
+
+                test_attempt_list = list(reversed(StudentAttemptsTest.objects.filter(tid_id=testid, student_email_id=email)))
                 test_name = TestForClass.objects.get(tid=testid).test_name
-                full_name = User.objects.get(email=student.student_email).full_name
                 marks = []
                 is_full_marks = []
                 table_name = []
@@ -37,7 +46,7 @@ class StudentListFormView(FormView):
                 for tobj in test_attempt_list:
                     with connection.cursor() as cursor:
                         # Get table name
-                        student_test_name = student_attempt_table_format(testid, student.student_email, tobj.attempt_no)
+                        student_test_name = student_attempt_table_format(testid, email, tobj.attempt_no)
                         instructor_test_name = test_name_table_format(testid, test_name)
 
                         # Get total marks from instructor table
@@ -62,16 +71,16 @@ class StudentListFormView(FormView):
                     tobj.tid_id = encryptData(tobj.tid_id)
 
                 test_attempt_list = zip(test_attempt_list, marks, table_name, is_full_marks)
-                student_attempt_list.append(test_attempt_list)
+                attempt_list.append(test_attempt_list)
 
 
-        student_list = zip(student_list, student_name, student_attempt_list)
+        user_list = zip(user_id, user_name, attempt_list)
 
         return self.render_to_response(
             self.get_context_data(
                 testid=tid,
                 test_name=test_name,
                 full_name=curr_full_name,
-                student_list=student_list
+                user_list=user_list
             )
         )

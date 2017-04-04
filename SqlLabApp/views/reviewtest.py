@@ -52,8 +52,8 @@ class ReviewTestFormView(FormView):
             questions.append(str(qn_id) + ". " + str(instructor[1]))
             print "=========="
             print instructor[1]
-            answers.append(student[2])
-            print student[2]
+            answers.append(student[0])
+            print student[0]
             marks.append(str(student[3]) + ' / ' + str(instructor[3]))
             print str(student[3]) + ' / ' + str(instructor[3])
 
