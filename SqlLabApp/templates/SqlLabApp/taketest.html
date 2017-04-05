@@ -94,7 +94,7 @@
                 <form class="form" method="post">{% csrf_token %}
                     <div class="row">
                         <div class="col-md-10">
-                            <input type="text" id= "query_area" name="Enter Query">
+                            <input type="text" id="query_area" name="Enter Query">
                         </div>
                         <div class="col-md-2">
                             <button id="execute-select-query-btn" class="btn btn-success">EXECUTE QUERY</button>
@@ -102,7 +102,15 @@
                     </div>
                     {% for question in qst_data %}
                         <div id="action-container">
-                            <h4>{{ question.qid }}) {{ question.question }}</h4><br>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h4>{{ question.qid }}) {{ question.question }}</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <h4 style="text-align: right; color: #f00009">({{ question.marks }} marks)</h4>
+                                </div>
+                                <br>
+                            </div>
                             {{ take_test_form.as_p }}
                         </div>
                     {% endfor %}

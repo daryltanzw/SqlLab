@@ -169,3 +169,8 @@ tr {
 .intro {
     z-index: 2;
 }
+
+.row {
+    margin-bottom: 10px;
+    word-break:break-all;
+}
