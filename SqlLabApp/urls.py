@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from SqlLabApp.views.login import LoginFormView, MainView, RegistrationFormView
 from SqlLabApp.views.module import InstructorModuleFormView
-from SqlLabApp.views.teacher_manage_module import TeacherManageModuleFormView
+from SqlLabApp.views.uploadstudents import TeacherManageModuleFormView
 from SqlLabApp.views.test import InstructorTestFormView
 from SqlLabApp.views.createmodule import CreateModuleFormView
 from SqlLabApp.views.createtest import CreateTestFormView
