@@ -12,7 +12,7 @@ from SqlLabApp.views.editmodule import EditModuleFormView
 from SqlLabApp.views.deletemodule import DeleteModuleView
 from SqlLabApp.views.edittest import EditTestFormView
 from SqlLabApp.views.reviewtest import ReviewTestFormView
-from SqlLabApp.views.studentlist import StudentListFormView
+from SqlLabApp.views.studentattemptlist import StudentListFormView
 from SqlLabApp.views.deletetest import DeleteTestView
 from SqlLabApp.views.testattempt import TestAttemptFormView
 from SqlLabApp.views.helpguide import HelpView

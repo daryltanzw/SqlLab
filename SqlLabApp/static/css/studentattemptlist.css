@@ -33,6 +33,14 @@
     color: #f00009;
 }
 
+#full {
+    color: #1e9f75;
+}
+
+#not-full {
+    color: #f00009;
+}
+
 #date {
     font-weight: normal;
     font-size: 15px;

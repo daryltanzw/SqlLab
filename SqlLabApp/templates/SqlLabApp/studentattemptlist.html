@@ -26,7 +26,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/module.css' %}">
-    <link rel="stylesheet" href="{% static 'css/studentlist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/studentattemptlist.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -88,7 +88,7 @@
             <div class="container">
                 <div class="student">
                     {% if user_list %}
-                        {% for user_id, name, attempt_list in user_list %}
+                        {% for user_id, name, attempt_list, highest_marks, is_highest_marks_full, number_of_attempts in user_list %}
                             <div class="panel-group">
                             <div class="panel panel-default" id="panel-container">
                                 <div class="panel-heading" id="module-container">
@@ -96,7 +96,12 @@
                                         <a data-toggle="collapse" href="#collapse{{ user_id }}">
                                             <p>&ensp;&ensp;{{ name }}</p>
                                             <ul id="menu">
-                                                <li class="sub"></li>
+                                                <li class="sub">Number of Attempts: {{ number_of_attempts }}</li> |
+                                                {% if is_highest_marks_full %}
+                                                    <li class="sub" id="full">Highest Marks Obtained: {{ highest_marks }} / {{ total_marks }}</li>
+                                                {% else %}
+                                                    <li class="sub" id="not-full">Highest Marks Obtained: {{ highest_marks }} / {{ total_marks }}</li>
+                                                {% endif %}
                                             </ul>
                                         </a>
                                     </h4>
