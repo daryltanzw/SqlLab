@@ -47,6 +47,8 @@
   .sidebar-nav .navbar ul {
     float: none;
     display: block;
+      height:100%;
+      background-color: #f1f1f1;
   }
   .sidebar-nav .navbar li {
     float: none;
@@ -63,6 +65,12 @@
       color:white;
       background-color:#555;
   }
+
+  img {
+      width:100%;
+      border:3px solid black;
+  }
+
 }</style>
 </head>
 
@@ -110,25 +118,15 @@
   <div class="col-sm-3">
     <div class="sidebar-nav">
       <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <span class="visible-xs navbar-brand">Sidebar menu</span>
-        </div>
-        <div class="navbar-collapse collapse sidebar-navbar-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">
             <li>Instructor</li>
-            <li><a href="#">Create module</a></li>
-            <li><a href="#">Upload student list</a></li>
+            <li><a href="#createmodule">Create module</a></li>
+            <li><a href="#uploadstudentlist">Upload student list</a></li>
             <li><a href="#">Create test</a></li>
               <li>Student</li>
             <li><a href="#">Take test</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        <!--/.nav-collapse -->
       </div>
     </div>
   </div>
@@ -137,18 +135,38 @@
       <div style="text-decoration: underline">
           Instructor (has all the functionalities of students as well)
       </div>
-      <p>CREATE A MODULE</p>
-      <p>1.Upon logging into the system for the first time, the page as shown in figure 1 below, will be displayed. This page
-          lists all the modules under an instructor.</p>
-      <p>2. To create a module, click the "Create new module" button as shown in figure 1.</p>
-      <p><figure><img src="/static/img/Sqllab_1.png" alt="create new module" style="width:100%; border:3px solid black">
+      <p id="createmodule">CREATE A MODULE</p></p>
+      <p>1.Upon logging into the system for the first time, a page listing all the modules under an instructor, will be displayed, as shown in figure 1.</p>
+      <p>2. To create a module, click the "Create new module" button as shown below.</p>
+      <p><figure><img src="/static/img/Sqllab_1.png" alt="create new module">
           <figcaption style="text-align:center">Figure 1- Empty modules list</figcaption></figure></p>
-      <p>3. Fill in the details of the module in the form as shown in figure 2.</p>
-       <p><figure><img src="/static/img/Sqllab_2.png" alt="create module form" style="width:100%; border:3px solid black">
+      <p>3. Fill in the details of the module in the form. When done, click the "Create new module" button as shown in figure 2.</p>
+       <p><figure><img src="/static/img/Sqllab_2.png" alt="create module form">
           <figcaption style="text-align:center">Figure 2- Create module form</figcaption></figure></p>
       <p>4. Upon successful creation of a module, the module will be displayed in the modules list page as shown in figure 3.</p>
-      <p><figure><img src="/static/img/Sqllab_9.png" alt="successfully created module" style="width:100%; border:3px solid black">
+      <p><figure><img src="/static/img/Sqllab_9.png" alt="successfully created module">
           <figcaption style="text-align:center">Figure 3- Module successfully created</figcaption></figure></p>
+      <p>5. The next step would be to upload the list of students enrolled in that module you just created.</p>
+      <br>
+
+      <p id="uploadstudentlist">UPLOAD STUDENT LIST</p>
+      <p>1. On the module listing page, for the module you wish to upload the student list for, click on "View Students", as highlighted in figure 4 below.</p>
+      <p><figure><img src="/static/img/Sqllab_4.png" alt="View students">
+          <figcaption style="text-align:center">Figure 4- View students for a module</figcaption></figure></p>
+      <p>3. Upload a text file containing student email addresses, with each line of the text file an email address.</p>
+      <p><figure><img src="/static/img/Sqllab_5.png" alt="Upload student list form">
+          <figcaption style="text-align:center">Figure 5- Upload student list form</figcaption></figure></p>
+         <p>4. The format of a sample text file containing student email addresses is shown in figure 6.</p>
+      <p><figure><img src="/static/img/Sqllab_3.png" alt="sample text file">
+          <figcaption style="text-align:center">Figure 6- Sample student email addresses text file</figcaption></figure></p>
+      <p>5. After uploading the text file, click the "Upload Student List" button as shown in figure 5.</p>
+      <p>6. On successful upload of the student list, the names of all students(only those who have registered with SqlLab),
+          and their corresponding email addresses will be shown. Those who have yet to register with SqlLab will be listed as unknown (as shown in Figure 7 below).
+          In this way, you can easily track which student has registered and which has not.</p>
+      <p><figure><img src="/static/img/Sqllab_6.png" alt="List of students">
+          <figcaption style="text-align:center">Figure 7- List of students enrolled in module</figcaption></figure></p>
+      <br>
+
   </div>
 </div>
 </div>
