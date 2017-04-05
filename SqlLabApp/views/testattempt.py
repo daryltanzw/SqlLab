@@ -22,6 +22,7 @@ class TestAttemptFormView(FormView):
         full_name = User.objects.get(email=request.user.email).full_name
         marks = []
         is_full_marks = []
+        table_name = []
 
         for tobj in test_attempt_list:
             with connection.cursor() as cursor:
@@ -38,6 +39,7 @@ class TestAttemptFormView(FormView):
                 student_marks = cursor.fetchone()[0]
 
                 marks.append(str(student_marks) + ' / ' + str(total_marks))
+                table_name.append(str(instructor_test_name + '-' + student_test_name))
 
                 if student_marks == total_marks:
                     is_full_marks.append(True)
@@ -46,7 +48,7 @@ class TestAttemptFormView(FormView):
 
             tobj.tid_id = encryptData(tobj.tid_id)
 
-        test_attempt_list = zip(test_attempt_list, marks, is_full_marks)
+        test_attempt_list = zip(test_attempt_list, marks, is_full_marks, table_name)
 
         return self.render_to_response(
             self.get_context_data(
