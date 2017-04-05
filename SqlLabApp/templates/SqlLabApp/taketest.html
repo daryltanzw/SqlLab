@@ -92,8 +92,14 @@
                     <h2>{{ test_name }}</h2>
                 </div>
                 <form class="form" method="post">{% csrf_token %}
-                     <input type="text" id= "query_area" name="Enter Query"><br>
-                     <button id="execute-select-query-btn">Execute Query</button>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="text" id= "query_area" name="Enter Query">
+                        </div>
+                        <div class="col-md-2">
+                            <button id="execute-select-query-btn" class="btn btn-success">EXECUTE QUERY</button>
+                        </div>
+                    </div>
                     {% for question in qst_data %}
                         <div id="action-container">
                             <h4>{{ question.qid }}) {{ question.question }}</h4><br>
