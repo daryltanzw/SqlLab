@@ -60,16 +60,20 @@
                     </li>
                     <li>
                         <div class="dropdown">
-                            <a>{{ full_name }}&ensp;&ensp;▾</a>
-                            <div class="dropdown-content">
-                                <a href="#">Edit Profile</a>
-                                <a href="{% url 'main' %}">Logout</a>
-                            </div>
+                            <a href="{% url 'documentation' %}" target="_blank">Documentation</a>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown">
                             <a href="{% url 'help' %}" target="_blank">Help</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a>{{ full_name }}&ensp;&ensp;▾</a>
+                            <div class="dropdown-content">
+                                <a href="{% url 'main' %}">Logout</a>
+                            </div>
                         </div>
                     </li>
                 </ul>

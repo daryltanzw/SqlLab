@@ -16,6 +16,7 @@ from SqlLabApp.views.studentattemptlist import StudentListFormView
 from SqlLabApp.views.deletetest import DeleteTestView
 from SqlLabApp.views.testattempt import TestAttemptFormView
 from SqlLabApp.views.helpguide import HelpView
+from SqlLabApp.views.documentation import DocumentationView
 from SqlLabApp.jquerymethods import execute_query
 
 urlpatterns = [
@@ -37,5 +38,6 @@ urlpatterns = [
     url(r'^(?P<test_id>[\w\-]+)/testattempt/$', TestAttemptFormView.as_view(), name='testattempt'),
     url(r'^(?P<class_id>[\w\-]+)/teachermanagemodule/$', TeacherManageModuleFormView.as_view(), name='teachermanagemodule'),
     url(r'^help/$', HelpView.as_view(), name='help'),
+    url(r'^documentation/$', DocumentationView.as_view(), name='documentation'),
     url(r'^(?P<test_id>[\w\-]+)/taketest/execute_query/', execute_query, name='executequery'),
 ]

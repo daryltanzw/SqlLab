@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>Welcome to SqlLab’s documentation! &#8212; SqlLab 1.0.0 documentation</title>
+
+    <link rel="stylesheet" href="../../static/_build/html/_static/classic.css" type="text/css"/>
+    <link rel="stylesheet" href="../../static/_build/html/_static/pygments.css" type="text/css"/>
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT: './',
+            VERSION: '1.0.0',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE: true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../../static/_build/html/_static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/_build/html/_static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/_build/html/_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../static/_build/html/genindex.html"/>
+    <link rel="search" title="Search" href="../../static/_build/html/search.html"/>
+</head>
+<body role="document">
+<div class="related" role="navigation" aria-label="related navigation">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+            <a href="../../static/_build/html/genindex.html" title="General Index"
+               accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="#">SqlLab 1.0.0 documentation</a> &#187;</li>
+    </ul>
+</div>
+
+<div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+
+                <div class="section" id="welcome-to-sqllab-s-documentation">
+                    <h1>Welcome to SqlLab&#8217;s documentation!<a class="headerlink"
+                                                                   href="#welcome-to-sqllab-s-documentation"
+                                                                   title="Permalink to this headline">¶</a></h1>
+                    <p>SQL Lab is an automated system where instructors can create tests that students can take online.
+                        The system issues questions and validates answer given by students by checking comparing them
+                        with those given by the instructors. The system also measures and reports the comparative
+                        performance of the answers given by students.</p>
+                    <div class="toctree-wrapper compound">
+                    </div>
+                </div>
+                <div class="section" id="system-documentation">
+                    <h1>System Documentation<a class="headerlink" href="#system-documentation"
+                                               title="Permalink to this headline">¶</a></h1>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="#user-roles"><span class="std std-ref">User Roles</span></a>
+                        </li>
+                        <li><a class="reference internal" href="#er-model"><span class="std std-ref">ER Model</span></a>
+                        </li>
+                        <li><a class="reference internal" href="#dynamic-tables"><span class="std std-ref">Dynamic Tables</span></a>
+                        </li>
+                        <li><a class="reference internal" href="../../static/_build/html/search.html"><span
+                                class="std std-ref">Search Page</span></a></li>
+                    </ul>
+                </div>
+                <div class="section" id="user-roles">
+                    <span id="id1"></span>
+                    <h1>User Roles<a class="headerlink" href="#user-roles" title="Permalink to this headline">¶</a></h1>
+                    <div class="section" id="instructor">
+                        <h2>Instructor<a class="headerlink" href="#instructor" title="Permalink to this headline">¶</a>
+                        </h2>
+                        <p>Instructor is given privileges to set test questions, specify the duration and maximum number
+                            of attempts allowed as well as track the students&#8217; performance.</p>
+                        <div class="section" id="instructor-privileges">
+                            <h3>Instructor Privileges<a class="headerlink" href="#instructor-privileges"
+                                                        title="Permalink to this headline">¶</a></h3>
+                            <ul class="simple">
+                                <li>Create a Module</li>
+                                <li>Create a Test</li>
+                                <li>Edit a Test</li>
+                                <li>Review a Test</li>
+                                <li>Delete a Test</li>
+                                <li>Take a Test</li>
+                            </ul>
+                        </div>
+                        <div class="section" id="instructor-home">
+                            <h3>Instructor Home<a class="headerlink" href="#instructor-home"
+                                                  title="Permalink to this headline">¶</a></h3>
+                            <p>Upon login, the instructor will be presented with the following:</p>
+                            <ul class="simple">
+                                <li>Option to create a new module</li>
+                                <li>List of all the modules the instructor has created</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="section" id="student">
+                        <h2>Student<a class="headerlink" href="#student" title="Permalink to this headline">¶</a></h2>
+                        <p>The student will be able to take tests that are assigned to him/her within a specified time
+                            period as well as track his/her own scores.</p>
+                        <div class="section" id="student-privileges">
+                            <h3>Student Privileges<a class="headerlink" href="#student-privileges"
+                                                     title="Permalink to this headline">¶</a></h3>
+                            <ul class="simple">
+                                <li>Take a Test</li>
+                                <li>Track Test Scores</li>
+                            </ul>
+                        </div>
+                        <div class="section" id="student-home">
+                            <h3>Student Home<a class="headerlink" href="#student-home"
+                                               title="Permalink to this headline">¶</a></h3>
+                            <p>Upon login, the student will be presented with the following:</p>
+                            <ul class="simple">
+                                <li>Take Test if available</li>
+                                <li>Review past Tests if available</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="section" id="er-model">
+                    <span id="id2"></span>
+                    <h1>ER Model<a class="headerlink" href="#er-model" title="Permalink to this headline">¶</a></h1>
+                    <div class="section" id="entity-relationship-diagram">
+                        <h2>Entity Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram"
+                                                          title="Permalink to this headline">¶</a></h2>
+                        <div class="figure align-center" id="id4">
+                            <img alt="_images/ermodel.jpg" src="../../static/_build/html/_images/ermodel.jpg"/>
+                            <p class="caption"><span
+                                    class="caption-text"><strong>ER diagram of the SQL Lab System</strong></span></p>
+                        </div>
+                        <p><strong>Note:</strong> Attributes that are marked with &#8216;*&#8217; have a table that is
+                            created in their names dynamically.</p>
+                    </div>
+                    <div class="section" id="sql-lab-database-tables">
+                        <h2>SQL Lab Database Tables<a class="headerlink" href="#sql-lab-database-tables"
+                                                      title="Permalink to this headline">¶</a></h2>
+                        <p>The backend of the SQL Lab system stores data pertaining to the questions, answers and
+                            studnets&#8217; performance in a series of database tables. The database schema is presented
+                            in the <a class="reference internal" href="#er-model"><span
+                                    class="std std-ref">ER Model</span></a>. This section details on each of the
+                            database schema and its purpose.</p>
+                        <div class="section" id="user">
+                            <h3>1. User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+                            <p>The <strong>User</strong> relation stores the follwoign attributes pertaining to the
+                                user:</p>
+                            <ul class="simple">
+                                <li><em>email</em></li>
+                                <li><em>password</em></li>
+                                <li><em>full name</em></li>
+                            </ul>
+                            <p>These attributes are colelcted from each user upon registration into the SQL Lab system.
+                                Each user is uniquely indentified by his/her <em>email</em>.</p>
+                        </div>
+                        <div class="section" id="role">
+                            <h3>2. Role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h3>
+                            <p>Each user is defined a <em>role</em>. A user can either be a <em>student</em> or an <em>instructor</em>.
+                                It is also possible for a user to hold multiple roles. The <strong>Role</strong> is
+                                designed to be a weak entity and is uniquly identified by both the <em>role</em> and
+                                <em>email</em> of the user.</p>
+                        </div>
+                        <div class="section" id="class">
+                            <h3>3. Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a>
+                            </h3>
+                            <p>The <strong>Class</strong> relation holds data pertaining to the class conducted. Each
+                                class has the following attributes:</p>
+                            <ul class="simple">
+                                <li><em>class ID</em></li>
+                                <li><em>class name</em></li>
+                                <li><em>semster</em> class is conducted</li>
+                                <li><em>facilitators</em></li>
+                            </ul>
+                            <p>Each <em>class</em> is uniquely identified by a <em>class id</em>. Each class is
+                                conducted by the <em>instructor(s)</em> and is attended by the <em>student(s)</em>. The
+                                class is a weak entity of the relationship between the <strong>User</strong> model and
+                                the <strong>Role</strong> model.</p>
+                            <p><strong>Note:</strong> It is not possible for a user to be both a student as well as a
+                                instructor for the same class.</p>
+                        </div>
+                        <div class="section" id="question-data">
+                            <h3>4. Question Data<a class="headerlink" href="#question-data"
+                                                   title="Permalink to this headline">¶</a></h3>
+                            <p>This relation stores the names of the relations in which the questions reside for each
+                                test. It also stores the a boolean value for the visibility attribute, which denotes if
+                                a student will be able to see a particular instance. This relation is designed to be a
+                                weak entity of <strong>Test</strong> and is uniquly identified by both the <em>database
+                                    table name</em>, <em>test ID</em>, and <em>class ID</em>.</p>
+                        </div>
+                        <div class="section" id="teacher-conducts-class">
+                            <h3>5. Teacher Conducts Class<a class="headerlink" href="#teacher-conducts-class"
+                                                            title="Permalink to this headline">¶</a></h3>
+                            <p>This table denotes the relation between the <em>instructor</em> and the <em>class</em>
+                                (s)he conducts. It has the following attributes:</p>
+                            <ul class="simple">
+                                <li><em>class ID</em></li>
+                                <li><em>instructor email</em></li>
+                            </ul>
+                            <p>Both the attributes uniquely determine each record in this relation.</p>
+                        </div>
+                        <div class="section" id="student-attends-class">
+                            <h3>6. Student Attends Class<a class="headerlink" href="#student-attends-class"
+                                                           title="Permalink to this headline">¶</a></h3>
+                            <p>This table denotes the relation between the <em>student</em> and the <em>class</em> (s)he
+                                attends. It has the following attributes:</p>
+                            <ul class="simple">
+                                <li><em>class ID</em></li>
+                                <li><em>student email</em></li>
+                            </ul>
+                            <p>Both the attributes uniquely determine each record in this relation.</p>
+                        </div>
+                        <div class="section" id="class-holds-test">
+                            <h3>7. Class Holds Test<a class="headerlink" href="#class-holds-test"
+                                                      title="Permalink to this headline">¶</a></h3>
+                            <p>Instructors set tests to be taken online. A test consists of a database and a sequence of
+                                questions, a visible database schema and a visible database instance. Each
+                                <strong>Test</strong> relation consists of the following attributes:</p>
+                            <ul class="simple">
+                                <li><em>test ID</em></li>
+                                <li><em>class ID</em></li>
+                                <li><em>test name</em></li>
+                                <li><em>start time</em></li>
+                                <li><em>end time</em></li>
+                                <li><em>maximum number of attempts</em></li>
+                            </ul>
+                            <p>Each <em>test</em> is uniquely identified by its <em>test ID</em>. The <em>test name</em>
+                                attribute stores the name of the test i.e. Midterms. There will be corresponding table
+                                called &#8216;<em>Midterms</em>&#8216; that will be generated dynamically once the <em>instructor</em>
+                                creates the test and adds the questions and answers to the system.</p>
+                            <p><strong>Note:</strong> The <em>test</em> relation is merged with the <em>Holds</em>
+                                relationship due to the mandatory 1-1 partcipation constraint.</p>
+                        </div>
+                        <div class="section" id="student-attempts-test">
+                            <h3>8. Student Attempts Test<a class="headerlink" href="#student-attempts-test"
+                                                           title="Permalink to this headline">¶</a></h3>
+                            <p>This table denotes the relationship between the <em>student</em> and the <em>test</em>
+                                taken. It keeps track of each student&#8217;s number of attempts and marks obtained. It
+                                has the following attributes:</p>
+                            <ul class="simple">
+                                <li><em>test ID</em></li>
+                                <li><em>student email</em></li>
+                                <li><em>attempt number</em></li>
+                                <li><em>total marks</em></li>
+                            </ul>
+                            <p>Both the <em>test ID</em> and <em>student email</em> uniquely determine each record in
+                                this table.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section" id="dynamic-tables">
+                    <span id="id3"></span>
+                    <h1>Dynamic Tables<a class="headerlink" href="#dynamic-tables"
+                                         title="Permalink to this headline">¶</a></h1>
+                    <p>There are some tables that are created in real time when the instructors upload questions and
+                        answers to the SQL Lab system. These dynamic tables will be addressed in this section.</p>
+                    <div class="section" id="data-table">
+                        <h2>1. Data Table<a class="headerlink" href="#data-table"
+                                            title="Permalink to this headline">¶</a></h2>
+                        <p>The instructor is allowed to upload multiple database schemas, out of which some are made
+                            visible to the students while others are kept as hidden instnces. The SQL Lab parser will
+                            create a separate table for each instance of the same schema.</p>
+                        <p>For instance, if the instructor uploads a &#8216;<em>Employee</em>&#8216; schema and splits
+                            it into 2 instances, the SQL parser will create 2 tables with the names
+                            &#8216;<em>Employee1</em>&#8216; and &#8216;<em>Employee2</em>&#8216;. These will be created
+                            once the schemas are uploaded into the system and will be persistently stored to the
+                            backend.</p>
+                    </div>
+                    <div class="section" id="test-name">
+                        <h2>2. Test Name<a class="headerlink" href="#test-name" title="Permalink to this headline">¶</a>
+                        </h2>
+                        <p>Each Test Name table is created based on the name of the test stored in the <em>Class Holds
+                            Test</em> relation. It contains the questions and the corresponding answers given by the
+                            instructors. The arttributes of the relation are as follow:</p>
+                        <ul class="simple">
+                            <li><em>question ID</em></li>
+                            <li><em>question</em></li>
+                            <li><em>Instructor SQL answer query</em></li>
+                            <li><em>marks</em></li>
+                        </ul>
+                        <p>Each <strong>Test Name</strong> table is referenced using the <em>test ID</em> i.e. <em>tid.testName</em>.
+                        </p>
+                    </div>
+                    <div class="section" id="student-attempts">
+                        <h2>3. Student Attempts<a class="headerlink" href="#student-attempts"
+                                                  title="Permalink to this headline">¶</a></h2>
+                        <p>This table stores the question and the student&#8217;s answer entered. This will ensure that
+                            the student&#8217;s answers are saved across multiple attempts. This relation has the
+                            following fields:</p>
+                        <ul class="simple">
+                            <li><em>question ID</em></li>
+                            <li><em>question</em></li>
+                            <li><em>Student SQL answer query</em></li>
+                            <li><em>marks obtained</em></li>
+                        </ul>
+                        <p>The <em>question ID</em> uniquely detemrines each record in this relation.</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="#">Table Of Contents</a></h3>
+            <ul>
+                <li><a class="reference internal" href="#">Welcome to SqlLab&#8217;s documentation!</a></li>
+                <li><a class="reference internal" href="#system-documentation">System Documentation</a></li>
+                <li><a class="reference internal" href="#user-roles">User Roles</a>
+                    <ul>
+                        <li><a class="reference internal" href="#instructor">Instructor</a>
+                            <ul>
+                                <li><a class="reference internal" href="#instructor-privileges">Instructor
+                                    Privileges</a></li>
+                                <li><a class="reference internal" href="#instructor-home">Instructor Home</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="reference internal" href="#student">Student</a>
+                            <ul>
+                                <li><a class="reference internal" href="#student-privileges">Student Privileges</a></li>
+                                <li><a class="reference internal" href="#student-home">Student Home</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="reference internal" href="#er-model">ER Model</a>
+                    <ul>
+                        <li><a class="reference internal" href="#entity-relationship-diagram">Entity Relationship
+                            Diagram</a></li>
+                        <li><a class="reference internal" href="#sql-lab-database-tables">SQL Lab Database Tables</a>
+                            <ul>
+                                <li><a class="reference internal" href="#user">1. User</a></li>
+                                <li><a class="reference internal" href="#role">2. Role</a></li>
+                                <li><a class="reference internal" href="#class">3. Class</a></li>
+                                <li><a class="reference internal" href="#question-data">4. Question Data</a></li>
+                                <li><a class="reference internal" href="#teacher-conducts-class">5. Teacher Conducts
+                                    Class</a></li>
+                                <li><a class="reference internal" href="#student-attends-class">6. Student Attends
+                                    Class</a></li>
+                                <li><a class="reference internal" href="#class-holds-test">7. Class Holds Test</a></li>
+                                <li><a class="reference internal" href="#student-attempts-test">8. Student Attempts
+                                    Test</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="reference internal" href="#dynamic-tables">Dynamic Tables</a>
+                    <ul>
+                        <li><a class="reference internal" href="#data-table">1. Data Table</a></li>
+                        <li><a class="reference internal" href="#test-name">2. Test Name</a></li>
+                        <li><a class="reference internal" href="#student-attempts">3. Student Attempts</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div role="note" aria-label="source link">
+                <h3>This Page</h3>
+                <ul class="this-page-menu">
+                    <li><a href="../../static/_build/html/_sources/index.rst.txt"
+                           rel="nofollow">Show Source</a></li>
+                </ul>
+            </div>
+            <div id="searchbox" style="display: none" role="search">
+                <h3>Quick search</h3>
+                <form class="search" action="../../static/_build/html/search.html" method="get">
+                    <div><input type="text" name="q"/></div>
+                    <div><input type="submit" value="Go"/></div>
+                    <input type="hidden" name="check_keywords" value="yes"/>
+                    <input type="hidden" name="area" value="default"/>
+                </form>
+            </div>
+            <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+    </div>
+    <div class="clearer"></div>
+</div>
+<div class="related" role="navigation" aria-label="related navigation">
+    <h3>Navigation</h3>
+    <ul>
+        <li class="right" style="margin-right: 10px">
+            <a href="../../static/_build/html/genindex.html" title="General Index"
+            >index</a></li>
+        <li class="nav-item nav-item-0"><a href="#">SqlLab 1.0.0 documentation</a> &#187;</li>
+    </ul>
+</div>
+<div class="footer" role="contentinfo">
+    &#169; Copyright 2017, Girish.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
+</div>
+</body>
+</html>
