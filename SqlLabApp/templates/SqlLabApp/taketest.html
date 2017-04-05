@@ -88,10 +88,10 @@
     <header class="intro">
         <div class="intro-body">
             <div class="container">
-                <div id="module-header">
-                    <h2>{{ test_name }}</h2>
-                </div>
                 <form class="form" method="post">{% csrf_token %}
+                    <div id="module-header">
+                        <h2>{{ test_name }}</h2>
+                    </div>
                     <div class="row">
                         <div class="col-md-10">
                             <input type="text" id="query_area" name="Enter Query">
@@ -114,8 +114,7 @@
                             {{ take_test_form.as_p }}
                         </div>
                     {% endfor %}
-                    <button id="create-test" data-toggle="modal" data-target="#modal">SUBMIT
-                    </button>
+                    <div id="create-test" data-toggle="modal" data-target="#modal">SUBMIT</div>
                     <div class="modal fade" id="modal">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -123,7 +122,7 @@
                                     <h4 class="modal-title">{{ test_name }}</h4>
                                 </div>
                                 <div class="modal-body" id="modal-body" style="height: 50px;">
-                                    <p>Are you sure you want to submit?</p>
+                                    <p>Are you sure you want to submit? Check that you have answered every question.</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default"
