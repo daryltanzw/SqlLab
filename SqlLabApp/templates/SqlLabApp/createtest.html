@@ -87,12 +87,16 @@
                 <form class="form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <script type="text/javascript">
+                        $("#id_start_time").datetimepicker({
+                            format: 'YYYY-MM-DD HH:mm'
+                        });
+                        $("#id_end_time").datetimepicker({
+                            format: 'YYYY-MM-DD HH:mm'
+                        });
+                    </script>
                     <button id="create-test" class="btn" type="submit">CREATE NEW TEST</button>
                 </form>
-                <script type="text/javascript">
-                    $("#id_start_time").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-                    $("#id_end_time").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-                </script>
             </div>
         </div>
     </header>
