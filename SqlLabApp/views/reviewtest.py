@@ -3,6 +3,7 @@ from django.views.generic import FormView
 
 from SqlLabApp.forms.reviewtest import ReviewTestForm
 from SqlLabApp.models import User, TestForClass
+from SqlLabApp.utils.CryptoSign import encryptUrl, decryptUrl
 
 
 class ReviewTestFormView(FormView):
@@ -12,7 +13,7 @@ class ReviewTestFormView(FormView):
 
     def get(self, request, *args, **kwargs):
         tables = self.kwargs['tables']
-        # tables = str(decryptData(tables))
+        tables = str(decryptUrl(tables))
         tables = tables.split('-')
         full_name = User.objects.get(email=request.user.email).full_name
 

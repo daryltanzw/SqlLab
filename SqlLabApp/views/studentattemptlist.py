@@ -5,6 +5,7 @@ from django.db import connection
 
 from SqlLabApp.models import User, UserRole, TestForClass, ClassTeacherTeaches, ClassStudentAttends, StudentAttemptsTest
 from SqlLabApp.utils.CryptoSign import encryptData, decryptData
+from SqlLabApp.utils.CryptoSign import encryptUrl, decryptUrl
 
 
 class StudentListFormView(FormView):
@@ -72,8 +73,7 @@ class StudentListFormView(FormView):
                             if student_marks > curr_highest_mark:
                                 curr_highest_mark = student_marks
 
-                            # curr_name = encryptData(str(instructor_test_name + '-' + student_test_name))
-                            curr_name = str(instructor_test_name + '-' + student_test_name)
+                            curr_name = encryptUrl(str(instructor_test_name + '-' + student_test_name))
                             table_name.append(curr_name)
 
                         if curr_highest_mark == total_marks:
