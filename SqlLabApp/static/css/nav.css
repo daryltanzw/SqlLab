@@ -38,6 +38,10 @@ h1 {
     margin-bottom: 10px;
 }
 
+.navbar-header a {
+    text-decoration: none;
+}
+
 .navbar {
     font-weight: 700;
     background: #2c3e50;
