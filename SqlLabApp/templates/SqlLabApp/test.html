@@ -89,7 +89,7 @@
                 {% endifequal %}
                 <div class="button-container">
                     {% if test_list %}
-                        {% for test, can_take_test, attempt in test_list %}
+                        {% for test, can_take_test, number_of_students_attempted, attempt in test_list %}
                             <div class="panel-group">
                             <div class="panel panel-default" id="panel-container">
                                 <div class="panel-heading" id="test-container">
@@ -216,7 +216,7 @@
                                         Attempts:</strong>&ensp;&ensp;{{ attempt }} / {{ test.max_attempt }}
                                         {% ifequal user_role 'INS' %}
                                             <p style="text-indent: 1em;">
-                                            <strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
+                                            <strong>Number of Students Attempted:</strong>&ensp;{{ number_of_students_attempted }}
                                         {% endifequal %}
                                         </p>
                                 </div>

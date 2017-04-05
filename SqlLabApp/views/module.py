@@ -21,20 +21,24 @@ class InstructorModuleFormView(FormView):
             class_list = ClassStudentAttends.objects.filter(student_email=request.user.email)
 
         class_names = []
+        number_of_students = []
 
         for module in class_list:
             class_names.append(Class.objects.get(classid=module.classid_id))
 
         for cobj in class_names:
+            student_list = ClassStudentAttends.objects.filter(classid_id=cobj.classid)
+            number_of_students.append(len(student_list))
             cobj.classid = encryptData(cobj.classid)
 
         class_names.sort(key=operator.attrgetter('class_name'))
+        class_list = zip(class_names, number_of_students)
 
         return self.render_to_response(
             self.get_context_data(
                 full_name=full_name,
                 user_role=user_role,
-                class_list=class_names,
+                class_list=class_list,
                 create_module_form=create_module_form,
             )
         )

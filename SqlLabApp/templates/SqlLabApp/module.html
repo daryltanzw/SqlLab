@@ -88,7 +88,7 @@
 
                 <div class="button-container">
                     {% if class_list %}
-                        {% for module in class_list %}
+                        {% for module, number_of_students in class_list %}
                             <div class="panel-group">
                             <div class="panel panel-default" id="panel-container">
                                 <div class="panel-heading" id="module-container">
@@ -140,7 +140,7 @@
                                         <p style="text-indent: 1em;">
                                             <strong>Facilitators:</strong>&ensp;&ensp;{{ module.facilitators }}</p>
                                         {% ifequal user_role 'INS' %}
-                                            <p style="text-indent: 1em;"><strong>Number of Students:</strong>&ensp;&ensp;60
+                                            <p style="text-indent: 1em;"><strong>Number of Students:</strong>&ensp;&ensp;{{ number_of_students }}
                                             </p>
                                         {% endifequal %}
                                     </div>
