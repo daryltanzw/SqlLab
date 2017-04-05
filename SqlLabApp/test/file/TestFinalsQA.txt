@@ -1,0 +1,4 @@
+Find distinct item names in Singapore.	select distinct(i.iname) from item i, stock s, warehouse w where i.iid = s.iid and w.wid = s.wid and w.wlocation='Singapore';	3
+Find most expensive items in Singapore.	select i1.* from item i1 where i1.iprice in (select max(i.iprice) from item i, stock s, warehouse w where w.wid = s.wid and i.iid = s.iid and w.wlocation='Singapore');	5
+Find number of warehouse in China.	select count(*) from warehouse where wlocation = 'China';	2
+Find most stocked item id, item name and price in China.	select i.* from item i, stock s1, warehouse w1 where s1.wid = w1.wid and s1.iid = i.iid and w1.wlocation = 'China' and s1.qty >= All (select max(s.qty) from stock s, warehouse w where w.wid = s.wid and w.wlocation = 'China');	5

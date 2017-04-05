@@ -34,13 +34,12 @@ class LoginFormView(FormView):
                 django_login(request, user)
                 return HttpResponseRedirect("../module")
 
-        else:
-            return self.render_to_response(
-                self.get_context_data(
-                    login_form=login_form,
-                    register_form=register_form
-                )
+        return self.render_to_response(
+            self.get_context_data(
+                login_form=login_form,
+                register_form=register_form
             )
+        )
 
 
 class RegistrationFormView(FormView):
