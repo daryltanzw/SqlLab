@@ -43,13 +43,19 @@ class ReviewTestFormView(FormView):
         questions = []
         answers = []
         marks = []
+        correctness = []
 
         for i in range(0,len(instructor_test_table)):
-            questions.append(str(i + 1) + '. ' + instructor_test_table[i][1])
+            questions.append(str(i + 1) + ') ' + instructor_test_table[i][1])
             answers.append(student_test_table[i][2])
             marks.append(str(student_test_table[i][3]) + ' / ' + str(instructor_test_table[i][3]))
 
-        test_data = zip(questions, answers, marks)
+            if student_test_table[i][3] == instructor_test_table[i][3]:
+                correctness.append(True)
+            else:
+                correctness.append(False)
+
+        test_data = zip(questions, answers, marks, correctness)
 
         return self.render_to_response(
             self.get_context_data(

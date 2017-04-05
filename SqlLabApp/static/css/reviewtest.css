@@ -46,7 +46,16 @@
     margin-bottom: 15px;
     outline: none;
     padding: 10px;
+    width: 100%;
     font-size: 14px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    border: 1px solid rgba(74, 74, 74, 0.22);
+    background: white;
+    color: #204056;
     text-align: left;
+}
+
+.row {
+    margin-bottom: 10px;
+    word-break:break-all;
 }

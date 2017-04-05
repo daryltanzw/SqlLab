@@ -82,10 +82,22 @@
                 <div id="module-header">
                     <h2>{{ test_name }}</h2>
                 </div>
-                {% for question, answer, marks in test_data %}
+                {% for question, answer, marks, correctness in test_data %}
                     <div id="action-container">
-                        <h4>{{ question }} ({{ marks }})</h4><br>
-                        <p>Your Answer: {{ answer }}</p>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4>{{ question }}</h4>
+                            </div>
+                            <div class="col-md-3">
+                                {% if correctness %}
+                                    <h4 style="text-align: right; color: #1e9f75; font-size: 16px">Marks Obtained: {{ marks }}</h4>
+                                {% else %}
+                                    <h4 style="text-align: right; color: #f00009; font-size: 16px">Marks Obtained: {{ marks }}</h4>
+                                {% endif %}
+                            </div>
+                            <br>
+                        </div>
+                        <textarea cols="40" id="id_student_answer" name="student_answer" rows="10" disabled>Your Answer: {{ answer }}</textarea>
                     </div>
                 {% endfor %}
             </div>
