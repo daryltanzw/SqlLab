@@ -89,7 +89,7 @@
                 {% endifequal %}
                 <div class="button-container">
                     {% if test_list %}
-                        {% for test, attempt in test_list %}
+                        {% for test, can_take_test, number_of_students_attempted, attempt in test_list %}
                             <div class="panel-group">
                             <div class="panel panel-default" id="panel-container">
                                 <div class="panel-heading" id="test-container">
@@ -107,26 +107,27 @@
                                                                 </div>
                                                                 <div class="modal-body" id="modal-body"
                                                                      style="height: 70px;">
-                                                                    {% ifequal attempt test.max_attempt %}
-                                                                        <p>You have exceeded the maximum number of
-                                                                            attempts.</p>
+                                                                    {% if can_take_test %}
+                                                                        <p>Are you sure you want to take the test?</p>
                                                                     {% else %}
-                                                                        <p>Are you sure you want to take the test? Once
-                                                                            you click "Confirm", it will be counted as 1
-                                                                            attempt.</p>
-                                                                    {% endifequal %}
+                                                                        {% ifequal attempt test.max_attempt %}
+                                                                            <p>You are not allowed to take the test anymore as you have exceeded maximum number of attempts.</p>
+                                                                        {% else %}
+                                                                            <p>You are not allowed to take the test anymore as the test has expired.</p>
+                                                                        {% endifequal %}
+                                                                    {% endif %}
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-default"
                                                                             data-dismiss="modal">Close
                                                                     </button>
-                                                                    {% ifnotequal attempt test.max_attempt %}
+                                                                    {% if can_take_test %}
                                                                         <a href="{% url 'taketest' test.tid %}">
                                                                             <button class="btn btn-success"
                                                                                     type="submit">Confirm
                                                                             </button>
                                                                         </a>
-                                                                    {% endifnotequal %}
+                                                                    {% endif %}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -159,8 +160,13 @@
                                                         </div>
                                                     </li>
                                                 {% else %}
-                                                    <li class="sub"><a href="{% url 'testattempt' test.tid %}">Review
-                                                        Test</a></li>
+                                                    {% ifequal user_role 'INS' %}
+                                                        <li class="sub"><a href="{% url 'studentlist' test.tid %}">Review
+                                                            Test</a></li>
+                                                    {% else %}
+                                                        <li class="sub"><a href="{% url 'testattempt' test.tid %}">Review
+                                                            Test</a></li>
+                                                    {% endifequal %}
                                                 {% endifequal %}
                                                 {% ifequal user_role 'INS' %}
                                                     <li class="sub"><a href="{% url 'edittest' test.tid %}">| Edit
@@ -210,7 +216,7 @@
                                         Attempts:</strong>&ensp;&ensp;{{ attempt }} / {{ test.max_attempt }}
                                         {% ifequal user_role 'INS' %}
                                             <p style="text-indent: 1em;">
-                                            <strong>Number of Students Completed:</strong>&ensp;&ensp;10 / 60
+                                            <strong>Number of Students Attempted:</strong>&ensp;{{ number_of_students_attempted }}
                                         {% endifequal %}
                                         </p>
                                 </div>

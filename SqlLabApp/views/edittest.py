@@ -1,3 +1,6 @@
+import datetime
+import time
+
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView
@@ -26,7 +29,7 @@ class EditTestFormView(FormView):
         data_table_names = []
 
         for table in data_tables:
-            data_table_names.append(table.data_tbl_name)
+            data_table_names.append({'name': table.data_tbl_name, 'visibility': table.student_visibility})
 
         form = EditTestForm(instance=test, dynamic_field_names=data_table_names)
         test.tid = test_id
@@ -46,34 +49,40 @@ class EditTestFormView(FormView):
         max_attempt = request.POST['max_attempt']
         data_tables = QuestionDataUsedByTest.objects.filter(tid_id=tid)
 
-        try:
-            connection = get_db_connection()
-            with transaction.atomic():
-                test = TestForClass.objects.get(tid=tid)
-                queryset_test = TestForClass.objects.filter(tid=tid)
-                fields = ['start_time', 'end_time', 'max_attempt']
-                updatedValues = [start_time, end_time, max_attempt]
+        current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
-                for field, updatedValue in zip(fields, updatedValues):
-                    if getattr(test, field) != updatedValue:
-                        queryset_test.update(**{field: updatedValue})
+        if start_time > current_time and end_time > current_time and start_time < end_time:
+            try:
+                connection = get_db_connection()
+                with transaction.atomic():
+                    test = TestForClass.objects.get(tid=tid)
+                    queryset_test = TestForClass.objects.filter(tid=tid)
+                    fields = ['start_time', 'end_time', 'max_attempt']
+                    updatedValues = [start_time, end_time, max_attempt]
 
-                for table in data_tables:
-                    result = request.POST.getlist(table.data_tbl_name)
+                    for field, updatedValue in zip(fields, updatedValues):
+                        if getattr(test, field) != updatedValue:
+                            queryset_test.update(**{field: updatedValue})
 
-                    with transaction.atomic():
-                        is_visible = False
-                        result = ''.join(result)
-                        if result == 'on':
-                            is_visible = True
+                    for table in data_tables:
+                        result = request.POST.getlist(table.data_tbl_name)
 
-                        QuestionDataUsedByTest.objects.filter(tid_id=tid, data_tbl_name=table.data_tbl_name).update(
-                            student_visibility=is_visible)
+                        with transaction.atomic():
+                            is_visible = False
+                            result = ''.join(result)
+                            if result == 'on':
+                                is_visible = True
 
-                connection.commit()
+                            QuestionDataUsedByTest.objects.filter(tid_id=tid, data_tbl_name=table.data_tbl_name).update(
+                                student_visibility=is_visible)
 
-        except ValueError as err:
-            connection.close()
-            raise err
+                    connection.commit()
 
-        return HttpResponseRedirect("../../" + str(class_id) + "/test")
+            except ValueError as err:
+                connection.close()
+                raise err
+
+            return HttpResponseRedirect("../../" + str(class_id) + "/test")
+
+        else:
+            raise ValueError('Date cannot be in the past or start date cannot be before end date.')

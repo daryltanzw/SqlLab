@@ -1,3 +1,5 @@
+import datetime
+import time
 from django import forms
 from django.forms import ModelForm
 from SqlLabApp.models import TestForClass
@@ -11,5 +13,7 @@ class EditTestForm(ModelForm, forms.Form):
     def __init__(self, dynamic_field_names, *args, **kwargs):
         super(EditTestForm, self).__init__(*args, **kwargs)
 
-        for field_name in dynamic_field_names:
-            self.fields[field_name] = forms.BooleanField(label=field_name, required=False)
+        for row in dynamic_field_names:
+            field_name = row['name']
+            visi = row['visibility']
+            self.fields[field_name] = forms.BooleanField(label=field_name.title(), required=False, label_suffix='', initial=visi)

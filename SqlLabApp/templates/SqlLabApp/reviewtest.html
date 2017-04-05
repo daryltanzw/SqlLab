@@ -22,8 +22,9 @@
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/testattempt.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reviewtest.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -81,27 +82,15 @@
                 <div id="module-header">
                     <h2>{{ test_name }}</h2>
                 </div>
-            </div>
-            <div class="container">
-                <div class="student">
-                    {% for attempt, marks, is_full_marks, table_name in test_attempt_list %}
-                            <div class="attempt_container">
-                                <ul id="menu">
-                                    <li class="sub"><a href="{% url 'reviewtest' table_name %}"><p>Attempt {{ attempt.attempt_no }}</p></a></li>
-                                    {% if is_full_marks %}
-                                        <li class="sub" style="float: right"><p id="marks-correct">Marks Obtained: {{ marks }}</p></li>
-                                    {% else %}
-                                        <li class="sub" style="float: right"><p id="marks-incorrect">Marks Obtained: {{ marks }}</p></li>
-                                    {% endif %}
-                                    <li class="sub" style="float: right"><p id="date">Submitted: {{ attempt.date_submitted }}&ensp;|&ensp;</p></li>
-                                </ul>
-                            </div>
-                    {% endfor %}
-                </div>
+                {% for question, answer, marks in test_data %}
+                    <div id="action-container">
+                        <h4>{{ question }} ({{ marks }})</h4><br>
+                        <p>Your Answer: {{ answer }}</p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </header>
-
 
 {% endblock %}
 </body>

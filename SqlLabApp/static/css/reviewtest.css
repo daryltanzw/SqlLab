@@ -1,0 +1,52 @@
+.intro {
+    display: table;
+    width: 100%;
+    height: auto;
+    margin-top: 95px;
+    padding: 100px 0;
+    vertical-align: middle;
+    text-align: left;
+    background: white;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.intro .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body .brand-heading {
+        font-size: 150px;
+    }
+
+    .intro .intro-body .intro-text {
+        font-size: 26px;
+    }
+}
+
+#module-header h2 {
+    border-bottom: 1px solid #CCC;
+    float: left;
+    width: 100%;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+#id_student_answer {
+    display: inline;
+    margin-bottom: 15px;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    text-align: left;
+}
