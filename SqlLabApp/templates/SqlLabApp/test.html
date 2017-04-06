@@ -115,7 +115,6 @@
                                                                         {% if can_take_test %}
                                                                             <p>Are you sure you want to take the test?</p>
                                                                         {% else %}
-
                                                                                 {% ifequal attempt test.max_attempt %}
                                                                                     <p>You are not allowed to take the test anymore as you have exceeded maximum number of attempts.</p>
                                                                                 {% else %}
@@ -151,35 +150,35 @@
                                                     </div>
                                                 </li>
                                                 |
-                                                {% ifequal attempt 0 %}
-                                                    <li class="sub"><a data-toggle="modal"
-                                                                       data-target="#reviewtest{{ test.tid }}">Review
-                                                        Test</a>
+                                                {% ifequal user_role 'INS' %}
+                                                        <li class="sub"><a href="{% url 'studentlist' test.tid %}">Review
+                                                            Test</a></li>
+                                                {% else %}
+                                                    {% ifequal attempt 0  %}
+                                                        <li class="sub"><a data-toggle="modal"
+                                                                           data-target="#reviewtest{{ test.tid }}">Review
+                                                            Test</a>
 
-                                                        <div class="modal fade" id="reviewtest{{ test.tid }}"
-                                                             role="dialog">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">{{ test.test_name }}</h4>
-                                                                    </div>
-                                                                    <div class="modal-body" id="modal-body"
-                                                                         style="height: 70px;">
-                                                                        <p>There is no attempt yet.</p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default"
-                                                                                data-dismiss="modal">Close
-                                                                        </button>
+                                                            <div class="modal fade" id="reviewtest{{ test.tid }}"
+                                                                 role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">{{ test.test_name }}</h4>
+                                                                        </div>
+                                                                        <div class="modal-body" id="modal-body"
+                                                                             style="height: 70px;">
+                                                                            <p>There is no attempt yet.</p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default"
+                                                                                    data-dismiss="modal">Close
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                {% else %}
-                                                    {% ifequal user_role 'INS' %}
-                                                        <li class="sub"><a href="{% url 'studentlist' test.tid %}">Review
-                                                            Test</a></li>
+                                                        </li>
                                                     {% else %}
                                                         <li class="sub"><a href="{% url 'testattempt' test.tid %}">Review
                                                             Test</a></li>

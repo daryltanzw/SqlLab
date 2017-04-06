@@ -75,13 +75,13 @@ class StudentListFormView(FormView):
 
                             curr_name = encryptUrl(str(instructor_test_name + '-' + student_test_name))
                             table_name.append(curr_name)
+                            tobj.tid_id = encryptData(tobj.tid_id)
 
                         if curr_highest_mark == total_marks:
                             is_highest_marks_full.append(True)
                         else:
                             is_highest_marks_full.append(False)
 
-                        tobj.tid_id = encryptData(tobj.tid_id)
                         highest_marks.append(str(curr_highest_mark))
                         number_of_attempts.append(str(curr_number_of_attempts) + ' / ' + str(max_attempt))
                         test_attempt_list = zip(test_attempt_list, marks, table_name, is_full_marks)
