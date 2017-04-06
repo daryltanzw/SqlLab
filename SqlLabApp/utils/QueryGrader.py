@@ -2,6 +2,7 @@ import re
 
 import psycopg2
 import sqlparse
+import sys
 from sqlparse.tokens import Punctuation, Name
 
 from SqlLabApp.models import QuestionDataUsedByTest
@@ -20,7 +21,8 @@ def is_query_against_visible(fq):
         if match:
             s = str(match.group(0))
             tid = re.search(r'\d+', s).group()
-            invisible_tbl_list = QuestionDataUsedByTest.objects.filter(tid_id=tid, student_visibility=False).values('data_tbl_name')
+            invisible_tbl_list = QuestionDataUsedByTest.objects.filter(tid_id=tid, student_visibility=False).values(
+                'data_tbl_name')
             for t in invisible_tbl_list:
                 table_name = t['data_tbl_name']
                 if test_name_table_format(tid, table_name) in fq:
@@ -35,6 +37,10 @@ def execute_formatted_query(fq):
     if not is_query_against_visible(fq):
         return "Table is not Queryable"
 
+    print "+++++++++++++++++++++++++++++++++++++++++++++++"
+    student_query = "select * from item;"
+    teacher_query = "select i1.* from item i1 where i1.iprice in (select max(i.iprice) from item i, stock s, warehouse w where w.wid = s.wid and i.iid = s.iid and w.wlocation='Singapore');"
+    print "marks = " + str(grade_query(4, student_query, teacher_query, 5))
     result = sqlparse.parse(sqlparse.format(fq, reindent=True, keyword_case='upper'))[0]
 
     if is_select_query(result):
@@ -68,6 +74,10 @@ def execute_formatted_query(fq):
         return "Only Select Queries are allowed"
 
 
+def is_select_query(sqlparsed_result):
+    return sqlparsed_result.token_first().value == 'SELECT'
+
+# Only grades 1 set of formatted student_query and teacher_query
 def grade_formatted_query(student_query, teacher_query, mark):
     default_mark = 0
 
@@ -104,18 +114,9 @@ def format_select_query(tid, query_str):
     return formatted_query
 
 
-def is_select_query(sqlparsed_result):
-    return sqlparsed_result.token_first().value == 'SELECT'
-
-
 def get_tbl_names_from_select_query(query_str):
     result = sqlparse.parse(sqlparse.format(query_str, reindent=True, keyword_case='upper'))[0]
     token_ls = process_and_flatten_token_list(result.tokens)
-    table_name_list = get_table_names(token_ls)
-    return table_name_list
-
-
-def get_table_names(token_ls):
     tbl_names = []
     from_seen = False
     for i in range(0, len(token_ls)):
@@ -154,6 +155,63 @@ def process_and_flatten_token_list(tokens):
 def table_name_to_formatted(tid, table_name_list):
     table_dict = {}
     for name in table_name_list:
-        table_dict[name] = str(test_name_table_format(tid, name))
+        if not name in table_dict.keys():
+            table_dict[name] = str(test_name_table_format(tid, name))
 
     return table_dict
+
+
+# Method formats with hidden tables and grade multiple queries
+def grade_query(tid, s_query, t_query, mark):
+    s_used_tables_dict = table_name_to_formatted(tid, get_tbl_names_from_select_query(s_query))
+    t_used_tables_dict = table_name_to_formatted(tid, get_tbl_names_from_select_query(t_query))
+
+    if len(s_used_tables_dict) != len(
+            t_used_tables_dict) or s_used_tables_dict.viewkeys() != t_used_tables_dict.viewkeys():
+        return 0
+
+    all_tables = []
+    min_count = sys.maxint
+    # Same set of tables are used by both queries
+    for tbl_name in s_used_tables_dict:
+        list_of_tbls = QuestionDataUsedByTest.objects.filter(tid_id=tid, data_tbl_name__icontains=tbl_name).values_list(
+            'data_tbl_name', flat=True)
+        t = TableToInvisibleContainer(tbl_name, list_of_tbls)
+        all_tables.append(t)
+        min_count = min(len(list_of_tbls), min_count)
+
+    query_dict_ls = []
+    # Set up a list of Query_dictionaries {item: "tid4_item1"} etc for regex replacement
+    for i in range(0, min_count):
+        query_dict = {}
+        for table_container in all_tables:
+            query_dict[table_container.tblname] = test_name_table_format(tid, table_container.tbl_list[i])
+
+        query_dict_ls.append(query_dict)
+
+    # mark each query dictionary
+    for query_dict in query_dict_ls:
+        i_student_query = change_tbl_names(query_dict, s_query)
+        i_teacher_query = change_tbl_names(query_dict, t_query)
+        marks_received = grade_formatted_query(i_student_query, i_teacher_query, mark)
+        if marks_received == 0:
+            return marks_received
+
+    return mark
+
+
+# Given a dictionary of {"from_tbl_name":"to_tbl_name",}, return a formatted query
+def change_tbl_names(from_to_dict, query_str):
+    formatted_query = query_str
+    for key in from_to_dict.keys():
+        if key in query_str:
+            formatted_query = str(re.sub(r'\b{0}\b'.format(key), from_to_dict.get(key), formatted_query)).strip()
+
+    return formatted_query
+
+
+# Maps tbl name to list of all hidden tbl names including the tbl name itself
+class TableToInvisibleContainer:
+    def __init__(self, tbl_name, tbl_list):
+        self.tblname = tbl_name
+        self.tbl_list = tbl_list
