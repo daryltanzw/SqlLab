@@ -4,7 +4,7 @@ from SqlLabApp.utils.TestNameTableFormatter import test_name_table_format, stude
 from django.db import connection
 
 from SqlLabApp.models import User, UserRole, TestForClass, StudentAttemptsTest, QuestionAnswer
-from SqlLabApp.utils.CryptoSign import encryptData
+from SqlLabApp.utils.CryptoSign import encryptData, encryptUrl
 from SqlLabApp.utils.CryptoSign import decryptData
 
 class TestAttemptFormView(FormView):
@@ -39,7 +39,8 @@ class TestAttemptFormView(FormView):
                 student_marks = cursor.fetchone()[0]
 
                 marks.append(str(student_marks) + ' / ' + str(total_marks))
-                table_name.append(str(instructor_test_name + '-' + student_test_name))
+                curr_name = encryptUrl(str(instructor_test_name + '-' + student_test_name))
+                table_name.append(curr_name)
 
                 if student_marks == total_marks:
                     is_full_marks.append(True)
