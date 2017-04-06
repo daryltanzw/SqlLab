@@ -124,12 +124,13 @@
       </div>
     </div>
   </div>
+    <div id="createmodule"></div>
   <div class="col-sm-9">
       <br>
       <div style="text-decoration: underline; color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 21px; font-weight: 700; margin: 0 0 0; text-transform: uppercase;">
           Instructor (has all the functionalities of students as well)
       </div>
-      <p id="createmodule" class="header">CREATE A MODULE</p>
+      <p class="header">CREATE A MODULE</p>
       <p>1.Upon logging into the system for the first time, a page listing all the modules under an instructor, will be displayed, as shown in figure 1.</p>
       <p>2. To create a module, click the "Create new module" button as shown below.</p>
       <p><figure><img src="/static/img/Sqllab_1.png" alt="create new module">
@@ -140,10 +141,10 @@
       <p>4. Upon successful creation of a module, the module will be displayed in the modules list page as shown in figure 3.</p>
       <p><figure><img src="/static/img/Sqllab_9.png" alt="successfully created module">
           <figcaption style="text-align:center">Figure 3- Module successfully created</figcaption></figure></p>
-      <p>5. The next step would be to upload the list of students enrolled in that module you just created.</p>
+      <p id="uploadstudentlist">5. The next step would be to upload the list of students enrolled in that module you just created.</p>
       <br>
 
-      <p id="uploadstudentlist" class="header">UPLOAD STUDENT LIST</p>
+      <p class="header">UPLOAD STUDENT LIST</p>
       <p>1. On the module listing page, for the module you wish to upload the student list for, click on "View Students", as highlighted in figure 4 below.</p>
       <p><figure><img src="/static/img/Sqllab_4.png" alt="View students">
           <figcaption style="text-align:center">Figure 4- View students for a module</figcaption></figure></p>
@@ -158,7 +159,7 @@
           and their corresponding email addresses will be shown. Those who have yet to register with SqlLab will be listed as unknown (as shown in Figure 7 below).
           In this way, you can easily track which student has registered and which has not.</p>
       <p><figure><img src="/static/img/Sqllab_6.png" alt="List of students">
-          <figcaption style="text-align:center">Figure 7- List of students enrolled in module</figcaption></figure></p>
+          <figcaption id="createtest" style="text-align:center">Figure 7- List of students enrolled in module</figcaption></figure></p>
       <br>
 
       <p id="createtest" class="header">CREATE A TEST</p>
@@ -181,10 +182,11 @@
           <figcaption style="text-align:center">Figure 12- Sample .sql dump</figcaption></figure></p>
       <p>6. Having completed the form, click the "Create new test" button as shown in Figure 10. Upon successful creation of the test, the test details will be displayed on the tests page for the module, as shown below:</p>
       <p><figure><img src="/static/img/createtest_2.png" alt="Successfully created test">
-          <figcaption style="text-align:center">Figure 13- Created test successfully</figcaption></figure></p>
+          <figcaption id="reviewtestinstructor" style="text-align:center">Figure 13- Created test successfully</figcaption></figure></p>
+
       <br>
 
-    <p id="reviewtestinstructor" class="header">REVIEW A TEST</p>
+    <p class="header">REVIEW A TEST</p>
       <p>1. On the tests listing page for the module you wish to review a test for, click the "Review test" button of the test you want to review:</p>
       <p><figure><img src="/static/img/instructorreviewtest.png" alt="review test button">
           <figcaption style="text-align:center">Figure 14- Review test button</figcaption></figure></p>
@@ -198,6 +200,7 @@
       <p><figure><img src="/static/img/studentreviewtest_sample.png" alt="detailed student attempt">
           <figcaption style="text-align:center">Figure 17- Student test attempt</figcaption></figure></p>
       <br>
+      <p id="taketest"></p>
       <br>
 
       <p style="color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 21px; font-weight: 700; margin: 0 0 0; text-transform: uppercase;"">STUDENT</p>
@@ -229,11 +232,11 @@
           <figcaption style="text-align:center">Figure 25- Confirm test submission</figcaption></figure></p>
       <p>9. Upon successful submission of the test, you will be redirected to the tests page of the module where you can observe the number of attempts of the that test would have increased by 1.</p>
       <p><figure><img src="/static/img/taketest_Successful.png" alt="Sucessful submission">
-          <figcaption style="text-align:center">Figure 26- Submitted test successfully</figcaption></figure></p>
+          <figcaption id="reviewteststudent" style="text-align:center">Figure 26- Submitted test successfully</figcaption></figure></p>
 
       <br>
 
-      <p id="reviewteststudent" class="header">REVIEW A TEST</p>
+      <p class="header">REVIEW A TEST</p>
       <p>1.Upon logging into the system, a page listing all the modules you are enrolled in, will be displayed. Click "View tests"(figure 27 below) for the module you wish to review  the test.</p>
       <p><figure><img src="/static/img/taketest_1.png" alt="view tests">
           <figcaption style="text-align:center">Figure 27- View tests for a module</figcaption></figure></p>
