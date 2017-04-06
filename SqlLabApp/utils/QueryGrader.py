@@ -37,10 +37,6 @@ def execute_formatted_query(fq):
     if not is_query_against_visible(fq):
         return "Table is not Queryable"
 
-    print "+++++++++++++++++++++++++++++++++++++++++++++++"
-    student_query = "select * from item;"
-    teacher_query = "select i1.* from item i1 where i1.iprice in (select max(i.iprice) from item i, stock s, warehouse w where w.wid = s.wid and i.iid = s.iid and w.wlocation='Singapore');"
-    print "marks = " + str(grade_query(4, student_query, teacher_query, 5))
     result = sqlparse.parse(sqlparse.format(fq, reindent=True, keyword_case='upper'))[0]
 
     if is_select_query(result):

@@ -22,6 +22,18 @@ CREATE TABLE warehouse1 (
 	wlocation VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE item1 (
+	iid INTEGER PRIMARY KEY,
+	iname VARCHAR(50)  NOT NULL,
+	iprice NUMERIC(5, 2)  NOT NULL CHECK(iprice >0)
+);
+
+CREATE TABLE stock1 (
+wid INTEGER REFERENCES warehouse(wid),
+iid INTEGER REFERENCES item(iid),
+qty SMALLINT CHECK(qty > 0),
+PRIMARY KEY (wid, iid));
+
 INSERT INTO warehouse (wid, wname, wlocation) VALUES (1, 'Jurong Warehouse', 'Singapore');
 INSERT INTO warehouse (wid, wname, wlocation) VALUES (2, 'Tanglin Warehouse', 'Singapore');
 INSERT INTO warehouse (wid, wname, wlocation) VALUES (3, 'Beijing Warehouse', 'China');
@@ -60,3 +72,27 @@ INSERT INTO warehouse1 (wid, wname, wlocation) VALUES (3, 'C', 'China');
 INSERT INTO warehouse1 (wid, wname, wlocation) VALUES (4, 'D', 'UK');
 INSERT INTO warehouse1 (wid, wname, wlocation) VALUES (5, 'E', 'China');
 INSERT INTO warehouse1 (wid, wname, wlocation) VALUES (6, 'F', 'Japan');
+
+INSERT INTO item1 (iid, iname, iprice) VALUES (1, 'panadol' , 10.23);
+INSERT INTO item1 (iid, iname, iprice) VALUES (2, 'Mask' , 5.23);
+INSERT INTO item1 (iid, iname, iprice) VALUES (3, 'Chicken' , 5.99);
+INSERT INTO item1 (iid, iname, iprice) VALUES (4, 'pasta sauce' , 10.23);
+INSERT INTO item1 (iid, iname, iprice) VALUES (5, 'Oil Bottle' , 9.99);
+
+INSERT INTO stock1 VALUES (1, 5, 1000);
+INSERT INTO stock1 VALUES (1, 4, 400);
+INSERT INTO stock1 VALUES (1, 3, 400);
+INSERT INTO stock1 VALUES (2, 3, 1200);
+INSERT INTO stock1 VALUES (2, 4, 300);
+INSERT INTO stock1 VALUES (2, 1, 338);
+INSERT INTO stock1 VALUES (3, 1, 200);
+INSERT INTO stock1 VALUES (3, 5, 2345);
+INSERT INTO stock1 VALUES (4, 2, 111);
+INSERT INTO stock1 VALUES (4, 3, 1355);
+INSERT INTO stock1 VALUES (4, 1, 200);
+INSERT INTO stock1 VALUES (4, 5, 2300);
+INSERT INTO stock1 VALUES (4, 4, 100);
+INSERT INTO stock1 VALUES (5, 2, 400);
+INSERT INTO stock1 VALUES (6, 1, 199);
+INSERT INTO stock1 VALUES (6, 2, 200);
+INSERT INTO stock1 VALUES (6, 3, 390);
