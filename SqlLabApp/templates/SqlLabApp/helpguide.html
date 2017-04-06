@@ -39,6 +39,10 @@
     <![endif]-->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <style>@media (min-width: 500px) {
+        .nav .navbar .navbar-custom .navbar-fixed-top{
+            padding-top:0 !important;
+            padding-bottom:0 !important;
+        }
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -87,38 +91,14 @@
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a href="{% url 'module' %}">
-                    <h1>SqLLAB</h1>
+                    <h1 style="text-align:left">SqLLAB Help</h1>
                 </a>
-            </div>
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <div class="dropdown">
-                            <a href="{% url 'module' %}">My Modules</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <a>Hi, {{ full_name }}!&ensp;&ensp;▾</a>
-                            <div class="dropdown-content">
-                                <a href="#">Edit Profile</a>
-                                <a href="{% url 'main' %}">Logout</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <a href="{% url 'help' %}">Help</a>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
     </nav>
 
 
-<header class="intro" style="width:0px; margin-top:65px">
+<header class="intro" style="width:0px; margin-top:50px">
 <div class="container">
 <div class="row">
   <div class="col-sm-3">
