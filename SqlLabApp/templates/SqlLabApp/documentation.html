@@ -64,6 +64,8 @@
                         </li>
                         <li><a class="reference internal" href="#dynamic-tables"><span class="std std-ref">Dynamic Tables</span></a>
                         </li>
+                        <li><a class="reference internal" href="#sql-parser"><span class="std std-ref">SQL Parser</span></a>
+                        </li>
                         <li><a class="reference internal" href="../../static/_build/html/search.html"><span
                                 class="std std-ref">Search Page</span></a></li>
                     </ul>
@@ -127,7 +129,7 @@
                     <div class="section" id="entity-relationship-diagram">
                         <h2>Entity Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram"
                                                           title="Permalink to this headline">¶</a></h2>
-                        <div class="figure align-center" id="id4">
+                        <div class="figure align-center" id="id5">
                             <img alt="_images/ermodel.jpg" src="../../static/_build/html/_images/ermodel.jpg"/>
                             <p class="caption"><span
                                     class="caption-text"><strong>ER diagram of the SQL Lab System</strong></span></p>
@@ -139,27 +141,27 @@
                         <h2>SQL Lab Database Tables<a class="headerlink" href="#sql-lab-database-tables"
                                                       title="Permalink to this headline">¶</a></h2>
                         <p>The backend of the SQL Lab system stores data pertaining to the questions, answers and
-                            studnets&#8217; performance in a series of database tables. The database schema is presented
+                            students&#8217; performance in a series of database tables. The database schema is presented
                             in the <a class="reference internal" href="#er-model"><span
                                     class="std std-ref">ER Model</span></a>. This section details on each of the
                             database schema and its purpose.</p>
                         <div class="section" id="user">
                             <h3>1. User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
-                            <p>The <strong>User</strong> relation stores the follwoign attributes pertaining to the
+                            <p>The <strong>User</strong> relation stores the following attributes pertaining to the
                                 user:</p>
                             <ul class="simple">
                                 <li><em>email</em></li>
                                 <li><em>password</em></li>
                                 <li><em>full name</em></li>
                             </ul>
-                            <p>These attributes are colelcted from each user upon registration into the SQL Lab system.
-                                Each user is uniquely indentified by his/her <em>email</em>.</p>
+                            <p>These attributes are collected from each user upon registration into the SQL Lab system.
+                                Each user is uniquely identified by his/her <em>email</em>.</p>
                         </div>
                         <div class="section" id="role">
                             <h3>2. Role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h3>
                             <p>Each user is defined a <em>role</em>. A user can either be a <em>student</em> or an <em>instructor</em>.
                                 It is also possible for a user to hold multiple roles. The <strong>Role</strong> is
-                                designed to be a weak entity and is uniquly identified by both the <em>role</em> and
+                                designed to be a weak entity and is uniquely identified by both the <em>role</em> and
                                 <em>email</em> of the user.</p>
                         </div>
                         <div class="section" id="class">
@@ -170,7 +172,7 @@
                             <ul class="simple">
                                 <li><em>class ID</em></li>
                                 <li><em>class name</em></li>
-                                <li><em>semster</em> class is conducted</li>
+                                <li><em>semester</em> class is conducted</li>
                                 <li><em>facilitators</em></li>
                             </ul>
                             <p>Each <em>class</em> is uniquely identified by a <em>class id</em>. Each class is
@@ -186,7 +188,7 @@
                             <p>This relation stores the names of the relations in which the questions reside for each
                                 test. It also stores the a boolean value for the visibility attribute, which denotes if
                                 a student will be able to see a particular instance. This relation is designed to be a
-                                weak entity of <strong>Test</strong> and is uniquly identified by both the <em>database
+                                weak entity of <strong>Test</strong> and is uniquely identified by both the <em>database
                                     table name</em>, <em>test ID</em>, and <em>class ID</em>.</p>
                         </div>
                         <div class="section" id="teacher-conducts-class">
@@ -230,7 +232,7 @@
                                 called &#8216;<em>Midterms</em>&#8216; that will be generated dynamically once the <em>instructor</em>
                                 creates the test and adds the questions and answers to the system.</p>
                             <p><strong>Note:</strong> The <em>test</em> relation is merged with the <em>Holds</em>
-                                relationship due to the mandatory 1-1 partcipation constraint.</p>
+                                relationship due to the mandatory 1-1 participation constraint.</p>
                         </div>
                         <div class="section" id="student-attempts-test">
                             <h3>8. Student Attempts Test<a class="headerlink" href="#student-attempts-test"
@@ -259,7 +261,7 @@
                         <h2>1. Data Table<a class="headerlink" href="#data-table"
                                             title="Permalink to this headline">¶</a></h2>
                         <p>The instructor is allowed to upload multiple database schemas, out of which some are made
-                            visible to the students while others are kept as hidden instnces. The SQL Lab parser will
+                            visible to the students while others are kept as hidden instances. The SQL Lab parser will
                             create a separate table for each instance of the same schema.</p>
                         <p>For instance, if the instructor uploads a &#8216;<em>Employee</em>&#8216; schema and splits
                             it into 2 instances, the SQL parser will create 2 tables with the names
@@ -272,7 +274,7 @@
                         </h2>
                         <p>Each Test Name table is created based on the name of the test stored in the <em>Class Holds
                             Test</em> relation. It contains the questions and the corresponding answers given by the
-                            instructors. The arttributes of the relation are as follow:</p>
+                            instructors. The attributes of the relation are as follow:</p>
                         <ul class="simple">
                             <li><em>question ID</em></li>
                             <li><em>question</em></li>
@@ -294,7 +296,51 @@
                             <li><em>Student SQL answer query</em></li>
                             <li><em>marks obtained</em></li>
                         </ul>
-                        <p>The <em>question ID</em> uniquely detemrines each record in this relation.</p>
+                        <p>The <em>question ID</em> uniquely determines each record in this relation.</p>
+                    </div>
+                </div>
+                <div class="section" id="sql-parser">
+                    <span id="id4"></span>
+                    <h1>SQL Parser<a class="headerlink" href="#sql-parser" title="Permalink to this headline">¶</a></h1>
+                    <div class="section" id="sql-parser-dependency">
+                        <h2>SQL Parser Dependency:<a class="headerlink" href="#sql-parser-dependency"
+                                                     title="Permalink to this headline">¶</a></h2>
+                        <p>Library : SqlParse 0.2.3</p>
+                        <p>The parser is used heavily in our application.</p>
+                    </div>
+                    <div class="section" id="sql-parser-functionalities">
+                        <h2>SQL Parser Functionalities<a class="headerlink" href="#sql-parser-functionalities"
+                                                         title="Permalink to this headline">¶</a></h2>
+                        <div class="section" id="creating-test-data-tables-from-sql-dump">
+                            <h3>1. Creating Test Data Tables from SQL Dump<a class="headerlink"
+                                                                             href="#creating-test-data-tables-from-sql-dump"
+                                                                             title="Permalink to this headline">¶</a>
+                            </h3>
+                            <p>The SQL Parser is able to parse the table name from the SQL dump file uploaded and create
+                                separate instances of the same table while reading the dump file.</p>
+                        </div>
+                        <div class="section" id="parsing-sql-queries-given-in-tests">
+                            <h3>2. Parsing SQL queries given in Tests<a class="headerlink"
+                                                                        href="#parsing-sql-queries-given-in-tests"
+                                                                        title="Permalink to this headline">¶</a></h3>
+                            <p>The SQL Parser will ensure that no query will lead to loss or corruption of data. For
+                                instance, if any user gives a query to drop the table, it will ensure that the
+                                <em>DROP</em> statement is not executed. It will only ensure that valid SQL statements
+                                are being run against the visible database instances, which will be constructed
+                                real-time using regular expressions (e.g. <em>warehouse1</em> and <em>warehouse2</em>
+                                will be parsed out of the table <em>warehouse</em>, if only <em>warehouse1</em> and <em>warehouse2</em>
+                                are made visible during the test).</p>
+                        </div>
+                    </div>
+                    <div class="section" id="limitations-and-improvements">
+                        <h2>Limitations and Improvements<a class="headerlink" href="#limitations-and-improvements"
+                                                           title="Permalink to this headline">¶</a></h2>
+                        <p>SqlParse is one of the few opensource libraries available for python postgres parsing of SQL
+                            queries. Despite its effectiveness in parsing SQL queries and tokenising them, it still has
+                            its limitations as it is unable to identify and extract table names from the queries. Such
+                            limitations can only be overcome by extending the SQL Parser by the engineers.</p>
+                        <p>Our team is constantly working on extending the Parser&#8217;s functionalities and making it
+                            more robust so as to improve its accuracy.</p>
                     </div>
                 </div>
 
@@ -353,6 +399,22 @@
                         <li><a class="reference internal" href="#student-attempts">3. Student Attempts</a></li>
                     </ul>
                 </li>
+                <li><a class="reference internal" href="#sql-parser">SQL Parser</a>
+                    <ul>
+                        <li><a class="reference internal" href="#sql-parser-dependency">SQL Parser Dependency:</a></li>
+                        <li><a class="reference internal" href="#sql-parser-functionalities">SQL Parser
+                            Functionalities</a>
+                            <ul>
+                                <li><a class="reference internal" href="#creating-test-data-tables-from-sql-dump">1.
+                                    Creating Test Data Tables from SQL Dump</a></li>
+                                <li><a class="reference internal" href="#parsing-sql-queries-given-in-tests">2. Parsing
+                                    SQL queries given in Tests</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="reference internal" href="#limitations-and-improvements">Limitations and
+                            Improvements</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <div role="note" aria-label="source link">
@@ -386,7 +448,7 @@
     </ul>
 </div>
 <div class="footer" role="contentinfo">
-    &#169; Copyright 2017, Girish.
+    &#169; Copyright 2017, SQL Lab.
     Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
 </div>
 </body>
