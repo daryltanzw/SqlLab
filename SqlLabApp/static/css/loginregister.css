@@ -38,6 +38,7 @@
 .form input[type=password] {
     font: 15px/1 'Assistant';
     font-weight: 400;
+    height: 30px;
     display: block;
     width: 100%;
     padding: 5px;
@@ -115,16 +116,17 @@ a:focus {
     color: white;
 }
 
-#id_role ul {
-    text-align: left;
-    float: left;
-}
-
-#id_role li {
-    float: left;
-    color: #7287aa;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-right: 60px;
-    font: 13px/1 'Assistant';
+#id_role {
+    display: inline-table;
+    margin-bottom: 15px;
+    padding: 15px;
+    width: 100%;
+    height: 30px;
+    border-radius: 3px;
+    font: 15px/1 'Assistant';
+    border: 1px solid #ebe6e2;
+    background: white;
+    color: black;
+    text-align: center;
+    margin-right: 0;
 }

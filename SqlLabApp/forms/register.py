@@ -10,7 +10,7 @@ class RegistrationForm(forms.ModelForm):
     INSTRUCTOR = "INS"
     STUDENT = "STU"
     roles_choices = [(INSTRUCTOR, "Instructor"), (STUDENT, "Student")]
-    role = forms.ChoiceField(choices=roles_choices, widget=forms.RadioSelect(), label='')
+    role = forms.ChoiceField(choices=roles_choices, label='')
 
     class Meta:
         model = User
