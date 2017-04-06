@@ -52,7 +52,10 @@ class RegistrationFormView(FormView):
         login_form = LoginForm()
         if register_form.is_valid():
             register_form.save()
-            return HttpResponseRedirect("../login")
+            auth = EmailAuthBackend()
+            user = auth.authenticate(email=request.POST['email'], password=request.POST['password1'])
+            django_login(request, user)
+            return HttpResponseRedirect("../module")
 
         else:
             return self.render_to_response(
