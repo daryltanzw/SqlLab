@@ -17,6 +17,7 @@ System Documentation
 * :ref:`User Roles`
 * :ref:`ER Model`
 * :ref:`Dynamic Tables`
+* :ref:`SQL Parser`
 * :ref:`search`
 
 
@@ -199,3 +200,32 @@ This table stores the question and the student's answer entered. This will ensur
 
 The *question ID* uniquely detemrines each record in this relation.
  
+.. _SQL Parser:
+
+SQL Parser
+===============
+
+SQL Parser Dependency:
+-----------------------
+Library : SqlParse 0.2.3 
+
+The parser is used heavily in our application.
+
+SQL Parser Functionalities
+---------------------------
+
+1. Creating Test Data Tables from SQL Dump
+++++++++++++++++++++++++++++++++++++++++++++ 
+The SQL Parser is able to parse the table name from the SQL dump file uploaded and create separate instances of the same table while reading the dump file.
+
+2. Parsing SQL queries given in Tests
++++++++++++++++++++++++++++++++++++++++
+The SQL Parser will ensure that no query will lead to loss or corruption of data. For instance, if any user gives a query to drop the table, it will ensure that the *DROP* statement is not executed. It will only ensure that valid SQL statements are being run against the visbile database instances, which will be constructed real-time using regular expressions (e.g. *warehouse1* and *warehouse2* will be parsed out of the table *warehouse*, if only *warehouse1* and *warehouse2* are made visble during the test).
+
+
+Limitations and Improvements
+-----------------------------
+
+SqlParse is one of the few opensource libraries available for python postgres parsing of SQL queries. Despite its effectivness in parsing SQL queries and tokenising them, it still has its limitations as it is unable to identify and extract table names from the queries. Such limitations can only be overcome by extending the SQL Parser by the engineers.
+
+Our team is constantly working on extending the Parser's functionalities and making it more robust so as to improve its accuracy. 
