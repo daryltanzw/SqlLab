@@ -51,7 +51,7 @@ class EditTestFormView(FormView):
 
         current_time = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
-        if start_time > current_time and end_time > current_time and start_time < end_time:
+        if end_time > current_time and start_time < end_time:
             try:
                 connection = get_db_connection()
                 with transaction.atomic():
