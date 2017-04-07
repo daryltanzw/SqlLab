@@ -115,6 +115,7 @@
             <li><a href="#createmodule">Create module</a></li>
             <li><a href="#uploadstudentlist">Upload student list</a></li>
             <li><a href="#createtest">Create test</a></li>
+              <li><a href="#edittest">Edit test</a></li>
               <li><a href="#reviewtestinstructor">Review test</a></li>
               <li>Student</li>
             <li><a href="#taketest">Take test</a></li>
@@ -182,74 +183,84 @@
           <figcaption style="text-align:center">Figure 12- Sample .sql dump</figcaption></figure></p>
       <p>6. Having completed the form, click the "Create new test" button as shown in Figure 10. Upon successful creation of the test, the test details will be displayed on the tests page for the module, as shown below:</p>
       <p><figure><img src="/static/img/createtest_2.png" alt="Successfully created test">
-          <figcaption id="reviewtestinstructor" style="text-align:center">Figure 13- Created test successfully</figcaption></figure></p>
+          <figcaption id="edittest" style="text-align:center">Figure 13- Created test successfully</figcaption></figure></p>
+        <p>7. The next step would be to edit the test to choose which tables are visible to the students and which are not.</p>
+      <br>
 
+      <p class="header">EDIT A TEST</p>
+      <p>1. On the tests listing page for the module click "Edit test" for the test you wish to edit as shown below:</p>
+      <p><figure><img src="/static/img/edittest_1.png" alt="edit test button">
+          <figcaption style="text-align:center">Figure 14- Edit test button</figcaption></figure></p>
+      <p>2. Edit the details of the test. All tables will be checked by default. Uncheck those tables you wish to be invisible to the student as highlighted in figure 15 below:</p>
+       <p><figure><img src="/static/img/edittest_invisibletables.png" alt="edit test form">
+          <figcaption style="text-align:center">Figure 15- Edit a test</figcaption></figure></p>
+      <p id="reviewtestinstructor">4. When you have completed editing the test, click "Edit test" as shown in figure 15 above.</p>
       <br>
 
     <p class="header">REVIEW A TEST</p>
       <p>1. On the tests listing page for the module you wish to review a test for, click the "Review test" button of the test you want to review:</p>
       <p><figure><img src="/static/img/instructorreviewtest.png" alt="review test button">
-          <figcaption style="text-align:center">Figure 14- Review test button</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 16- Review test button</figcaption></figure></p>
       <p>2. The student list of the class, including the instructor, will be shown and their corresponding number of attempts at the test and the highest marks obtained, as shown in the sample below:</p>
        <p><figure><img src="/static/img/reviewtest_liststudent.png" alt="review student attempts">
-          <figcaption style="text-align:center">Figure 15- Review student attempts</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 17- Review student attempts</figcaption></figure></p>
       <p>3. If you click on the student's name, details of every attempt by the student will be shown:</p>
       <p><figure><img src="/static/img/reviewtest_studentAttempts.png" alt="detailed student attempts">
-          <figcaption style="text-align:center">Figure 16- Detailed student attempts</figcaption></figure></p>
-      <p>4. If you click on an attempt, as highlighted in figure 16, you can view the marks obtained by the student for each question as shown below:</p>
+          <figcaption style="text-align:center">Figure 18- Detailed student attempts</figcaption></figure></p>
+      <p>4. If you click on an attempt, as highlighted in figure 18, you can view the marks obtained by the student for each question as shown below:</p>
       <p><figure><img src="/static/img/studentreviewtest_sample.png" alt="detailed student attempt">
-          <figcaption style="text-align:center">Figure 17- Student test attempt</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 19- Student test attempt</figcaption></figure></p>
       <br>
       <p id="taketest"></p>
       <br>
 
-      <p style="color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 21px; font-weight: 700; margin: 0 0 0; text-transform: uppercase;"">STUDENT</p>
+      <p style="color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 21px; font-weight: 700; margin: 0 0 0; text-transform: uppercase;">STUDENT</p>
       <p id="taketest" class="header">TAKE A TEST</p>
-      <p>1.Upon logging into the system, a page listing all the modules you are enrolled in, will be displayed. Click "View tests"(Figure 18) of the module you wish to take the test for.</p>
+      <p>1.Upon logging into the system, a page listing all the modules you are enrolled in, will be displayed. Click "View tests"(Figure 20) of the module you wish to take the test for.</p>
       <p><figure><img src="/static/img/taketest_1.png" alt="view tests">
-          <figcaption style="text-align:center">Figure 18- View tests for a module</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 20- View tests for a module</figcaption></figure></p>
       <p>2. Click "Take test" for the test you wish to take:</p>
        <p><figure><img src="/static/img/taketest_1b.png" alt="take test button">
-          <figcaption style="text-align:center">Figure 19- Take test for a module</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 21- Take test for a module</figcaption></figure></p>
       <p>3. Click "Confirm" once you are sure you want to take the test:</p>
       <p><figure><img src="/static/img/taketest_3.png" alt="confirm take test">
-          <figcaption style="text-align:center">Figure 20- Confirm take test</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 22- Confirm take test</figcaption></figure></p>
       <p>4. Below is a sample of a test:</p>
       <p><figure><img src="/static/img/taketest_sample.png" alt="test sample">
-          <figcaption style="text-align:center">Figure 21- Sample test</figcaption></figure></p>
-      <p>5. Clicking "Show tables" allows you to view the tables needed for that test (figure 22).</p>
+          <figcaption style="text-align:center">Figure 23- Sample test</figcaption></figure></p>
+      <p>5. Clicking "Show tables" allows you to view the tables needed for that test (figure 24).</p>
       <p><figure><img src="/static/img/taketest_showtablespng.png" alt="show tables">
-          <figcaption style="text-align:center">Figure 22- View tables for a test</figcaption></figure></p>
-      <p>6. You can check the output of your answer query by executing it. Type your query in the textbox at the top as highlighted in red in figure 21. Click "Execute Query". The figure 23 shows the result of executing the query circled in red.
+          <figcaption style="text-align:center">Figure 24- View tables for a test</figcaption></figure></p>
+      <p>6. You can check the output of your answer query by executing it. Type your query in the textbox at the top as highlighted in red in figure 23. Click "Execute Query". The figure 23 shows the result of executing the query circled in red.
           The query shown gives the result 'panadol' which is the expected answer.</p>
       <p><figure><img src="/static/img/taketest_executequery.png" alt="execute query">
-          <figcaption style="text-align:center">Figure 23- Execute answer query</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 25- Execute answer query</figcaption></figure></p>
       <p>7. When you have completed the test, click the "Submit button" at the end of the test as shown below:</p>
       <p><figure><img src="/static/img/taketest_submit.png" alt="Submit test">
-          <figcaption style="text-align:center">Figure 24- Submit test</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 26- Submit test</figcaption></figure></p>
       <p>8. Click "Confirm" when you are ready to submit the test:</p>
       <p><figure><img src="/static/img/taketest_submitConfirm.png" alt="submit confirm">
-          <figcaption style="text-align:center">Figure 25- Confirm test submission</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 27- Confirm test submission</figcaption></figure></p>
       <p>9. Upon successful submission of the test, you will be redirected to the tests page of the module where you can observe the number of attempts of the test would have increased by 1.</p>
       <p><figure><img src="/static/img/taketest_Successful.png" alt="Sucessful submission">
-          <figcaption id="reviewteststudent" style="text-align:center">Figure 26- Submitted test successfully</figcaption></figure></p>
+          <figcaption id="reviewteststudent" style="text-align:center">Figure 28- Submitted test successfully</figcaption></figure></p>
 
       <br>
 
       <p class="header">REVIEW A TEST</p>
-      <p>1.Upon logging into the system, a page listing all the modules you are enrolled in, will be displayed. Click "View tests"(figure 27 below) for the module you wish to review  the test.</p>
+      <p>1.Upon logging into the system, a page listing all the modules you are enrolled in, will be displayed. Click "View tests"(figure 29 below) for the module you wish to review  the test.</p>
       <p><figure><img src="/static/img/taketest_1.png" alt="view tests">
-          <figcaption style="text-align:center">Figure 27- View tests for a module</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 29- View tests for a module</figcaption></figure></p>
   <p>2.Click "Review test" for the test you wish to review.  </p>
       <p><figure><img src="/static/img/studentreviewtest.png" alt="review test button">
-          <figcaption style="text-align:center">Figure 28- Review test button</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 30- Review test button</figcaption></figure></p>
       <p>3. A list of attempts of the test will be displayed and the corresponding marks for each attempt:</p>
        <p><figure><img src="/static/img/studentreviewtest_1.png" alt="review test attempt">
-          <figcaption style="text-align:center">Figure 29- Review test attempts</figcaption></figure></p>
-      <p>4. To get the details of how you performed for each question, click the attempt as highlighted in figure 29.
+          <figcaption style="text-align:center">Figure 31- Review test attempts</figcaption></figure></p>
+      <p>4. To get the details of how you performed for each question, click the attempt as highlighted in figure 31.
           A sample review of a test is shown below, where the marks obtained for each question are displayed to the right:</p>
       <p><figure><img src="/static/img/studentreviewtest_sample.png" alt="sample review test">
-          <figcaption style="text-align:center">Figure 30- Review test sample</figcaption></figure></p>
+          <figcaption style="text-align:center">Figure 32- Review test sample</figcaption></figure></p>
       <br>
   </div>
 </div>
