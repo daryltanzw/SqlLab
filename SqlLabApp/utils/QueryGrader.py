@@ -185,10 +185,14 @@ def grade_query(tid, s_query, t_query, mark):
 
         query_dict_ls.append(query_dict)
 
+    print "__________________+++++++++++++++++++"
+    print query_dict_ls
     # mark each query dictionary
     for query_dict in query_dict_ls:
         i_student_query = change_tbl_names(query_dict, s_query)
+        print "++++++++++ student query:" + str(i_student_query)
         i_teacher_query = change_tbl_names(query_dict, t_query)
+        print "++++++++++ teacher query:" + str(i_teacher_query)
         marks_received = grade_formatted_query(i_student_query, i_teacher_query, mark)
         if marks_received == 0:
             return marks_received
