@@ -24,9 +24,6 @@ def create_student_attempt_table(cursor, tbl_name, tid, student_answer_list):
             instructor_answer = str(tuple_list[1])
             total_marks = tuple_list[2]
 
-            # Mark student's query against instructor's query
-            # student_query = grader.format_select_query(tid, student_answer)
-            # teacher_query = grader.format_select_query(tid, instructor_answer)
             marks_obtained = grader.grade_query(tid, student_answer, instructor_answer, total_marks)
 
             cursor.execute("Insert into {0} values(%s, %s, %s, %s)".format(tbl_name), (

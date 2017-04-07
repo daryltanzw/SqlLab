@@ -83,7 +83,7 @@ def grade_formatted_query(student_query, teacher_query, mark):
         fq2 = teacher_query.replace(";", "")
 
         with conn.cursor() as cursor:
-            query = "( %s Except %s) UNION ALL (%s EXCEPT %s)" % (fq1, fq2, fq2, fq1)
+            query = "( %s Except All %s) UNION ALL (%s EXCEPT All %s)" % (fq1, fq2, fq2, fq1)
             cursor.execute(query)
             r = cursor.fetchall()
 

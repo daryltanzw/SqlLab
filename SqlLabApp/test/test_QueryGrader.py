@@ -3,7 +3,7 @@
 # from SqlLabApp.utils.DBUtils import get_db_connection
 #
 #
-# # TODO: Move the databases to test db
+# #
 # # WARNING: Will actually create and try to delete tables. Ensure deletion
 # class QueryGrader_Test(TestCase):
 #     @classmethod
