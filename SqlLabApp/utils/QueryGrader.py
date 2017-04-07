@@ -185,7 +185,8 @@ def grade_query(tid, s_query, t_query, mark):
 
         query_dict_ls.append(query_dict)
 
-    print "__________________+++++++++++++++++++"
+    print "+++++++++++++++++++"
+    print "Query dictionaries: "
     print query_dict_ls
     # mark each query dictionary
     for query_dict in query_dict_ls:
